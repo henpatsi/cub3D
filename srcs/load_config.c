@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 11:56:33 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/22 12:49:30 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/22 13:02:42 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	set_fc_color(t_map *map, char **split_line)
 	color += atoi(color_split[1]);
 	color = color << 8;
 	color += atoi(color_split[2]);
+	color = color << 8;
 	if (ft_strcmp(split_line[0], "F") == 0)
 		map->floor_color = color;
 	if (ft_strcmp(split_line[0], "C") == 0)
