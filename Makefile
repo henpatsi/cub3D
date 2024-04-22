@@ -3,22 +3,30 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+         #
+#    By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/22 08:30:50 by hpatsi            #+#    #+#              #
-#    Updated: 2024/04/22 08:55:11 by hpatsi           ###   ########.fr        #
+#    Updated: 2024/04/22 16:19:03 by ixu              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 
+# DIRECTORIES
+
+OBJS_DIR = ./objs/
+
+SRCS_DIR = ./srcs/
+
 # C FILES
 
-SOURCE_FILES = main
+SOURCE_NAMES = main validate
 
-SOURCES = $(addsuffix .c, $(addprefix ./srcs/, $(SOURCE_FILES)))
+SOURCE_FILES = $(addsuffix .c, $(SOURCE_NAMES))
 
-OBJECTS = $(SOURCES:.c=.o)
+SOURCES = $(addprefix $(SRCS_DIR), $(SOURCE_FILES))
+
+OBJECTS = $(addprefix $(OBJS_DIR), $(SOURCE_FILES:.c=.o))
 
 # LIBRARIES
 
@@ -44,10 +52,13 @@ CC = cc $(CFLAGS)
 
 all: $(NAME)
 
-$(NAME): $(OBJECTS) $(LIBFT) $(MLX42)
+$(NAME): $(OBJS_DIR) $(OBJECTS) $(LIBFT) $(MLX42)
 	$(CC) $(OBJECTS) $(LIBFT) $(MLX42) $(DEPENDENCIES) -o $(NAME)
 
-%.o: %.c
+$(OBJS_DIR):
+	mkdir $(OBJS_DIR)
+
+$(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 	$(CC) -c -o $@ $<
 
 $(LIBFT):
@@ -61,7 +72,7 @@ $(MLX42_DIR):
 
 clean:
 	make clean -C $(LIBFT_DIR)
-	rm -f $(OBJECTS)
+	rm -fr $(OBJS_DIR)
 	make depend -C $(MLX42_DIR)
 
 fclean: clean
