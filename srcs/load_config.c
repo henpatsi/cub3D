@@ -6,13 +6,40 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 11:56:33 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/22 13:02:42 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/22 13:54:44 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int	set_fc_color(t_map *map, char **split_line)
+int	init_image_from_color(t_map *map, char **split_line, uint32_t color)
+{
+	mlx_image_t	*image;
+	uint32_t	x;
+	uint32_t	y;
+
+	image = mlx_new_image(map->mlx, map->width, map->height / 2);
+	if (image == 0)
+		return (-1);
+	x = 0;
+	while (x < image->width)
+	{
+		y = 0;
+		while (y < image->height)
+		{
+			mlx_put_pixel(image, x, y, color);
+			y++;
+		}
+		x++;
+	}
+	if (ft_strcmp(split_line[0], "F") == 0)
+		map->images->floor = image;
+	if (ft_strcmp(split_line[0], "C") == 0)
+		map->images->ceiling = image;
+	return (1);
+}
+
+int	init_image_from_rgb(t_map *map, char **split_line)
 {
 	uint32_t	color;
 	char		**color_split;
@@ -27,20 +54,19 @@ int	set_fc_color(t_map *map, char **split_line)
 		free_strs(color_split);
 		return_error("Failed to read color config");
 	}
-	color = atoi(color_split[0]);
+	color = ft_atoi(color_split[0]);
 	color = color << 8;
-	color += atoi(color_split[1]);
+	color += ft_atoi(color_split[1]);
 	color = color << 8;
-	color += atoi(color_split[2]);
+	color += ft_atoi(color_split[2]);
 	color = color << 8;
-	if (ft_strcmp(split_line[0], "F") == 0)
-		map->floor_color = color;
-	if (ft_strcmp(split_line[0], "C") == 0)
-		map->ceiling_color = color;
+	color += 255;
+	if (init_image_from_color(map, split_line, color) == -1)
+		return (-1);
 	return (1);
 }
 
-int	load_image_from_config(t_map *map, char	**split_line)
+int	init_image_from_texture(t_map *map, char **split_line)
 {
 	mlx_texture_t	*texture;
 	mlx_image_t		*image;
@@ -102,9 +128,9 @@ int	load_config(t_map *map, int map_fd)
 			continue ;
 		}
 		if (ft_strcmp(split[0], "F") == 0 || ft_strcmp(split[0], "C") == 0)
-			ret = set_fc_color(map, split);
+			ret = init_image_from_rgb(map, split);
 		else
-			ret = load_image_from_config(map, split);
+			ret = init_image_from_texture(map, split);
 		free_strs(split);
 		if (ret == -1)
 			return (-1);

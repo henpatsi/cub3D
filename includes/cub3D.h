@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/22 12:41:52 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/22 13:20:02 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ typedef struct s_images
 	mlx_image_t *south;
 	mlx_image_t *east;
 	mlx_image_t *west;
+	mlx_image_t *floor;
+	mlx_image_t *ceiling;
 }	t_images;
 
 typedef struct s_image_instances
@@ -54,8 +56,6 @@ typedef struct s_map
 	int			height;
 	t_gridpos	**grid;
 	t_images	images[1];
-	uint32_t	floor_color;
-	uint32_t	ceiling_color;
 	mlx_t		*mlx;
 }	t_map;
 
