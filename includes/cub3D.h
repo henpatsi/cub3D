@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/22 15:52:50 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/22 23:20:30 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "MLX42.h"
 
 // printf
-# include <stdio.h>
+# include <stdio.h> // to be removed?
 
 // exit, EXIT_FAILURE
 # include <stdlib.h>
@@ -65,6 +65,16 @@ typedef struct s_map
 	t_images	images[1];
 	mlx_t		*mlx;
 }	t_map;
+
+typedef enum e_flags
+{
+	NO_FLAG = 1 << 0,
+	SO_FLAG = 1 << 1,
+	WE_FLAG = 1 << 2,
+	EA_FLAG = 1 << 3,
+	F_FLAG  = 1 << 4,
+	C_FLAG  = 1 << 5
+}	t_flags;
 
 // validate.c
 void	validate_input(int argc, char **argv, t_map *map);
