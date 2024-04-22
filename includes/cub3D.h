@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/22 08:54:42 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/22 08:54:56 by hpatsi           ###   ########.fr       */
+/*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
+/*   Updated: 2024/04/22 08:52:26 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#ifndef CUB3D_H
+# define CUB3D_H
 
-int main (int argc, char **argv)
-{
-	(void) argc;
-	(void) argv;
-	return (0);
-}
+# include "libft.h"
+# include "MLX42.h"
+
+#endif

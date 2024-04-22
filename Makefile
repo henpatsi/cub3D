@@ -6,7 +6,7 @@
 #    By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/22 08:30:50 by hpatsi            #+#    #+#              #
-#    Updated: 2024/04/22 08:43:49 by hpatsi           ###   ########.fr        #
+#    Updated: 2024/04/22 08:55:11 by hpatsi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ OBJECTS = $(SOURCES:.c=.o)
 
 LIBFT_DIR = ./libft/
 
-MLX42 = $(LIBFT_DIR)libft.a
+LIBFT = $(LIBFT_DIR)libft.a
 
 MLX42_DIR = ./MLX42/build/
 
@@ -32,7 +32,7 @@ MLX42 = $(MLX42_DIR)libmlx42.a
 
 # FLAGS
 
-HEADERS = -I ./includes -I ./MLX42/include/MLX42
+HEADERS = -I ./includes/ -I ./libft/ -I ./MLX42/include/MLX42/
 
 DEPENDENCIES = -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
 
@@ -62,13 +62,11 @@ $(MLX42_DIR):
 clean:
 	make clean -C $(LIBFT_DIR)
 	rm -f $(OBJECTS)
-	rm -f $(BONUS_OBJECTS)
 	make depend -C $(MLX42_DIR)
 
 fclean: clean
 	rm -f $(LIBFT)
 	rm -f $(NAME)
-	rm -f $(BONUS)
 	rm -rf $(MLX42_DIR)
 
 re: fclean all
