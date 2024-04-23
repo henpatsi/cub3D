@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 11:54:33 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/22 12:15:17 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/22 14:28:59 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,17 @@ void	free_strs(char **strs)
 		i++;
 	}
 	free(strs);
+}
+
+void	free_grid(t_gridpos **grid)
+{
+	int y;
+
+	y = 0;
+	while (grid[y] != 0)
+	{
+		free(grid[y]);
+		y++;
+	}
+	free(grid);
 }

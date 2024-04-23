@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 11:56:33 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/22 13:54:44 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/23 09:19:40 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	init_image_from_color(t_map *map, char **split_line, uint32_t color)
 	uint32_t	x;
 	uint32_t	y;
 
-	image = mlx_new_image(map->mlx, map->width, map->height / 2);
+	image = mlx_new_image(map->mlx, map->mlx->width, map->mlx->height / 2);
 	if (image == 0)
 		return (-1);
 	x = 0;
@@ -33,9 +33,9 @@ int	init_image_from_color(t_map *map, char **split_line, uint32_t color)
 		x++;
 	}
 	if (ft_strcmp(split_line[0], "F") == 0)
-		map->images->floor = image;
+		map->images.floor = image;
 	if (ft_strcmp(split_line[0], "C") == 0)
-		map->images->ceiling = image;
+		map->images.ceiling = image;
 	return (1);
 }
 
@@ -82,13 +82,13 @@ int	init_image_from_texture(t_map *map, char **split_line)
 	if (image == 0)
 		return (-1);
 	if (ft_strcmp(split_line[0], "NO") == 0)
-		map->images->north = image;
+		map->images.north = image;
 	if (ft_strcmp(split_line[0], "SO") == 0)
-		map->images->south = image;
+		map->images.south = image;
 	if (ft_strcmp(split_line[0], "WE") == 0)
-		map->images->west = image;
+		map->images.west = image;
 	if (ft_strcmp(split_line[0], "EA") == 0)
-		map->images->east = image;
+		map->images.east = image;
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/22 13:20:02 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/23 09:17:09 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,20 +50,30 @@ typedef struct s_gridpos
 	t_imgage_instances	image_instances;
 }	t_gridpos;
 
+typedef struct s_player
+{
+	float	x;
+	float	y;
+	float	x_rotation;
+}	t_player;
+
 typedef struct s_map
 {
 	int			width;
 	int			height;
 	t_gridpos	**grid;
-	t_images	images[1];
+	t_images	images;
+	t_player	player;
 	mlx_t		*mlx;
 }	t_map;
 
 int		load_map(t_map *map, char *map_filename);
 int		load_config(t_map *map, int map_fd);
+int		load_grid(t_map *map, int map_fd);
 
 int		return_error(char *message);
 
 void	free_strs(char **strs);
+void	free_grid(t_gridpos **grid);
 
 #endif
