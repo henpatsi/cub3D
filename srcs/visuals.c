@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 11:10:51 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/23 12:40:53 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/23 12:55:35 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,14 @@ int	update_visuals(t_map *map)
 	mlx_instance_t	*south_instances = map->images.south->instances;
 	
 	// Move test wall
-	south_instances[map->grid[0][0].image_instances.south].y = map->mlx->height / 2 - map->images.south->height / 2;
-	south_instances[map->grid[0][1].image_instances.south].y = map->mlx->height / 2 - map->images.south->height / 2;
-	south_instances[map->grid[0][2].image_instances.south].y = map->mlx->height / 2 - map->images.south->height / 2;
-	south_instances[map->grid[0][3].image_instances.south].y = map->mlx->height / 2 - map->images.south->height / 2;
-	south_instances[map->grid[0][4].image_instances.south].y = map->mlx->height / 2 - map->images.south->height / 2;
-
-	south_instances[map->grid[0][0].image_instances.south].x = (0 - player.x) * 128;
-	south_instances[map->grid[0][1].image_instances.south].x = (1 - player.x) * 128;
-	south_instances[map->grid[0][2].image_instances.south].x = (2 - player.x) * 128;
-	south_instances[map->grid[0][3].image_instances.south].x = (3 - player.x) * 128;
-	south_instances[map->grid[0][4].image_instances.south].x = (4 - player.x) * 128;
+	int x;
+	x = 0;
+	while (x < map->width)
+	{
+		south_instances[map->grid[0][x].image_instances.south].y = map->mlx->height / 2 - map->images.south->height / 2;
+		south_instances[map->grid[0][x].image_instances.south].x = map->mlx->width / 2 + (x - player.x) * 128;
+		x++;
+	}
 
 	return (1);
 }

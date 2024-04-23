@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:54:42 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/23 12:40:27 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/23 12:54:29 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void print_grid(t_map *map)
 
 int test_game(t_map *map, char **argv)
 {
-	map->width = 8;
-	map->height = 8;
+	map->width = 6;
+	map->height = 6;
 
 	map->mlx = mlx_init(512, 512, "cub3D", false);
 	if (map->mlx == 0)
@@ -57,11 +57,13 @@ int test_game(t_map *map, char **argv)
 	print_grid(map);
 
 	// Test wall
-	map->grid[0][0].image_instances.south = mlx_image_to_window(map->mlx, map->images.south, 0, 0);
-	map->grid[0][1].image_instances.south = mlx_image_to_window(map->mlx, map->images.south, 0, 0);
-	map->grid[0][2].image_instances.south = mlx_image_to_window(map->mlx, map->images.south, 0, 0);
-	map->grid[0][3].image_instances.south = mlx_image_to_window(map->mlx, map->images.south, 0, 0);
-	map->grid[0][4].image_instances.south = mlx_image_to_window(map->mlx, map->images.south, 0, 0);
+	int x;
+	x = 0;
+	while (x < map->width)
+	{
+		map->grid[0][x].image_instances.south = mlx_image_to_window(map->mlx, map->images.south, 0, 0);
+		x++;
+	}
 
 	if (init_visuals(map) == -1)
 	{
