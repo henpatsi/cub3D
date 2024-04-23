@@ -6,22 +6,14 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:54:42 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/23 09:50:19 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/23 10:58:54 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void test(t_map map)
+void print_grid(t_map map)
 {
-	mlx_image_to_window(map.mlx, map.images.floor, 0, map.mlx->height / 2);
-	mlx_image_to_window(map.mlx, map.images.ceiling, 0, 0);
-
-	mlx_image_to_window(map.mlx, map.images.north, 0, 0);
-	mlx_image_to_window(map.mlx, map.images.south, 128, 0);
-	mlx_image_to_window(map.mlx, map.images.east, 0, 128);
-	mlx_image_to_window(map.mlx, map.images.west, 128, 128);
-
 	int y;
 	int x;
 
@@ -70,7 +62,10 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 
-	test(map);
+	mlx_image_to_window(map.mlx, map.images.floor, 0, map.mlx->height / 2);
+	mlx_image_to_window(map.mlx, map.images.ceiling, 0, 0);
+
+	print_grid(map);
 
 	mlx_key_hook(map.mlx, key_hook, &map);
 	mlx_loop(map.mlx);

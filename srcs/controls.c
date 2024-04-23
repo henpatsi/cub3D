@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 09:45:59 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/23 10:40:51 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/23 10:58:40 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	move_player(t_map *map, int x, int y)
 {
-	float target_pos[2];
+	float	target_pos[2];
 
 	target_pos[0] = map->player.x + x * map->mlx->delta_time * MOVE_SPEED;
 	target_pos[1] = map->player.y + y * map->mlx->delta_time * MOVE_SPEED;
@@ -39,7 +39,7 @@ void	rotate_player(t_map *map, int dir)
 
 void	key_hook(mlx_key_data_t keydata, void *param)
 {
-	t_map *map;
+	t_map	*map;
 
 	map = (t_map *) param;
 	if (mlx_is_key_down(map->mlx, MLX_KEY_W))
