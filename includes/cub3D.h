@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/23 10:24:50 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/23 12:03:06 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,9 @@ int		load_grid(t_map *map, int map_fd);
 // GAME
 
 void	key_hook(mlx_key_data_t keydata, void *param);
+
+int		init_visuals(t_map *map);
+int		update_visuals(t_map *map);
 
 // HELPERS
 
