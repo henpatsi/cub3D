@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:54:42 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/23 09:22:56 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/23 09:38:18 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void test(t_map map)
 		y++;
 	}
 
-	ft_printf("player x: %d, y: %d, rot: %d\n", (int) map.player.x, (int) map.player.y, (int) map.player.x_rotation);
+	printf("\nplayer x: %f, y: %f, rot: %f\n\n", map.player.x, map.player.y, map.player.x_rotation);
 }
 
 int	main(int argc, char **argv)
