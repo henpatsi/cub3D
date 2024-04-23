@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:54:42 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/24 10:09:07 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/24 10:17:00 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,6 @@ int test_game(t_map *map, char **argv)
 	}
 
 	print_grid(map);
-
-	// Test wall
-	int x;
-	x = 0;
-	while (x < map->width)
-	{
-		map->grid[0][x].image_instances.south = mlx_image_to_window(map->mlx, map->images.south, 0, 0);
-		x++;
-	}
 
 	if (init_visuals(map) == -1)
 	{
