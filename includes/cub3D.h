@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/23 13:28:18 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/23 13:47:49 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_images
 	mlx_image_t *west;
 	mlx_image_t *floor;
 	mlx_image_t *ceiling;
+	mlx_image_t *draw;
 }	t_images;
 
 typedef struct s_image_instances
