@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/23 10:18:34 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/23 10:24:50 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "MLX42.h"
 
 # define MOVE_SPEED 10
+# define ROTATE_SPEED 200
 
 typedef enum e_gridpos_type
 {
