@@ -1,0 +1,8 @@
+General:
+	☐ Check leaks in load map
+	☐ Check that all possible errors handle in load map
+	☐ Make movement based on rotation, not always same
+
+Improvements:
+
+Bug fixes:

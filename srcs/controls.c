@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 09:45:59 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/24 09:29:54 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/24 10:07:47 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,9 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		rotate_player(map, -1);
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		mlx_close_window(map->mlx);
+
+	update_visuals(map);
+
 	printf("\nplayer x: %f, y: %f, rot: %f\n", map->player.x, map->player.y, map->player.x_rotation);
 	printf("player vec x: %f, vec y: %f\n\n", map->player.dir.x, map->player.dir.y);
 }
