@@ -6,7 +6,7 @@
 #    By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/22 08:30:50 by hpatsi            #+#    #+#              #
-#    Updated: 2024/04/23 10:09:17 by hpatsi           ###   ########.fr        #
+#    Updated: 2024/04/23 17:20:04 by hpatsi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ MLX42 = $(MLX42_DIR)libmlx42.a
 
 HEADERS = -I ./includes/ -I ./libft/ -I ./MLX42/include/MLX42/
 
-DEPENDENCIES = -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
+DEPENDENCIES = -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -lm
 
 CFLAGS += -Wall -Wextra -Werror $(HEADERS)
 

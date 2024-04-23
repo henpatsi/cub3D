@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:54:42 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/23 10:58:54 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/23 18:00:42 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void print_grid(t_map map)
 		y++;
 	}
 
-	printf("\nplayer x: %f, y: %f, rot: %f\n\n", map.player.x, map.player.y, map.player.x_rotation);
+	printf("\nplayer x: %f, y: %f, rot: %f\n", map.player.x, map.player.y, map.player.x_rotation);
+	printf("player vec x: %f, vec y: %f\n\n", map.player.dir.x, map.player.dir.y);
 }
 
 int	main(int argc, char **argv)

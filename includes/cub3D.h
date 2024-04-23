@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/23 10:24:50 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/23 17:31:54 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,21 @@
 # include <stdio.h> // printf, remove later
 
 # include <fcntl.h>
+# include <math.h>
 
 # include "libft.h"
 # include "MLX42.h"
 
+# define PI 3.141592654
+
 # define MOVE_SPEED 10
 # define ROTATE_SPEED 200
+
+typedef struct s_vector
+{
+	double	x;
+	double	y;
+}	t_vector;
 
 typedef enum e_gridpos_type
 {
@@ -57,9 +66,11 @@ typedef struct s_gridpos
 
 typedef struct s_player
 {
-	float	x;
-	float	y;
-	float	x_rotation;
+	double		x;
+	double		y;
+	double		x_rotation;
+	t_vector	dir;
+
 }	t_player;
 
 typedef struct s_map

@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 14:19:17 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/23 10:59:33 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/23 18:00:01 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 
 void	init_player(t_map *map, int x, int y, char gridchar)
 {
+	double	rotation_rad;
+	
 	map->player.x = x;
 	map->player.y = y;
 	if (gridchar == 'N')
@@ -36,6 +38,9 @@ void	init_player(t_map *map, int x, int y, char gridchar)
 		map->player.x_rotation = 90;
 	if (gridchar == 'W')
 		map->player.x_rotation = 270;
+	rotation_rad = (map->player.x_rotation * PI) / 180;
+	map->player.dir.x = sin(rotation_rad);
+	map->player.dir.y = -cos(rotation_rad);
 }
 
 int	init_gridpos(t_map *map, int x, int y, char gridchar)
