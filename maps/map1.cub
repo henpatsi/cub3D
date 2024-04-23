@@ -1,8 +1,8 @@
 SO ./textures/south_texture.png
-F 220,100,0
+F 204,204,204
 WE ./textures/west_texture.png
 NO ./textures/north_texture.png
-C 225,30,0
+C 153,204,255
 EA ./textures/east_texture.png
 
 111111
