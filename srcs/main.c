@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:54:42 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/23 09:38:18 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/23 09:50:19 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	main(int argc, char **argv)
 
 	test(map);
 
+	mlx_key_hook(map.mlx, key_hook, &map);
 	mlx_loop(map.mlx);
 	mlx_terminate(map.mlx);
 

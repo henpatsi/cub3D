@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/23 09:37:26 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/23 10:18:34 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 
 # include "libft.h"
 # include "MLX42.h"
+
+# define MOVE_SPEED 10
 
 typedef enum e_gridpos_type
 {
@@ -69,9 +71,17 @@ typedef struct s_map
 	mlx_t		*mlx;
 }	t_map;
 
+// PREPARE MAP
+
 int		load_map(t_map *map, char *map_filename);
 int		load_config(t_map *map, int map_fd);
 int		load_grid(t_map *map, int map_fd);
+
+// GAME
+
+void	key_hook(mlx_key_data_t keydata, void *param);
+
+// HELPERS
 
 int		return_error(char *message);
 
