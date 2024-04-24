@@ -6,7 +6,7 @@
 #    By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/22 08:30:50 by hpatsi            #+#    #+#              #
-#    Updated: 2024/04/24 10:18:15 by hpatsi           ###   ########.fr        #
+#    Updated: 2024/04/24 14:26:51 by hpatsi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = cub3D
 
 # C FILES
 
-SOURCE_FILES = main controls visuals load_map load_config load_grid error free
+SOURCE_FILES = main controls visuals raycast load_map load_config load_grid error free
 
 SOURCES = $(addsuffix .c, $(addprefix ./srcs/, $(SOURCE_FILES)))
 

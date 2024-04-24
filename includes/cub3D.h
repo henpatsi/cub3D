@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/24 11:57:50 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/24 14:26:54 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,35 @@
 # define MOVE_SPEED 10
 # define ROTATE_SPEED 200
 
-typedef struct s_vector
+// ENUMS
+
+typedef enum e_wall_side
 {
-	double	x;
-	double	y;
-}	t_vector;
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST
+}	t_wall_side;
 
 typedef enum e_gridpos_type
 {
 	EMPTY,
 	WALL,
 }	t_gridpos_type;
+
+// STRUCTS
+
+typedef struct s_vector
+{
+	double	x;
+	double	y;
+}	t_vector;
+
+typedef struct s_hitinfo
+{
+	double		distance;
+	t_wall_side	side;
+}	t_hitinfo;
 
 typedef struct s_images
 {
@@ -49,9 +67,9 @@ typedef struct s_images
 
 typedef struct s_gridpos
 {
-	int					x;
-	int					y;
-	t_gridpos_type		type;
+	int				x;
+	int				y;
+	t_gridpos_type	type;
 }	t_gridpos;
 
 typedef struct s_player
@@ -87,6 +105,8 @@ void	key_hook(mlx_key_data_t keydata, void *param);
 
 int		init_visuals(t_map *map);
 int		update_visuals(t_map *map);
+
+int		grid_raycast(t_hitinfo *hit, t_map *map, t_vector origin, t_vector direction);
 
 // HELPERS
 

@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 11:10:51 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/24 12:37:59 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/24 14:53:02 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,13 @@ int	update_visuals(t_map *map)
 	uint32_t x;
 	uint32_t y;
 
+	t_hitinfo 	hit;
+	t_vector	origin;
+	origin.x = map->player.x;
+	origin.y = map->player.y;
+	if (grid_raycast(&hit, map, origin, map->player.dir) == 1)
+		printf("hit wall, distance: %f, side: %d\n", hit.distance, hit.side);
+
 	x = 0;
 	while (x < map->images.draw->width)
 	{
@@ -38,9 +45,9 @@ int	update_visuals(t_map *map)
 		y = 0;
 		
 		if (map->player.x + grid_offset >= 0 && map->player.x + grid_offset < map->width
-				&& map->grid[0][(int)(map->player.x + grid_offset)].type == WALL)
+				&& map->grid[0][(int) round(map->player.x + grid_offset)].type == WALL)
 		{
-			uint32_t wall_height = 300 - (int) fabs(map->player.y - 0) * 20;
+			uint32_t wall_height = 300 - (int) round(fabs(map->player.y - 0) * 20);
 			uint32_t target = (map->images.draw->height / 2) - (wall_height / 2);
 			while (y < target)
 			{
