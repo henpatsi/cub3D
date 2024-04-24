@@ -6,71 +6,70 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 11:10:51 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/23 13:56:08 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/24 11:51:38 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	draw_scaled_image(t_map *map, mlx_image_t *image, int x_pos, int y_pos, int scale)
-{
-	uint32_t	x;
-	uint32_t	y;
-
-	scale = 1;
-
-	y = 0;
-	while (y < image->height)
-	{
-		x = 0;
-		while (x < image->width)
-		{
-			mlx_put_pixel(map->images.draw, x + x_pos, y + y_pos, 0xFF0000FF);
-			x++;
-		}
-		y++;
-	}
-}
 
 int	init_visuals(t_map *map)
 {
-	// Background
-	if (mlx_image_to_window(map->mlx, map->images.floor, 0,
-			map->mlx->height / 2) == -1)
-		return (-1);
-	if (mlx_image_to_window(map->mlx, map->images.ceiling, 0, 0) == -1)
-		return (-1);
-	mlx_set_instance_depth(map->images.ceiling->instances, 0);
-	mlx_set_instance_depth(map->images.floor->instances, 0);
-
-	// Test wall
+	// Canvas for drawing
 	map->images.draw = mlx_new_image(map->mlx, map->mlx->width, map->mlx->height);
 	mlx_image_to_window(map->mlx, map->images.draw, 0, 0);
-	int x;
-	x = 0;
-	while (x < map->width)
-	{
-		//map->grid[0][x].image_instances.south = mlx_image_to_window(map->mlx, map->images.south, 0, 0);
-		draw_scaled_image(map, map->images.south, map->mlx->width / 2 + (x - map->player.x) * 128,
-				map->mlx->height / 2 - map->images.south->height / 2, 1);
-		x++;
-	}
+	mlx_set_instance_depth(map->images.draw->instances, 1);
+
 	return (update_visuals(map));
 }
 
 int	update_visuals(t_map *map)
 {
-	//mlx_instance_t	*south_instances = map->images.south->instances;
+	uint32_t x;
+	uint32_t y;
 
-	// Move test wall
-	int x;
 	x = 0;
-	while (x < map->width)
+	while (x < map->images.draw->width)
 	{
-		// south_instances[map->grid[0][x].image_instances.south].y = map->mlx->height / 2 - map->images.south->height / 2;
-		// south_instances[map->grid[0][x].image_instances.south].x = map->mlx->width / 2 + (x - player.x) * 128;
-		draw_scaled_image(map, map->images.south, map->mlx->width / 2 + (x - map->player.x) * 128,
-				map->mlx->height / 2 - map->images.south->height / 2, 1);
+		int screen_center_offset = x - (map->images.draw->width / 2);
+		int	grid_offset = screen_center_offset / 100;
+		printf("x: %d, scroff: %d, grdoff: %d\n", x, screen_center_offset, grid_offset);
+
+		y = 0;
+		
+		if (map->player.x + grid_offset >= 0 && map->player.x + grid_offset < map->width
+				&& map->grid[0][(int) map->player.x + grid_offset].type == WALL)
+		{
+			while (y < 200)
+			{
+				mlx_put_pixel(map->images.draw, x, y, 0x00FF00FF);
+				y++;
+			}
+			while (y < 200 + 100)
+			{
+				mlx_put_pixel(map->images.draw, x, y, 0xFF0000FF);
+				y++;
+			}
+			while (y < map->images.draw->height)
+			{
+				mlx_put_pixel(map->images.draw, x, y, 0x0000FFFF);
+				y++;
+			}
+		}
+		else
+		{
+			while (y < 200 + 100 / 2)
+			{
+				mlx_put_pixel(map->images.draw, x, y, 0x00FF00FF);
+				y++;
+			}
+			while (y < map->images.draw->height)
+			{
+				mlx_put_pixel(map->images.draw, x, y, 0x0000FFFF);
+				y++;
+			}
+		}
+		
 		x++;
 	}
 
