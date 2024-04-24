@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 14:19:17 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/24 09:31:17 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/24 12:40:18 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	init_player(t_map *map, int x, int y, char gridchar)
 	rotation_rad = (map->player.x_rotation * PI) / 180;
 	map->player.dir.x = sin(rotation_rad);
 	map->player.dir.y = -cos(rotation_rad);
+	map->player.cam_plane.x = cos(rotation_rad);
+	map->player.cam_plane.y = sin(rotation_rad);
 }
 
 int	init_gridpos(t_map *map, int x, int y, char gridchar)

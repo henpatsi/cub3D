@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 11:10:51 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/24 12:28:31 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/24 12:37:59 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	update_visuals(t_map *map)
 	{
 		double screen_center_offset = x - (double) (map->images.draw->width / 2);
 		double grid_offset = screen_center_offset / (200 - (fabs(map->player.y - 0) * 20));
-		printf("x: %d, scroff: %f, grdoff: %f\n", x, screen_center_offset, grid_offset);
+		//printf("x: %d, scroff: %f, grdoff: %f\n", x, screen_center_offset, grid_offset);
 
 		y = 0;
 		
