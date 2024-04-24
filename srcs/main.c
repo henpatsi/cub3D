@@ -6,15 +6,15 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:54:42 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/22 14:22:38 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/24 17:33:11 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int main (int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_map map;
+	t_map	map;
 
 	validate_input(argc, argv, &map);
 	return (0);

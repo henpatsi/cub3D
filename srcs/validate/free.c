@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:44:53 by ixu               #+#    #+#             */
-/*   Updated: 2024/04/24 09:46:51 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/25 01:29:32 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ void	free_arr(char **arr)
 	free(arr);
 }
 
-void	free_grid(char **grid, t_map *map)
+void	free_grid(char **grid)
 {
 	int	row;
 
 	row = 0;
-	while (row < map->height)
+	while (grid[row] != NULL)
 	{
 		free(grid[row]);
 		row++;

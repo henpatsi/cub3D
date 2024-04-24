@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:44:40 by ixu               #+#    #+#             */
-/*   Updated: 2024/04/24 12:16:35 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/25 01:27:51 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,22 @@ void	non_map_error(char *line, char **split_line)
 	exit(EXIT_FAILURE);
 }
 
-void	map_error(char *message, char **grid, t_map *map)
+void	map_error(char *message, char **grid)
 {
 	ft_putstr_fd("Error\n", 2);
 	ft_putstr_fd(message, 2);
-	free_grid(grid, map);
+	free_grid(grid);
 	exit(EXIT_FAILURE);
 }
 
 void	perror_and_exit(char *message)
 {
 	perror(message);
+	exit(EXIT_FAILURE);
+}
+
+void	put_error_and_exit(char *message)
+{
+	ft_putstr_fd(message, 2);
 	exit(EXIT_FAILURE);
 }
