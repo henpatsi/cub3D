@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 11:10:51 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/24 11:51:38 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/24 12:19:53 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,28 +31,31 @@ int	update_visuals(t_map *map)
 	x = 0;
 	while (x < map->images.draw->width)
 	{
-		int screen_center_offset = x - (map->images.draw->width / 2);
-		int	grid_offset = screen_center_offset / 100;
-		printf("x: %d, scroff: %d, grdoff: %d\n", x, screen_center_offset, grid_offset);
+		double screen_center_offset = x - (double) (map->images.draw->width / 2);
+		double grid_offset = screen_center_offset / 100;
+		printf("x: %d, scroff: %f, grdoff: %f\n", x, screen_center_offset, grid_offset);
 
 		y = 0;
 		
 		if (map->player.x + grid_offset >= 0 && map->player.x + grid_offset < map->width
-				&& map->grid[0][(int) map->player.x + grid_offset].type == WALL)
+				&& map->grid[0][(int)(map->player.x + grid_offset)].type == WALL)
 		{
-			while (y < 200)
+			uint32_t wall_height = 200 - (int) fabs(map->player.y - 0) * 10;
+			uint32_t target = (map->images.draw->height / 2) - (wall_height / 2);
+			while (y < target)
 			{
-				mlx_put_pixel(map->images.draw, x, y, 0x00FF00FF);
+				mlx_put_pixel(map->images.draw, x, y, map->ceiling_color);
 				y++;
 			}
-			while (y < 200 + 100)
+			target += wall_height;
+			while (y < target)
 			{
 				mlx_put_pixel(map->images.draw, x, y, 0xFF0000FF);
 				y++;
 			}
 			while (y < map->images.draw->height)
 			{
-				mlx_put_pixel(map->images.draw, x, y, 0x0000FFFF);
+				mlx_put_pixel(map->images.draw, x, y, map->floor_color);
 				y++;
 			}
 		}
@@ -60,12 +63,12 @@ int	update_visuals(t_map *map)
 		{
 			while (y < 200 + 100 / 2)
 			{
-				mlx_put_pixel(map->images.draw, x, y, 0x00FF00FF);
+				mlx_put_pixel(map->images.draw, x, y, map->ceiling_color);
 				y++;
 			}
 			while (y < map->images.draw->height)
 			{
-				mlx_put_pixel(map->images.draw, x, y, 0x0000FFFF);
+				mlx_put_pixel(map->images.draw, x, y, map->floor_color);
 				y++;
 			}
 		}
