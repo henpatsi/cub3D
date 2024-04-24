@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 12:27:31 by ixu               #+#    #+#             */
-/*   Updated: 2024/04/24 08:39:57 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/24 10:54:10 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,28 +39,6 @@ static void	validate_file_extension(char *file)
 	}
 	free(filename);
 	free(extension);
-}
-
-static void	free_arr(char **arr)
-{
-	int	i;
-
-	i = 0;
-	while (arr[i] != NULL)
-	{
-		free(arr[i]);
-		i++;
-	}
-	free(arr);
-}
-
-static void	non_map_error(char *line, char **split_line)
-{
-	ft_putstr_fd("Error\nInvalid element: ", 2);
-	ft_putstr_fd(line, 2);
-	free(line);
-	free_arr(split_line);
-	exit(EXIT_FAILURE);
 }
 
 static void	validate_non_map_elements(char *line, int *flags)
@@ -153,15 +131,15 @@ static void	fill_in_grid(char *line, t_map *map, char **grid, int row)
 	}
 	while (col < map->width && (line[col] != '\n' && line[col] != '\0'))
 	{
-		if (line[col] == ' ')
-			grid[row][col] = '0';
-		else
-			grid[row][col] = line[col];
+		// if (line[col] == ' ')
+		// 	grid[row][col] = '0';
+		// else
+		grid[row][col] = line[col];
 		col++;
 	}
 	while (col < map->width)
 	{
-		grid[row][col] = '0';
+		grid[row][col] = ' ';
 		col++;
 	}
 }
@@ -209,6 +187,8 @@ static char	**grid_init(char *file, t_map *map)
 		exit(EXIT_FAILURE);
 	}
 	// print grid
+	printf("map width: %d\n", map->width);
+	printf("map height: %d\n", map->height);
 	for (int r = 0; r < map->height; r++)
 	{
 		for (int c = 0; c < map->width; c++)
@@ -223,41 +203,41 @@ static char	**grid_init(char *file, t_map *map)
 	return (grid);
 }
 
-static void	free_grid(char **grid, t_map *map)
+static bool	is_closed(int r, int c, t_map *map, char **grid)
 {
-	int	row;
-
-	row = 0;
-	while (row < map->height)
-	{
-		free(grid[row]);
-		row++;
-	}
-	free(grid);
-}
-
-static void	map_error(char *message, char **grid, t_map *map)
-{
-	ft_putstr_fd("Error\n", 2);
-	ft_putstr_fd(message, 2);
-	free_grid(grid, map);
-	exit(EXIT_FAILURE);
-}
-int	visited[15][36] = {0}; // malloc
-static int	is_closed(int r, int c, t_map *map, char **grid) 
-{
-	int	closed;
-
 	if (r < 0 || r >= map->height || c < 0 || c >= map->width)
-		return (0);
-	if (grid[r][c] == '1' || visited[r][c] == 1)
-		return (1);
-	visited[r][c] = 1;
-	closed = is_closed(r + 1, c, map, grid) &
-				is_closed(r - 1, c, map, grid) &
-				is_closed(r, c + 1, map, grid) &
-				is_closed(r, c - 1, map, grid);
-	return (closed);
+		return (false);
+	if (grid[r][c] == ' ')
+		return (false);
+	return (true);	
+}
+
+static void	validate_walls(char **grid, t_map *map)
+{
+	int	r;
+	int	c;
+
+	r = 0;
+	while (r < map->height)
+	{
+		c = 0;
+		while (c < map->width)
+		{
+			if (grid[r][c] == '0')
+			{
+				if (!is_closed(r + 1, c, map, grid))
+					map_error("Map not closed by walls\n", grid, map);
+				if (!is_closed(r - 1, c, map, grid))
+					map_error("Map not closed by walls\n", grid, map);
+				if (!is_closed(r, c + 1, map, grid))
+					map_error("Map not closed by walls\n", grid, map);
+				if (!is_closed(r, c - 1, map, grid))
+					map_error("Map not closed by walls\n", grid, map);
+			}
+			c++;
+		}
+		r++;
+	}
 }
 
 static void	validate_map(char **grid, t_map *map)
@@ -265,8 +245,6 @@ static void	validate_map(char **grid, t_map *map)
 	int		row;
 	int		col;
 	bool	player_found;
-	int		start_r;
-	int		start_c;
 
 	row = 0;
 	player_found = false;
@@ -275,26 +253,19 @@ static void	validate_map(char **grid, t_map *map)
 		col = 0;
 		while (col < map->width)
 		{
-			if (ft_strchr("01NSEW", grid[row][col]) == NULL)
+			if (ft_strchr("01NSEW ", grid[row][col]) == NULL)
 				map_error("Map contains an invalid character\n", grid, map);
 			if (ft_strchr("NSEW", grid[row][col]) != NULL && !player_found)
-			{
 				player_found = true;
-				start_r = row;
-				start_c = col;
-			}
 			else if (ft_strchr("NSEW", grid[row][col]) != NULL && player_found)
 				map_error("Map contains more than one start position\n", grid, map);
 			col++;
 		}
 		row++;
 	}
-	// validate walls
-	int	closed;
-	closed = is_closed(start_r, start_c, map, grid);
-	printf("is closed: %d\n", closed);
-	if (!closed)
-		map_error("Map not closed by walls\n", grid, map);
+	if (!player_found)
+		map_error("Map missing start position\n", grid, map);
+	validate_walls(grid, map);
 }
 
 static void validate_file_content(char *file, t_map *map)
@@ -331,8 +302,6 @@ static void validate_file_content(char *file, t_map *map)
 			get_map_dimensions(line, map);
 		free(line);
 	}
-	printf("\nmap width: %d\n", map->width);
-	printf("map height: %d\n", map->height);
 	if (close(fd) == -1)
 	{
 		perror("close() error");
