@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 11:56:33 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/23 09:19:40 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/24 09:30:21 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ int	init_image_from_rgb(t_map *map, char **split_line)
 	char		**color_split;
 
 	if (split_line[1] == 0)
-		return_error("Failed to read color config");
+		return (return_error("Failed to read color config"));
 	split_line[1][ft_strlen(split_line[1]) - 1] = 0;
 	color_split = ft_split(split_line[1], ',');
 	if (color_split == 0 || color_split[0] == 0 || color_split[1] == 0
 		|| color_split[2] == 0)
 	{
 		free_strs(color_split);
-		return_error("Failed to read color config");
+		return (return_error("Failed to read color config"));
 	}
 	color = ft_atoi(color_split[0]);
 	color = color << 8;
@@ -72,7 +72,7 @@ int	init_image_from_texture(t_map *map, char **split_line)
 	mlx_image_t		*image;
 
 	if (split_line[1] == 0)
-		return_error("Failed to read texture config");
+		return (return_error("Failed to read texture config"));
 	split_line[1][ft_strlen(split_line[1]) - 1] = 0;
 	texture = mlx_load_png(split_line[1]);
 	if (texture == 0)
@@ -121,7 +121,7 @@ int	load_config(t_map *map, int map_fd)
 	{
 		split = read_split_line(map_fd);
 		if (split == 0)
-			return_error("Failed to read config");
+			return (return_error("Failed to read config"));
 		if (ft_strcmp(split[0], "\n") == 0)
 		{
 			free_strs(split);

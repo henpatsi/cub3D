@@ -6,28 +6,16 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 14:19:17 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/23 18:00:01 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/24 09:31:17 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-// int init_wall_textures(t_map *map, int x, int y)
-// {
-// 	t_gridpos gridpos;
-
-// 	gridpos = map->grid[y][x];
-// 	gridpos.image_instances.north = mlx_image_to_window(map->mlx, map->images->north, x, y);
-// 	gridpos.image_instances.south = mlx_image_to_window(map->mlx, map->images->south, x, y);
-// 	gridpos.image_instances.east = mlx_image_to_window(map->mlx, map->images->east, x, y);
-// 	gridpos.image_instances.west = mlx_image_to_window(map->mlx, map->images->west, x, y);
-// 	return (1);
-// }
-
 void	init_player(t_map *map, int x, int y, char gridchar)
 {
 	double	rotation_rad;
-	
+
 	map->player.x = x;
 	map->player.y = y;
 	if (gridchar == 'N')
@@ -51,10 +39,7 @@ int	init_gridpos(t_map *map, int x, int y, char gridchar)
 	gridpos->x = x;
 	gridpos->y = y;
 	if (gridchar == '1')
-	{
-		//init_wall_textures(map, x, y);
 		gridpos->type = WALL;
-	}
 	else
 		gridpos->type = EMPTY;
 	if (gridchar == 'N' || gridchar == 'S'
@@ -100,7 +85,7 @@ int	load_grid(t_map *map, int map_fd)
 		{
 			free(line);
 			free_grid(map->grid);
-			return_error("Failed to read map");
+			return (return_error("Failed to read map"));
 		}
 		if (ft_strcmp(line, "\n") == 0)
 		{

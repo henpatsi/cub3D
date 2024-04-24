@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 09:45:59 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/23 19:05:27 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/24 09:29:54 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,20 @@ void	move_player(t_map *map, int forward, int right)
 {
 	t_vector	target_pos;
 
-
-	target_pos.x = map->player.x + (forward * map->mlx->delta_time * MOVE_SPEED * map->player.dir.x) + 
-					(right * map->mlx->delta_time * MOVE_SPEED * map->player.dir.x);
-	target_pos.y = map->player.y + (forward * map->mlx->delta_time * MOVE_SPEED * map->player.dir.y) + 
-					(right * map->mlx->delta_time * MOVE_SPEED * map->player.dir.y);
-
-	printf("forward x: %f\n", forward * map->mlx->delta_time * MOVE_SPEED * map->player.dir.x);
-	printf("forward y: %f\n", forward * map->mlx->delta_time * MOVE_SPEED * map->player.dir.y);
-
-	printf("target x: %f\n", target_pos.x);
-	printf("target y: %f\n", target_pos.y);
-
+	target_pos.x = map->player.x
+		+ (forward * map->mlx->delta_time * MOVE_SPEED * map->player.dir.x)
+		+ (right * map->mlx->delta_time * MOVE_SPEED * -map->player.dir.y);
+	target_pos.y = map->player.y
+		+ (forward * map->mlx->delta_time * MOVE_SPEED * map->player.dir.y)
+		+ (right * map->mlx->delta_time * MOVE_SPEED * map->player.dir.x);
 	if (target_pos.x < 0 || target_pos.x >= map->width)
 		return ;
 	if (target_pos.y < 0 || target_pos.y >= map->height)
 		return ;
 	if (map->grid[(int) target_pos.y][(int) target_pos.x].type == WALL)
 		return ;
-	map->player.x = target_pos.y; 
-	map->player.y = target_pos.x;
+	map->player.x = target_pos.x;
+	map->player.y = target_pos.y;
 }
 
 void	rotate_player(t_map *map, int dir)
@@ -43,7 +37,8 @@ void	rotate_player(t_map *map, int dir)
 	double	rotation;
 	double	rotation_rad;
 
-	rotation = map->player.x_rotation + (dir * map->mlx->delta_time * ROTATE_SPEED);
+	rotation = map->player.x_rotation
+		+ (dir * map->mlx->delta_time * ROTATE_SPEED);
 	if (rotation > 360)
 		rotation -= 360;
 	if (rotation < 0)
@@ -73,7 +68,6 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		rotate_player(map, -1);
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		mlx_close_window(map->mlx);
-
 	printf("\nplayer x: %f, y: %f, rot: %f\n", map->player.x, map->player.y, map->player.x_rotation);
 	printf("player vec x: %f, vec y: %f\n\n", map->player.dir.x, map->player.dir.y);
 }
