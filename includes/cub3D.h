@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/24 09:47:18 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/24 12:40:27 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,10 @@ typedef enum e_flags
 // validate.c
 void	validate_input(int argc, char **argv, t_map *map);
 
+// validate_map.c
+void	validate_map(char **grid, t_map *map);
+char	**grid_init(char *file, t_map *map);
+
 // free.c
 void	free_arr(char **arr);
 void	free_grid(char **grid, t_map *map);
@@ -86,5 +90,6 @@ void	free_grid(char **grid, t_map *map);
 // error.c
 void	non_map_error(char *line, char **split_line);
 void	map_error(char *message, char **grid, t_map *map);
+void	perror_and_exit(char *message);
 
 #endif

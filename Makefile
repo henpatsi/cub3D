@@ -6,7 +6,7 @@
 #    By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/22 08:30:50 by hpatsi            #+#    #+#              #
-#    Updated: 2024/04/24 09:45:10 by ixu              ###   ########.fr        #
+#    Updated: 2024/04/24 12:13:32 by ixu              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRCS_DIR = ./srcs/
 
 # C FILES
 
-SOURCE_NAMES = main validate free error
+SOURCE_NAMES = main validate validate_map free error
 
 SOURCE_FILES = $(addsuffix .c, $(SOURCE_NAMES))
 
