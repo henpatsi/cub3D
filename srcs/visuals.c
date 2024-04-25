@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 11:10:51 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/24 14:53:02 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/25 13:00:11 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,17 @@ int	update_visuals(t_map *map)
 	x = 0;
 	while (x < map->images.draw->width)
 	{
-		double screen_center_offset = x - (double) (map->images.draw->width / 2);
-		double grid_offset = screen_center_offset / (200 - (fabs(map->player.y - 0) * 20));
-		//printf("x: %d, scroff: %f, grdoff: %f\n", x, screen_center_offset, grid_offset);
+		t_vector ray_dir;
+		ray_dir.x = map->player.dir.x + (map->player.cam_plane.x * ((double)x / (double)map->images.draw->width));
+		ray_dir.y = map->player.dir.y + (map->player.cam_plane.y * ((double)x / (double)map->images.draw->width));
+		printf("ray dir x: %f, y: %f\n", ray_dir.x, ray_dir.y);
+		printf("calc: %u / %u = %f\n", x, map->images.draw->width, (double)x / (double)map->images.draw->width);
 
 		y = 0;
 		
-		if (map->player.x + grid_offset >= 0 && map->player.x + grid_offset < map->width
-				&& map->grid[0][(int) round(map->player.x + grid_offset)].type == WALL)
+		if (grid_raycast(&hit, map, origin, ray_dir) == 1)
 		{
-			uint32_t wall_height = 300 - (int) round(fabs(map->player.y - 0) * 20);
+			uint32_t wall_height = 200 - hit.distance * 3;
 			uint32_t target = (map->images.draw->height / 2) - (wall_height / 2);
 			while (y < target)
 			{

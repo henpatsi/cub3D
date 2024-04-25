@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/25 11:06:53 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/25 12:28:08 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,6 @@ typedef struct s_vector
 
 typedef struct s_ray_data
 {
-	double	ray_x; // actual ray position
-	double	ray_y;
 	int		grid_x; // the grid the ray is in
 	int		grid_y;
 	double	delta_x; // distance for ray from one x to next x
