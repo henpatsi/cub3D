@@ -13,17 +13,29 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include <stdio.h> // printf, remove later
+
+// open
+# include <fcntl.h>
+
+# include <math.h>
+
 # include "libft.h"
 # include "MLX42.h"
-
-// printf
-# include <stdio.h> // to be removed?
 
 // exit, EXIT_FAILURE
 # include <stdlib.h>
 
-// open
-#include <fcntl.h>
+# define PI 3.141592654
+
+# define MOVE_SPEED 10
+# define ROTATE_SPEED 200
+
+typedef struct s_vector
+{
+	double	x;
+	double	y;
+}	t_vector;
 
 typedef enum e_gridpos_type
 {
@@ -57,12 +69,22 @@ typedef struct s_gridpos
 	t_imgage_instances	image_instances;
 }	t_gridpos;
 
+typedef struct s_player
+{
+	double		x;
+	double		y;
+	double		x_rotation;
+	t_vector	dir;
+
+}	t_player;
+
 typedef struct s_map
 {
 	int			width;
 	int			height;
 	t_gridpos	**grid;
-	t_images	images[1];
+  t_images	images;
+	t_player	player;
 	mlx_t		*mlx;
 }	t_map;
 
@@ -100,5 +122,22 @@ void	map_error(char *message, char **grid);
 void	perror_and_exit(char *message);
 void	put_error_and_exit(char *message);
 void	put_error_free_and_exit(char *message, char **grid, int row);
+
+// PREPARE MAP
+
+int		load_map(t_map *map, char *map_filename);
+int		load_config(t_map *map, int map_fd);
+int		load_grid(t_map *map, int map_fd);
+
+// GAME
+
+void	key_hook(mlx_key_data_t keydata, void *param);
+
+// HELPERS
+
+int		return_error(char *message);
+
+void	free_strs(char **strs);
+void	free_grid(t_gridpos **grid);
 
 #endif

@@ -22,7 +22,7 @@ VALIDATE_DIR = ./srcs/validate/
 
 # C FILES
 
-SOURCE_FILES = main
+SOURCE_FILES = main controls load_map load_config load_grid error free
 
 VALIDATE_FILES = validate validate_utils grid_init validate_map free error
 
@@ -45,11 +45,11 @@ MLX42 = $(MLX42_DIR)libmlx42.a
 
 HEADERS = -I ./includes/ -I ./libft/ -I ./MLX42/include/MLX42/
 
-DEPENDENCIES = -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
+DEPENDENCIES = -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -lm
 
 CFLAGS += -Wall -Wextra -Werror $(HEADERS)
 
-CC = cc $(CFLAGS)
+CC = cc $(CFLAGS) -g
 
 # RULES
 
