@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 13:05:12 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/25 12:39:24 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/25 14:08:26 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,31 @@ int	get_next_edge(t_hitinfo *hit, t_map *map, t_vector direction, t_raydata *ray
 	if (raydata->dist_to_y < raydata->dist_to_x)
 	{
 		if (direction.y > 0)
+		{
 			raydata->grid_y += 1;
+			hit->side = SOUTH;
+		}
 		else
+		{
 			raydata->grid_y -= 1;
-		hit->distance += raydata->dist_to_y;
+			hit->side = NORTH;
+		}
+		hit->distance = raydata->dist_to_y;
 		raydata->dist_to_y += raydata->delta_y;
 	}
 	else
 	{
 		if (direction.x > 0)
+		{
 			raydata->grid_x += 1;
+			hit->side = WEST;
+		}
 		else
+		{
 			raydata->grid_x -= 1;
-		hit->distance += raydata->dist_to_x;
+			hit->side = EAST;
+		}
+		hit->distance = raydata->dist_to_x;
 		raydata->dist_to_x += raydata->delta_x;
 	}
 	if (raydata->grid_y >= map->height || raydata->grid_x >= map->width
@@ -63,12 +75,12 @@ int	grid_raycast(t_hitinfo *hit, t_map *map, t_vector origin, t_vector direction
 
 	init_raydata(&raydata, origin, direction);
 
-	printf("distance to closest x = %f\n", raydata.dist_to_x);
-	printf("distance to closest y = %f\n", raydata.dist_to_y);
+	//printf("distance to closest x = %f\n", raydata.dist_to_x);
+	//printf("distance to closest y = %f\n", raydata.dist_to_y);
 
 	while (get_next_edge(hit, map, direction, &raydata))
 	{
-		printf("x: %d, y: %d, grid type %d\n", raydata.grid_x, raydata.grid_y, map->grid[raydata.grid_y][raydata.grid_x].type);
+		//printf("x: %d, y: %d, grid type %d\n", raydata.grid_x, raydata.grid_y, map->grid[raydata.grid_y][raydata.grid_x].type);
 		if (map->grid[raydata.grid_y][raydata.grid_x].type == WALL)
 			return (1);
 	}

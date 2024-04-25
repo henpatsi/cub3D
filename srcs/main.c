@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:54:42 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/24 12:37:33 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/25 14:14:56 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void print_grid(t_map *map)
 
 int test_game(t_map *map, char **argv)
 {
-	map->width = 6;
-	map->height = 6;
+	map->width = 40;
+	map->height = 20;
 
 	map->mlx = mlx_init(512, 512, "cub3D", false);
 	if (map->mlx == 0)

@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 11:10:51 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/25 13:00:11 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/25 13:10:28 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,20 @@ int	update_visuals(t_map *map)
 		t_vector ray_dir;
 		ray_dir.x = map->player.dir.x + (map->player.cam_plane.x * ((double)x / (double)map->images.draw->width));
 		ray_dir.y = map->player.dir.y + (map->player.cam_plane.y * ((double)x / (double)map->images.draw->width));
-		printf("ray dir x: %f, y: %f\n", ray_dir.x, ray_dir.y);
-		printf("calc: %u / %u = %f\n", x, map->images.draw->width, (double)x / (double)map->images.draw->width);
+		//printf("ray dir x: %f, y: %f\n", ray_dir.x, ray_dir.y);
+		//printf("calc: %u / %u = %f\n", x, map->images.draw->width, (double)x / (double)map->images.draw->width);
 
 		y = 0;
-		
+		uint32_t color;
+		if (hit.side == NORTH)
+			color = 0xFF0000FF;
+		if (hit.side == SOUTH)
+			color = 0x00FF00FF;
+		if (hit.side == EAST)
+			color = 0x0000FFFF;
+		if (hit.side == WEST)
+			color = 0xFF00FFFF;
+
 		if (grid_raycast(&hit, map, origin, ray_dir) == 1)
 		{
 			uint32_t wall_height = 200 - hit.distance * 3;
@@ -58,7 +67,7 @@ int	update_visuals(t_map *map)
 			target += wall_height;
 			while (y < target)
 			{
-				mlx_put_pixel(map->images.draw, x, y, 0xFF0000FF);
+				mlx_put_pixel(map->images.draw, x, y, color);
 				y++;
 			}
 			while (y < map->images.draw->height)
