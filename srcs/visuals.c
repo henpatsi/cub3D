@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 11:10:51 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/25 15:10:43 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/25 15:22:36 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ int	update_visuals(t_map *map)
 		ray_dir.x = map->player.dir.x + map->player.cam_plane.x * screen_position;
 		ray_dir.y = map->player.dir.y + map->player.cam_plane.y * screen_position;
 		//printf("ray dir x: %f, y: %f\n", ray_dir.x, ray_dir.y);
-
-		y = 0;
+		
 		uint32_t color;
 		if (hit.side == NORTH)
 			color = 0xFF0000FF;
@@ -55,16 +54,19 @@ int	update_visuals(t_map *map)
 		if (hit.side == WEST)
 			color = 0xFF00FFFF;
 
+		y = 0;
+		
 		if (grid_raycast(&hit, map, origin, ray_dir) == 1)
 		{
-			uint32_t wall_height = 200 - hit.distance * 3;
-			uint32_t target = (map->images.draw->height / 2) - (wall_height / 2);
+			double wall_height = 200;
+			uint32_t scaled_wall_height = (uint32_t) (wall_height / hit.distance);
+			uint32_t target = (map->images.draw->height / 2) - (scaled_wall_height / 2);
 			while (y < target)
 			{
 				mlx_put_pixel(map->images.draw, x, y, map->ceiling_color);
 				y++;
 			}
-			target += wall_height;
+			target += scaled_wall_height;
 			while (y < target)
 			{
 				mlx_put_pixel(map->images.draw, x, y, color);
