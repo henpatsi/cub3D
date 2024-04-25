@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 12:27:31 by ixu               #+#    #+#             */
-/*   Updated: 2024/04/25 12:47:01 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/25 13:05:33 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ static void	validate_file_content(char *file, t_map *map)
 character, or error encountered when reading the file\n");
 	grid = grid_init(file, map, map_start_line);
 	validate_map(grid, map);
-	free_grid(grid);
+	free_initial_grid(grid);
 }
 
 void	validate_input(int argc, char **argv, t_map *map)

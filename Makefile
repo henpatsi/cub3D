@@ -6,7 +6,7 @@
 #    By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/22 08:30:50 by hpatsi            #+#    #+#              #
-#    Updated: 2024/04/25 00:37:31 by ixu              ###   ########.fr        #
+#    Updated: 2024/04/25 13:07:11 by ixu              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ VALIDATE_DIR = ./srcs/validate/
 
 SOURCE_FILES = main controls load_map load_config load_grid error free
 
-VALIDATE_FILES = validate validate_utils grid_init validate_map free error
+VALIDATE_FILES = validate validate_utils grid_init validate_map validate_free validate_error
 
 ALL_SRC_FILES = $(addsuffix .c, $(SOURCE_FILES)) \
 			$(addsuffix .c, $(VALIDATE_FILES))

@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 00:19:17 by ixu               #+#    #+#             */
-/*   Updated: 2024/04/25 12:40:52 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/25 13:05:13 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	fill_in_grid(char *line, t_map *map, char **grid, int row)
 	if (grid[row] == NULL)
 	{
 		ft_putstr_fd("malloc() error\n", 2);
-		free_grid(grid);
+		free_initial_grid(grid);
 		free(line);
 		return (1);
 	}

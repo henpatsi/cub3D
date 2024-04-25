@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:44:40 by ixu               #+#    #+#             */
-/*   Updated: 2024/04/25 11:05:39 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/25 13:04:59 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	map_error(char *message, char **grid)
 {
 	ft_putstr_fd("Error\n", 2);
 	ft_putstr_fd(message, 2);
-	free_grid(grid);
+	free_initial_grid(grid);
 	exit(EXIT_FAILURE);
 }
 

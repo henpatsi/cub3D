@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:44:53 by ixu               #+#    #+#             */
-/*   Updated: 2024/04/25 01:29:32 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/25 13:05:06 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	free_arr(char **arr)
 	free(arr);
 }
 
-void	free_grid(char **grid)
+void	free_initial_grid(char **grid)
 {
 	int	row;
 
