@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/23 17:31:54 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/25 11:05:37 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,16 @@
 
 # include <stdio.h> // printf, remove later
 
+// open
 # include <fcntl.h>
+
 # include <math.h>
 
 # include "libft.h"
 # include "MLX42.h"
+
+// exit, EXIT_FAILURE
+# include <stdlib.h>
 
 # define PI 3.141592654
 
@@ -78,10 +83,45 @@ typedef struct s_map
 	int			width;
 	int			height;
 	t_gridpos	**grid;
-	t_images	images;
+  t_images	images;
 	t_player	player;
 	mlx_t		*mlx;
 }	t_map;
+
+typedef enum e_flags
+{
+	NO_FLAG = 1 << 0,
+	SO_FLAG = 1 << 1,
+	WE_FLAG = 1 << 2,
+	EA_FLAG = 1 << 3,
+	F_FLAG  = 1 << 4,
+	C_FLAG  = 1 << 5
+}	t_flags;
+
+// validate.c
+void	validate_input(int argc, char **argv, t_map *map);
+
+// validate_utils.c
+bool	map_started(int flags);
+void	get_map_dimensions(char *line, t_map *map);
+
+// grid_init.c
+char	**grid_init(char *file, t_map *map, int map_start_line);
+
+// validate_map.c
+void	validate_non_map_elements(char *line, int *flags);
+void	validate_map(char **grid, t_map *map);
+
+// free.c
+void	free_arr(char **arr);
+void	free_grid(char **grid);
+
+// error.c
+void	non_map_error(char *line, char **split_line);
+void	map_error(char *message, char **grid);
+void	perror_and_exit(char *message);
+void	put_error_and_exit(char *message);
+void	put_error_free_and_exit(char *message, char **grid, int row);
 
 // PREPARE MAP
 

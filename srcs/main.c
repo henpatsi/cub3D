@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:54:42 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/24 09:33:35 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/24 17:33:11 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,7 @@ int	main(int argc, char **argv)
 {
 	t_map	map;
 
-	if (argc != 2)
-	{
-		ft_putstr_fd("Use: ./cub3D path_to_map\n", 2);
-		return (1);
-	}
-
+	validate_input(argc, argv, &map);
 	test_game(&map, argv);
-
 	return (0);
 }

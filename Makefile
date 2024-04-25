@@ -3,22 +3,33 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+         #
+#    By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/22 08:30:50 by hpatsi            #+#    #+#              #
-#    Updated: 2024/04/23 17:20:04 by hpatsi           ###   ########.fr        #
+#    Updated: 2024/04/25 00:37:31 by ixu              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 
+# DIRECTORIES
+
+OBJS_DIR = ./objs/
+
+SRCS_DIR = ./srcs/
+
+VALIDATE_DIR = ./srcs/validate/
+
 # C FILES
 
 SOURCE_FILES = main controls load_map load_config load_grid error free
 
-SOURCES = $(addsuffix .c, $(addprefix ./srcs/, $(SOURCE_FILES)))
+VALIDATE_FILES = validate validate_utils grid_init validate_map free error
 
-OBJECTS = $(SOURCES:.c=.o)
+ALL_SRC_FILES = $(addsuffix .c, $(SOURCE_FILES)) \
+			$(addsuffix .c, $(VALIDATE_FILES))
+
+OBJECTS = $(addprefix $(OBJS_DIR), $(ALL_SRC_FILES:.c=.o))
 
 # LIBRARIES
 
@@ -44,10 +55,16 @@ CC = cc $(CFLAGS) -g
 
 all: $(NAME)
 
-$(NAME): $(OBJECTS) $(LIBFT) $(MLX42)
+$(NAME): $(OBJS_DIR) $(OBJECTS) $(LIBFT) $(MLX42)
 	$(CC) $(OBJECTS) $(LIBFT) $(MLX42) $(DEPENDENCIES) -o $(NAME)
 
-%.o: %.c
+$(OBJS_DIR):
+	mkdir $(OBJS_DIR)
+
+$(OBJS_DIR)%.o: $(SRCS_DIR)%.c
+	$(CC) -c -o $@ $<
+
+$(OBJS_DIR)%.o: $(VALIDATE_DIR)%.c
 	$(CC) -c -o $@ $<
 
 $(LIBFT):
@@ -61,7 +78,7 @@ $(MLX42_DIR):
 
 clean:
 	make clean -C $(LIBFT_DIR)
-	rm -f $(OBJECTS)
+	rm -fr $(OBJS_DIR)
 	make depend -C $(MLX42_DIR)
 
 fclean: clean
