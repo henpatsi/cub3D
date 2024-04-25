@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/25 10:49:17 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/25 11:06:53 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,14 @@ typedef struct s_vector
 
 typedef struct s_ray_data
 {
-	int		grid_x; // actual grid int value
+	double	ray_x; // actual ray position
+	double	ray_y;
+	int		grid_x; // the grid the ray is in
 	int		grid_y;
-	double	delta_x; // how much distance to next x of grid
+	double	delta_x; // distance for ray from one x to next x
 	double	delta_y;
-	double	first_dist_x; // distance from player to first x of grid
-	double	first_dist_y;
+	double	dist_to_x; // distance for ray from current pos to next x
+	double	dist_to_y;
 }	t_raydata;
 
 typedef struct s_hitinfo
