@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:54:42 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/25 13:09:33 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/25 13:32:00 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,6 @@ void print_grid(t_map *map)
 
 int test_game(t_map *map, char **argv)
 {
-	map->width = 6;
-	map->height = 6;
-
 	map->mlx = mlx_init(512, 512, "cub3D", false);
 	if (map->mlx == 0)
 	{
@@ -68,6 +65,8 @@ int	main(int argc, char **argv)
 	t_map	map;
 
 	validate_input(argc, argv, &map);
+	// printf("map width: %d\n", map.width);
+	// printf("map height: %d\n", map.height);
 	test_game(&map, argv);
 	return (0);
 }

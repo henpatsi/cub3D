@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_grid.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 14:19:17 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/24 09:31:17 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/25 13:25:52 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,6 @@ int	load_grid(t_map *map, int map_fd)
 			free(line);
 			free_grid(map->grid);
 			return (return_error("Failed to read map"));
-		}
-		if (ft_strcmp(line, "\n") == 0)
-		{
-			free(line);
-			continue ;
 		}
 		if (load_grid_row(map, y, line) == -1)
 		{

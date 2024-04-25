@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/25 13:04:37 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/25 13:44:08 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct s_map
 	int			width;
 	int			height;
 	t_gridpos	**grid;
+	// char		**grid;
 	t_images	images;
 	t_player	player;
 	mlx_t		*mlx;
