@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 12:09:09 by ixu               #+#    #+#             */
-/*   Updated: 2024/04/25 01:28:43 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/25 11:13:26 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	validate_walls(char **grid, t_map *map)
 		c = 0;
 		while (c < map->width)
 		{
-			if (grid[r][c] == '0')
+			if (grid[r][c] == '0' || ft_strchr("NSEW", grid[r][c]) != NULL)
 			{
 				if (!is_closed(r + 1, c, map, grid))
 					map_error("Map not closed by walls\n", grid);

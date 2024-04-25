@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 00:19:17 by ixu               #+#    #+#             */
-/*   Updated: 2024/04/25 01:27:58 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/25 12:40:52 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,13 @@ static int	fill_in_grid(char *line, t_map *map, char **grid, int row)
 	return (0);
 }
 
+static void	close_file_and_exit(int fd)
+{
+	if (close(fd) == -1)
+		perror_and_exit("close() error");
+	exit(EXIT_FAILURE);
+}
+
 static void	parse_file(int fd, int map_start_line, t_map *map, char **grid)
 {
 	char	*line;
@@ -49,10 +56,12 @@ static void	parse_file(int fd, int map_start_line, t_map *map, char **grid)
 	row = 0;
 	while (1)
 	{
-		line = get_next_line(fd); // malloc, read error->grid memory not fully allocated->segfault in validate_map()?
+		line = get_next_line(fd);
 		line_nbr++;
-		if (line == NULL)
+		if (line == NULL && row == map->height)
 			break ;
+		else if (line == NULL && row != map->height)
+			put_error_free_and_exit("Error encountered when reading the file\n", grid, row);
 		// printf("line %3d: %s", line_nbr, line);
 		if (line_nbr < map_start_line)
 		{
@@ -60,10 +69,7 @@ static void	parse_file(int fd, int map_start_line, t_map *map, char **grid)
 			continue ;
 		}
 		if (fill_in_grid(line, map, grid, row))
-		{
-			close(fd);
-			exit(EXIT_FAILURE);
-		}
+			close_file_and_exit(fd);
 		row++;
 		free(line);
 	}

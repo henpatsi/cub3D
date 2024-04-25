@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/25 01:28:12 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/25 11:05:37 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,6 @@ void	non_map_error(char *line, char **split_line);
 void	map_error(char *message, char **grid);
 void	perror_and_exit(char *message);
 void	put_error_and_exit(char *message);
+void	put_error_free_and_exit(char *message, char **grid, int row);
 
 #endif

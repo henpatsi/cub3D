@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 12:27:31 by ixu               #+#    #+#             */
-/*   Updated: 2024/04/25 01:28:02 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/25 12:47:01 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,31 +41,31 @@ static void	validate_file_extension(char *file)
 	free(extension);
 }
 
-static int	parse_file(int fd, t_map *map)
+static int	parse_file(int fd, t_map *map, int *flags)
 {
 	int		last_line_before_map;
-	int		flags;
+	// int		flags;
 	char	*line;
 
 	// int line_nbr = 0;
 	last_line_before_map = 0;
-	flags = 0;
+	// flags = 0;
 	while (1)
 	{
-		line = get_next_line(fd); // malloc error->malloc error in grid init->exit; read error->read error in gnl in grid_init->grid allocated and unitialized, grid[row] not allcoated->segfault in validate_map()?
+		line = get_next_line(fd);
 		// line_nbr++;
-		if (!map_started(flags))
-			last_line_before_map++;
 		if (line == NULL)
 			break ;
 		// printf("line %3d: %s", line_nbr, line);
-		if (*line == '\n' && !map_started(flags))
+		if (!map_started(*flags))
+			last_line_before_map++;
+		if (*line == '\n' && !map_started(*flags))
 		{
 			free(line);
 			continue ;
 		}
-		if (!map_started(flags))
-			validate_non_map_elements(line, &flags); // validate texture path during data init with mlx_load_png()? 
+		if (!map_started(*flags))
+			validate_non_map_elements(line, flags);
 		else
 			get_map_dimensions(line, map);
 		free(line);
@@ -86,6 +86,7 @@ static int	parse_file(int fd, t_map *map)
 static void	validate_file_content(char *file, t_map *map)
 {
 	int		fd;
+	int		flags;
 	int		map_start_line;
 	char	**grid;
 
@@ -94,9 +95,13 @@ static void	validate_file_content(char *file, t_map *map)
 		perror_and_exit("open() error");
 	map->width = 0;
 	map->height = 0;
-	map_start_line = parse_file(fd, map);
+	flags = 0;
+	map_start_line = parse_file(fd, map, &flags);
 	if (close(fd) == -1)
 		perror_and_exit("close() error");
+	if (map_start_line == 1 || !map_started(flags))
+		put_error_and_exit("Empty file, or file contains only newline \
+character, or error encountered when reading the file\n");
 	grid = grid_init(file, map, map_start_line);
 	validate_map(grid, map);
 	free_grid(grid);
