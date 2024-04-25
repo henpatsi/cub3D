@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/25 13:44:08 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/25 18:51:40 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,10 @@ char	**grid_init(char *file, t_map *map, int map_start_line);
 // validate/validate_map.c
 void	validate_non_map_elements(char *line, int *flags);
 void	validate_map(char **grid, t_map *map);
+
+// validate/validate_map_utils.c
+bool	is_closed(int r, int c, t_map *map, char **grid);
+void	flood_fill(char **grid, t_map *map, int row, int col);
 
 // validate/free.c
 void	free_arr(char **arr);

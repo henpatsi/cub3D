@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 00:19:17 by ixu               #+#    #+#             */
-/*   Updated: 2024/04/25 13:05:13 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/25 19:34:30 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,11 +101,13 @@ char	**grid_init(char *file, t_map *map, int map_start_line)
 		for (int c = 0; c < map->width; c++)
 		{
 			if (grid[r][c] == '0')
+				printf("%c", '0');
+			else if (grid[r][c] == ' ')
 				printf("%c", '.');
 			else
 				printf("%c", grid[r][c]);
 		}
 		printf("\n");
-	} */
+	}*/
 	return (grid);
 }

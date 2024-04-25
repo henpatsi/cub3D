@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 12:27:31 by ixu               #+#    #+#             */
-/*   Updated: 2024/04/25 13:05:33 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/25 19:37:23 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,10 @@ static void	validate_file_extension(char *file)
 static int	parse_file(int fd, t_map *map, int *flags)
 {
 	int		last_line_before_map;
-	// int		flags;
 	char	*line;
 
 	// int line_nbr = 0;
 	last_line_before_map = 0;
-	// flags = 0;
 	while (1)
 	{
 		line = get_next_line(fd);
