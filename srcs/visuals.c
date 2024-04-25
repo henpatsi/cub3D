@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 11:10:51 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/25 13:10:28 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/25 15:10:43 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ int	update_visuals(t_map *map)
 	while (x < map->images.draw->width)
 	{
 		t_vector ray_dir;
-		ray_dir.x = map->player.dir.x + (map->player.cam_plane.x * ((double)x / (double)map->images.draw->width));
-		ray_dir.y = map->player.dir.y + (map->player.cam_plane.y * ((double)x / (double)map->images.draw->width));
+		double screen_position = 2 * (double) x / (double) map->images.draw->width - 1;
+		ray_dir.x = map->player.dir.x + map->player.cam_plane.x * screen_position;
+		ray_dir.y = map->player.dir.y + map->player.cam_plane.y * screen_position;
 		//printf("ray dir x: %f, y: %f\n", ray_dir.x, ray_dir.y);
-		//printf("calc: %u / %u = %f\n", x, map->images.draw->width, (double)x / (double)map->images.draw->width);
 
 		y = 0;
 		uint32_t color;
