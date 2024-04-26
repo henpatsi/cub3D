@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 12:27:31 by ixu               #+#    #+#             */
-/*   Updated: 2024/04/25 19:37:23 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/26 15:15:32 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	validate_file_extension(char *file)
 		free(filename);
 		free(extension);
 		ft_putendl_fd("Invalid file extension", 2);
-		ft_putendl_fd("Usage: ./cub3D example.cub", 1);
+		ft_putendl_fd("Usage: ./cub3D path_to_file.cub", 1);
 		exit(EXIT_FAILURE);
 	}
 	free(filename);
@@ -102,6 +102,20 @@ static void	validate_file_content(char *file, t_map *map)
 character, or error encountered when reading the file\n");
 	grid = grid_init(file, map, map_start_line);
 	validate_map(grid, map);
+	// --- print grid ---
+	printf("map width: %d\n", map->width);
+	printf("map height: %d\n", map->height);
+	for (int r = 0; r < map->height; r++)
+	{
+		for (int c = 0; c < map->width; c++)
+		{
+			if (grid[r][c] == ' ')
+				printf("%c", '-');
+			else
+				printf("%c", grid[r][c]);
+		}
+		printf("\n");
+	}
 	free_initial_grid(grid);
 }
 
@@ -110,7 +124,7 @@ void	validate_input(int argc, char **argv, t_map *map)
 	if (argc != 2)
 	{
 		ft_putendl_fd("Invalid number of arguments", 2);
-		ft_putendl_fd("Usage: ./cub3D example.cub", 1);
+		ft_putendl_fd("Usage: ./cub3D path_to_file.cub", 1);
 		exit(EXIT_FAILURE);
 	}
 	validate_file_extension(argv[1]);

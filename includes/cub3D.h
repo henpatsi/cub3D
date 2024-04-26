@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/25 18:51:40 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/26 15:16:28 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@
 
 // exit, EXIT_FAILURE
 # include <stdlib.h>
+
+# define WIN_WIDTH 1024
+# define WIN_HEIGHT 1024
+# define IMG_WIDTH 1024
+# define IMG_HEIGHT 1024
 
 # define PI 3.141592654
 
@@ -103,6 +108,7 @@ typedef enum e_flags
 void	validate_input(int argc, char **argv, t_map *map);
 
 // validate/validate_utils.c
+void	validate_non_map_elements(char *line, int *flags);
 bool	map_started(int flags);
 void	get_map_dimensions(char *line, t_map *map);
 
@@ -110,7 +116,6 @@ void	get_map_dimensions(char *line, t_map *map);
 char	**grid_init(char *file, t_map *map, int map_start_line);
 
 // validate/validate_map.c
-void	validate_non_map_elements(char *line, int *flags);
 void	validate_map(char **grid, t_map *map);
 
 // validate/validate_map_utils.c
