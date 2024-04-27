@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/27 14:49:39 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/27 16:35:54 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@
 
 // distance from player to midpoint of one of minimap sides (apothem)
 # define APO 5
+
+// scale factor for scaling up minimap for drawing onto the screen
+# define SCALE 10
 
 # define DEBUG_MODE 1
 
