@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 12:27:31 by ixu               #+#    #+#             */
-/*   Updated: 2024/04/26 15:15:32 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/27 14:05:55 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,25 @@ static int	parse_file(int fd, t_map *map, int *flags)
 	return (last_line_before_map + 1);
 }
 
+static void	print_grid(char **grid, t_map *map)
+{
+	ft_printf("map width: %d\n", map->width);
+	ft_printf("map height: %d\n", map->height);
+	for (int r = 0; r < map->height; r++)
+	{
+		for (int c = 0; c < map->width; c++)
+		{
+			if (grid[r][c] == ' ')
+				ft_printf("%c", '-');
+			else
+				ft_printf("%c", grid[r][c]);
+		}
+	
+		ft_printf("\n");
+	}
+	ft_printf("\n");
+}
+
 /*
 	During the first time of reading lines of the file, 
 	(1) non-map elements are validated, (2) map dimensions 
@@ -102,20 +121,8 @@ static void	validate_file_content(char *file, t_map *map)
 character, or error encountered when reading the file\n");
 	grid = grid_init(file, map, map_start_line);
 	validate_map(grid, map);
-	// --- print grid ---
-	printf("map width: %d\n", map->width);
-	printf("map height: %d\n", map->height);
-	for (int r = 0; r < map->height; r++)
-	{
-		for (int c = 0; c < map->width; c++)
-		{
-			if (grid[r][c] == ' ')
-				printf("%c", '-');
-			else
-				printf("%c", grid[r][c]);
-		}
-		printf("\n");
-	}
+	if (DEBUG_MODE)
+		print_grid(grid, map);
 	free_initial_grid(grid);
 }
 

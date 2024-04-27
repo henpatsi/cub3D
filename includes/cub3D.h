@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/26 15:16:28 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/27 14:49:39 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,20 @@
 // exit, EXIT_FAILURE
 # include <stdlib.h>
 
-# define WIN_WIDTH 1024
-# define WIN_HEIGHT 1024
-# define IMG_WIDTH 1024
-# define IMG_HEIGHT 1024
+# define WIN_WIDTH 512
+# define WIN_HEIGHT 512
+# define IMG_WIDTH 512
+# define IMG_HEIGHT 512
 
 # define PI 3.141592654
 
 # define MOVE_SPEED 10
 # define ROTATE_SPEED 200
+
+// distance from player to midpoint of one of minimap sides (apothem)
+# define APO 5
+
+# define DEBUG_MODE 1
 
 typedef struct s_vector
 {
@@ -46,6 +51,7 @@ typedef enum e_gridpos_type
 {
 	EMPTY,
 	WALL,
+	PLAYER
 }	t_gridpos_type;
 
 typedef struct s_images
@@ -74,6 +80,13 @@ typedef struct s_gridpos
 	t_imgage_instances	image_instances;
 }	t_gridpos;
 
+typedef struct s_mini_gridpos
+{
+	int					x;
+	int					y;
+	t_gridpos_type		type;
+}	t_mini_gridpos;
+
 typedef struct s_player
 {
 	double		x;
@@ -82,6 +95,13 @@ typedef struct s_player
 	t_vector	dir;
 
 }	t_player;
+
+typedef	struct s_minimap
+{
+	int				len;
+	t_mini_gridpos	**grid;
+	t_player		player;
+}	t_minimap;
 
 typedef struct s_map
 {
@@ -149,5 +169,6 @@ int		return_error(char *message);
 
 void	free_strs(char **strs);
 void	free_grid(t_gridpos **grid);
+void	free_mini_grid(t_mini_gridpos **grid);
 
 #endif
