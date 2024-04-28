@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/28 10:39:00 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/28 18:33:28 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@
 // exit, EXIT_FAILURE
 # include <stdlib.h>
 
-# define WIN_WIDTH 512
-# define WIN_HEIGHT 512
-# define IMG_WIDTH 512
-# define IMG_HEIGHT 512
+# define WIN_WIDTH 1024
+# define WIN_HEIGHT 1024
+# define IMG_WIDTH 1024
+# define IMG_HEIGHT 1024
 
 # define PI 3.141592654
 
@@ -40,7 +40,7 @@
 # define D 10
 
 // scale factor for scaling up minimap for drawing onto the screen
-# define SCALE 5
+# define SCALE 10
 
 // distance of minimap to the edge of the window
 # define PAD 15
@@ -187,8 +187,11 @@ void	load_pixel_grid(t_minimap *minimap);
 // print_minimap.c
 void	print_minimap(t_minimap *minimap, bool scaled_up);
 // draw_minimap.c
-void	draw_minimap(t_minimap *minimap, mlx_image_t *image);
+void	draw_minimap(t_map *map, mlx_image_t *image);
 void	reload_and_draw_minimap(t_map *map, mlx_image_t *image);
+// draw_minimap_utils.c
+double	deg_to_rad(double degrees);
+void	draw_line(t_vector v1, t_vector v2, mlx_image_t *image);
 
 // GAME
 

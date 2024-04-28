@@ -6,7 +6,7 @@
 #    By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/22 08:30:50 by hpatsi            #+#    #+#              #
-#    Updated: 2024/04/27 21:13:31 by ixu              ###   ########.fr        #
+#    Updated: 2024/04/28 18:34:04 by ixu              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ VALIDATE_FILES = validate validate_utils grid_init validate_map \
 					validate_map_utils validate_free validate_error
 
 MINIMAP_FILES = create_minimap init_minimap load_minimap print_minimap \
-				draw_minimap
+				draw_minimap draw_minimap_utils
 
 ALL_SRC_FILES = $(addsuffix .c, $(SOURCE_FILES)) \
 			$(addsuffix .c, $(VALIDATE_FILES)) \
