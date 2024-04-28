@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:28:58 by ixu               #+#    #+#             */
-/*   Updated: 2024/04/27 21:37:24 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/28 10:38:03 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ void	draw_minimap(t_minimap *minimap, mlx_image_t *image)
 		while (++x < minimap->pixel_grid_len)
 		{
 			if (minimap->pixel_grid[y][x].type == EMPTY)
-				mlx_put_pixel(image, x, y, BLACK);
+				mlx_put_pixel(image, x + PAD, y + PAD, BLACK);
 			else if (minimap->pixel_grid[y][x].type == WALL)
-				mlx_put_pixel(image, x, y, DARK_GREY);
+				mlx_put_pixel(image, x + PAD, y + PAD, DARK_GREY);
 			else if (minimap->pixel_grid[y][x].type == PLAYER)
-				mlx_put_pixel(image, x, y, MAGENTA);
+				mlx_put_pixel(image, x + PAD, y + PAD, MAGENTA);
 		}
 	}
 }

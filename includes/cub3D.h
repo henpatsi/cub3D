@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/28 10:21:12 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/28 10:39:00 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@
 
 // scale factor for scaling up minimap for drawing onto the screen
 # define SCALE 5
+
+// distance of minimap to the edge of the window
+# define PAD 15
 
 // a list of colors in hexadecimal format for testing
 # define BLACK 0x000000ff
