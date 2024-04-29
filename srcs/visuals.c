@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 11:10:51 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/29 12:19:01 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/29 14:04:49 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	init_visuals(t_map *map)
 	map->images.draw = mlx_new_image(map->mlx, map->mlx->width,
 			map->mlx->height);
 	mlx_image_to_window(map->mlx, map->images.draw, 0, 0);
-	mlx_set_instance_depth(map->images.draw->instances, 1);
+	mlx_set_instance_depth(map->images.draw->instances, 0);
 	return (update_visuals(map));
 }
 
@@ -63,11 +63,17 @@ void	draw_wall(t_map *map, int x, t_hitinfo hit)
 	scaled_wall_height = (uint32_t)(WALL_HEIGHT / hit.distance);
 	start.x = x;
 	start.y = 0;
+
+	int image_x = round(hit.side_ratio * (double) wall_image->width);
 	
 	if (scaled_wall_height >= map->images.draw->height)
 	{
-		//draw_vertical_line(map, start, map->images.draw->height, color);
-		return ;
+		uint32_t y = 0;
+		while(y < map->images.draw->height)
+		{
+			mlx_put_pixel(map->images.draw, start.x, start.y + y, 0x000000FF); // temp black wall
+			y++;
+		}
 	}
 	else
 	{
@@ -77,12 +83,29 @@ void	draw_wall(t_map *map, int x, t_hitinfo hit)
 		uint32_t y = 0;
 		while(y < scaled_wall_height)
 		{
-			int image_y_offset = (int)((double) y / (double) scaled_wall_height * (double) wall_image->height) * 4 * wall_image->width;
-			int image_x = (int)(hit.side_ratio * (double) wall_image->width) * 4;
-			//printf("image_x = %d\n", image_x);
+			int image_y = round((double) y / (double) scaled_wall_height * (double) wall_image->height);
+
+			int image_x_offset = image_x * 4;
+			int image_y_offset = image_y * wall_image->width * 4;
+
 			uint32_t color;
-			ft_memcpy(&color, &wall_image->pixels[image_x + image_y_offset], 4);
-			mlx_put_pixel(map->images.draw, start.x, start.y + y, color);
+			uint32_t color2;
+			uint8_t	byte[4];
+			ft_memcpy(&color, &wall_image->pixels[image_y_offset + image_x_offset], 4);
+
+			byte[0] = (color >> 24) & 0xFF;
+			byte[1] = (color >> 16) & 0xFF;
+			byte[2] = (color >> 8) & 0xFF;
+			byte[3] = (color) & 0xFF;
+			color2 = byte[3];
+			color2 = color2 << 8;
+			color2 += byte[2];
+			color2 = color2 << 8;
+			color2 += byte[1];
+			color2 = color2 << 8;
+			color2 += byte[0];
+
+			mlx_put_pixel(map->images.draw, start.x, start.y + y, (uint32_t) color2);
 			y++;
 		}
 
