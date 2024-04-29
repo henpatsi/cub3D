@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 11:10:51 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/29 14:04:49 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/29 14:36:48 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,38 @@ int	init_visuals(t_map *map)
 	mlx_image_to_window(map->mlx, map->images.draw, 0, 0);
 	mlx_set_instance_depth(map->images.draw->instances, 0);
 	return (update_visuals(map));
+}
+
+uint32_t	abgr_to_rgba(uint32_t abgr)
+{
+	uint32_t rgba;
+	uint8_t	byte[4];
+	
+	byte[0] = (abgr >> 24) & 0xFF;
+	byte[1] = (abgr >> 16) & 0xFF;
+	byte[2] = (abgr >> 8) & 0xFF;
+	byte[3] = (abgr) & 0xFF;
+	rgba = byte[3];
+	rgba = rgba << 8;
+	rgba += byte[2];
+	rgba = rgba << 8;
+	rgba += byte[1];
+	rgba = rgba << 8;
+	rgba += byte[0];
+	return (rgba);
+}
+
+uint32_t	get_image_pixel(mlx_image_t *image, int x, int y)
+{
+	uint32_t color;
+	int image_x_offset;
+	int image_y_offset;
+	
+	image_x_offset = x * 4;
+	image_y_offset = y * image->width * 4;
+	ft_memcpy(&color, &image->pixels[image_y_offset + image_x_offset], 4);
+	color = abgr_to_rgba(color);
+	return (color);
 }
 
 t_vector	calculate_ray_dir(t_map *map, int x)
@@ -71,7 +103,9 @@ void	draw_wall(t_map *map, int x, t_hitinfo hit)
 		uint32_t y = 0;
 		while(y < map->images.draw->height)
 		{
-			mlx_put_pixel(map->images.draw, start.x, start.y + y, 0x000000FF); // temp black wall
+			int image_y = round(((double) y + (double) (scaled_wall_height - map->images.draw->height) / 2) / (double) scaled_wall_height * (double) wall_image->height);
+			uint32_t color = get_image_pixel(wall_image, image_x, image_y);
+			mlx_put_pixel(map->images.draw, start.x, start.y + y, (uint32_t) color);
 			y++;
 		}
 	}
@@ -84,28 +118,8 @@ void	draw_wall(t_map *map, int x, t_hitinfo hit)
 		while(y < scaled_wall_height)
 		{
 			int image_y = round((double) y / (double) scaled_wall_height * (double) wall_image->height);
-
-			int image_x_offset = image_x * 4;
-			int image_y_offset = image_y * wall_image->width * 4;
-
-			uint32_t color;
-			uint32_t color2;
-			uint8_t	byte[4];
-			ft_memcpy(&color, &wall_image->pixels[image_y_offset + image_x_offset], 4);
-
-			byte[0] = (color >> 24) & 0xFF;
-			byte[1] = (color >> 16) & 0xFF;
-			byte[2] = (color >> 8) & 0xFF;
-			byte[3] = (color) & 0xFF;
-			color2 = byte[3];
-			color2 = color2 << 8;
-			color2 += byte[2];
-			color2 = color2 << 8;
-			color2 += byte[1];
-			color2 = color2 << 8;
-			color2 += byte[0];
-
-			mlx_put_pixel(map->images.draw, start.x, start.y + y, (uint32_t) color2);
+			uint32_t color = get_image_pixel(wall_image, image_x, image_y);
+			mlx_put_pixel(map->images.draw, start.x, start.y + y, (uint32_t) color);
 			y++;
 		}
 

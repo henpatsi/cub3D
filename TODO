@@ -1,8 +1,9 @@
 General:
 	☐ Check leaks in load map
 	☐ Check that all possible errors handle in load map
-	☐ Fix crash with visuals when going into wall
 
 Improvements:
+	☐ Fix stuck on walls when diagonal towards wall
+	☐ Set minimum distance from wall, set to that distance if would otherwise go in wall
 
 Bug fixes:
