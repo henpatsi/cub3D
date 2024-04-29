@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:54:42 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/29 13:53:16 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/29 14:51:32 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int test_game(t_map *map, char **argv)
 		mlx_terminate(map->mlx);
 		return (1);
 	}
-	draw_minimap(map, map->images.draw);
+	draw_minimap(map, map->images.draw, 0, 0);
 
 	mlx_key_hook(map->mlx, key_hook, map);
 	mlx_loop(map->mlx);

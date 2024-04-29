@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:48:51 by ixu               #+#    #+#             */
-/*   Updated: 2024/04/29 13:52:12 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/29 14:32:27 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	create_minimap_pixel_grid(t_minimap *minimap)
 		}
 	}
 	load_pixel_grid(minimap);
-	if (DEBUG_MODE)
-		print_minimap(minimap, true);
+	// if (DEBUG_MODE)
+	// 	print_minimap(minimap, true);
 	return (0);
 }

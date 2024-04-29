@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/29 13:51:40 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/29 16:35:03 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # define D 10
 
 // scale factor for scaling up minimap for drawing onto the screen
-# define SCALE 10
+# define SCALE 45
 
 // distance of minimap to the edge of the window
 # define PAD 15
@@ -58,6 +58,9 @@
 # define LIGHT_GREY 0xd3d3d3ff
 # define MEDIUM_GREY 0x808080ff
 # define DARK_GREY 0x696969ff
+# define LIGHT_PEACH 0xffdab9ff
+# define PALE_PINK 0xffd1dcff
+# define PALE_GREEN 0x98fb98ff
 
 # define DEBUG_MODE 1
 
@@ -201,8 +204,8 @@ void	load_pixel_grid(t_minimap *minimap);
 // print_minimap.c
 void	print_minimap(t_minimap *minimap, bool scaled_up);
 // draw_minimap.c
-void	draw_minimap(t_map *map, mlx_image_t *image);
-void	reload_and_draw_minimap(t_map *map, mlx_image_t *image);
+void	draw_minimap(t_map *map, mlx_image_t *image, double x_moved, double y_moved);
+void	reload_and_draw_minimap(t_map *map, mlx_image_t *image, double x_moved, double y_moved);
 // draw_minimap_utils.c
 double	deg_to_rad(double degrees);
 void	draw_line(t_vector v1, t_vector v2, mlx_image_t *image);

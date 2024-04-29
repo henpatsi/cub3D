@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   visuals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 11:10:51 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/29 10:31:05 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/29 15:33:09 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,17 @@ void	draw_wall(t_map *map, int x, t_hitinfo hit)
 	uint32_t	scaled_wall_height;
 
 	if (hit.side == NORTH)
-		color = 0xFF0000FF;
+		color = LIGHT_GREY;
+		// color = 0xFF0000FF;
 	if (hit.side == SOUTH)
-		color = 0x00FF00FF;
+		color = LIGHT_PEACH;
+		// color = 0x00FF00FF;
 	if (hit.side == EAST)
-		color = 0x0000FFFF;
+		color = PALE_PINK;
+		// color = 0x0000FFFF;
 	if (hit.side == WEST)
-		color = 0xFF00FFFF;
+		color = PALE_GREEN;
+		// color = 0xFF00FFFF;
 	scaled_wall_height = (uint32_t)(WALL_HEIGHT / hit.distance);
 	start.x = x;
 	start.y = 0;
