@@ -7,3 +7,4 @@ Improvements:
 	☐ Set minimum distance from wall, set to that distance if would otherwise go in wall
 
 Bug fixes:
+	☐ make re command does not work if MLX42 does not exist
