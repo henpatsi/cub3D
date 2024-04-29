@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/29 16:35:03 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/29 22:53:09 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # define D 10
 
 // scale factor for scaling up minimap for drawing onto the screen
-# define SCALE 45
+# define SCALE 10
 
 // distance of minimap to the edge of the window
 # define PAD 15
@@ -65,6 +65,16 @@
 # define DEBUG_MODE 1
 
 // ENUMS
+
+typedef enum e_flags
+{
+	NO_FLAG = 1 << 0,
+	SO_FLAG = 1 << 1,
+	WE_FLAG = 1 << 2,
+	EA_FLAG = 1 << 3,
+	F_FLAG  = 1 << 4,
+	C_FLAG  = 1 << 5
+}	t_flags;
 
 typedef enum e_wall_side
 {
@@ -152,16 +162,6 @@ typedef struct s_map
 	mlx_t		*mlx;
 }	t_map;
 
-typedef enum e_flags
-{
-	NO_FLAG = 1 << 0,
-	SO_FLAG = 1 << 1,
-	WE_FLAG = 1 << 2,
-	EA_FLAG = 1 << 3,
-	F_FLAG  = 1 << 4,
-	C_FLAG  = 1 << 5
-}	t_flags;
-
 /* VALIDATE */
 // validate.c
 void	validate_input(int argc, char **argv, t_map *map);
@@ -204,8 +204,8 @@ void	load_pixel_grid(t_minimap *minimap);
 // print_minimap.c
 void	print_minimap(t_minimap *minimap, bool scaled_up);
 // draw_minimap.c
-void	draw_minimap(t_map *map, mlx_image_t *image, double x_moved, double y_moved);
-void	reload_and_draw_minimap(t_map *map, mlx_image_t *image, double x_moved, double y_moved);
+void	draw_minimap(t_map *map, mlx_image_t *image);
+void	reload_and_draw_minimap(t_map *map, mlx_image_t *image);
 // draw_minimap_utils.c
 double	deg_to_rad(double degrees);
 void	draw_line(t_vector v1, t_vector v2, mlx_image_t *image);

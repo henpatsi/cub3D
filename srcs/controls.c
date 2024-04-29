@@ -6,31 +6,22 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 09:45:59 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/29 15:40:50 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/29 22:48:35 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-double	x_moved;
-double	y_moved;
-
 void	move_player(t_map *map, int forward, int right)
 {
 	t_vector	target_pos;
 
-	x_moved = 0;
-	y_moved = 0;
 	target_pos.x = map->player.x
 		+ (forward * map->mlx->delta_time * MOVE_SPEED * map->player.dir.x)
 		+ (right * map->mlx->delta_time * MOVE_SPEED * -map->player.dir.y);
-	// printf("x moved: %f\n", (forward * map->mlx->delta_time * MOVE_SPEED * map->player.dir.x)
-	// 	+ (right * map->mlx->delta_time * MOVE_SPEED * -map->player.dir.y));
 	target_pos.y = map->player.y
 		+ (forward * map->mlx->delta_time * MOVE_SPEED * map->player.dir.y)
 		+ (right * map->mlx->delta_time * MOVE_SPEED * map->player.dir.x);
-	// printf("y moved: %f\n", (forward * map->mlx->delta_time * MOVE_SPEED * map->player.dir.y)
-	// 	+ (right * map->mlx->delta_time * MOVE_SPEED * map->player.dir.x));
 	if (target_pos.x < 0 || target_pos.x >= map->width)
 		return ;
 	if (target_pos.y < 0 || target_pos.y >= map->height)
@@ -39,11 +30,6 @@ void	move_player(t_map *map, int forward, int right)
 		return ;
 	map->player.x = target_pos.x;
 	map->player.y = target_pos.y;
-
-	x_moved = (forward * map->mlx->delta_time * MOVE_SPEED * map->player.dir.x)
-		+ (right * map->mlx->delta_time * MOVE_SPEED * -map->player.dir.y);
-	y_moved = (forward * map->mlx->delta_time * MOVE_SPEED * map->player.dir.y)
-		+ (right * map->mlx->delta_time * MOVE_SPEED * map->player.dir.x);
 }
 
 void	rotate_player(t_map *map, int dir)
@@ -87,7 +73,5 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	printf("\nplayer x: %f, y: %f, rot: %f\n", map->player.x, map->player.y, map->player.x_rotation);
 	printf("player vec x: %f, vec y: %f\n\n", map->player.dir.x, map->player.dir.y);
 	update_visuals(map);
-	printf("x moved: %f\n", x_moved);
-	printf("y moved: %f\n", y_moved);
-	reload_and_draw_minimap(map, map->images.draw, x_moved, y_moved);
+	reload_and_draw_minimap(map, map->images.draw);
 }
