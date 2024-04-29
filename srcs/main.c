@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:54:42 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/29 12:20:58 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/29 12:38:02 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,19 @@ int test_game(t_map *map, char **argv)
 		return (1);
 	}
 	// --- for testing minimap ---
-	map->images.initial = mlx_new_image(map->mlx, IMG_WIDTH, IMG_HEIGHT);
-	if (map->images.initial == NULL)
-	{
-		mlx_close_window(map->mlx);
-		ft_putstr_fd("Failed to create image\n", 2);
-		return (1);
-	}
-	if (mlx_image_to_window(map->mlx, map->images.initial, 0, 0) == -1)
-	{
-		mlx_close_window(map->mlx);
-		ft_putstr_fd("Failed to draw image onto the window\n", 2);
-		return (1);
-	}
+	// map->images.initial = mlx_new_image(map->mlx, IMG_WIDTH, IMG_HEIGHT);
+	// if (map->images.initial == NULL)
+	// {
+	// 	mlx_close_window(map->mlx);
+	// 	ft_putstr_fd("Failed to create image\n", 2);
+	// 	return (1);
+	// }
+	// if (mlx_image_to_window(map->mlx, map->images.initial, 0, 0) == -1)
+	// {
+	// 	mlx_close_window(map->mlx);
+	// 	ft_putstr_fd("Failed to draw image onto the window\n", 2);
+	// 	return (1);
+	// }
 
 	if (load_map(map, argv[1]) == -1)
 	{
@@ -84,7 +84,7 @@ int test_game(t_map *map, char **argv)
 		mlx_terminate(map->mlx);
 		return (1);
 	}
-	draw_minimap(map, map->images.initial);
+	draw_minimap(map, map->images.draw);
 
 	mlx_key_hook(map->mlx, key_hook, map);
 	mlx_loop(map->mlx);

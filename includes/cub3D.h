@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/29 12:22:00 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/29 12:48:40 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ typedef struct s_hitinfo
 
 typedef struct s_images
 {
-	mlx_image_t	*initial;
 	mlx_image_t *north;
 	mlx_image_t *south;
 	mlx_image_t *east;
