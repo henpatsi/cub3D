@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_grid.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 14:19:17 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/25 14:32:31 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/29 10:12:58 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	init_player(t_map *map, int x, int y, char gridchar)
 {
 	double	rotation_rad;
 
-	map->player.x = x;
-	map->player.y = y;
+	map->player.x = x + 0.5;
+	map->player.y = y + 0.5;
 	if (gridchar == 'N')
 		map->player.x_rotation = 0;
 	if (gridchar == 'S')

@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 11:10:51 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/29 10:04:37 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/29 10:31:05 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	draw_wall(t_map *map, int x, t_hitinfo hit)
 {
 	t_vector	start;
 	uint32_t	color;
-	uint32_t		scaled_wall_height;
+	uint32_t	scaled_wall_height;
 
 	if (hit.side == NORTH)
 		color = 0xFF0000FF;

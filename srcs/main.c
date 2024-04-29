@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:54:42 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/25 19:41:35 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/29 10:32:10 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void print_grid(t_map *map)
 		while (x < map->width)
 		{
 			if (map->grid[y][x].type == EMPTY)
-				ft_printf("0");
+				ft_printf(".");
 			else
 				ft_printf("1");
 			x++;
