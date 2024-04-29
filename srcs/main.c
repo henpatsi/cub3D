@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:54:42 by hpatsi            #+#    #+#             */
 /*   Updated: 2024/04/29 12:20:58 by ixu              ###   ########.fr       */
@@ -24,7 +24,7 @@ void print_grid(t_map *map)
 		while (x < map->width)
 		{
 			if (map->grid[y][x].type == EMPTY)
-				ft_printf("0");
+				ft_printf(".");
 			else
 				ft_printf("1");
 			x++;
@@ -33,7 +33,8 @@ void print_grid(t_map *map)
 		y++;
 	}
 
-	printf("\nplayer x: %f, y: %f, rot: %f\n\n", map->player.x, map->player.y, map->player.x_rotation);
+	printf("\nplayer x: %f, y: %f, rot: %f\n", map->player.x, map->player.y, map->player.x_rotation);
+	printf("player dirx: %f, diry: %f, planex: %f planey: %f\n\n", map->player.dir.x, map->player.dir.y, map->player.cam_plane.x, map->player.cam_plane.y);
 }
 
 int test_game(t_map *map, char **argv)
@@ -67,8 +68,14 @@ int test_game(t_map *map, char **argv)
 
 	print_grid(map);
 
-	if (create_minimap_grid(map, &map->minimap) == -1)
+	if (init_visuals(map) == -1)
 	{
+		mlx_terminate(map->mlx);
+		return (1);
+	}
+
+ 	if (create_minimap_grid(map, &map->minimap) == -1)
+  {
 		mlx_terminate(map->mlx);
 		return (1);
 	}
@@ -78,6 +85,7 @@ int test_game(t_map *map, char **argv)
 		return (1);
 	}
 	draw_minimap(map, map->images.initial);
+
 	mlx_key_hook(map->mlx, key_hook, map);
 	mlx_loop(map->mlx);
 	mlx_terminate(map->mlx);

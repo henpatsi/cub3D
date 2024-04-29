@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 09:45:59 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/28 17:18:57 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/29 10:02:02 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	rotate_player(t_map *map, int dir)
 	rotation_rad = (rotation * PI) / 180;
 	map->player.dir.x = sin(rotation_rad);
 	map->player.dir.y = -cos(rotation_rad);
+	map->player.cam_plane.x = cos(rotation_rad);
+	map->player.cam_plane.y = sin(rotation_rad);
 }
 
 void	key_hook(mlx_key_data_t keydata, void *param)
@@ -68,7 +70,9 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		rotate_player(map, -1);
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		mlx_close_window(map->mlx);
-	reload_and_draw_minimap(map, map->images.initial);
 	printf("\nplayer x: %f, y: %f, rot: %f\n", map->player.x, map->player.y, map->player.x_rotation);
 	printf("player vec x: %f, vec y: %f\n\n", map->player.dir.x, map->player.dir.y);
+  reload_and_draw_minimap(map, map->images.initial);
+	update_visuals(map);
+
 }

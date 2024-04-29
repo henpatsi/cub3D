@@ -24,7 +24,7 @@ MINIMAP_DIR = ./srcs/minimap/
 
 # C FILES
 
-SOURCE_FILES = main controls load_map load_config load_grid error free
+SOURCE_FILES = main controls visuals raycast load_map load_config load_grid error free
 
 VALIDATE_FILES = validate validate_utils grid_init validate_map \
 					validate_map_utils validate_free validate_error
