@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/29 12:48:40 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/29 13:51:40 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,13 +119,6 @@ typedef struct s_gridpos
 	t_gridpos_type	type;
 }	t_gridpos;
 
-typedef struct s_mini_gridpos
-{
-	int					x;
-	int					y;
-	t_gridpos_type		type;
-}	t_mini_gridpos;
-
 typedef struct s_player
 {
 	double		x;
@@ -137,10 +130,10 @@ typedef struct s_player
 
 typedef	struct s_minimap
 {
-	int				len;
-	int				pixel_grid_len;
-	t_mini_gridpos	**grid;
-	t_mini_gridpos	**pixel_grid;
+	int			len;
+	int			pixel_grid_len;
+	t_gridpos	**grid;
+	t_gridpos	**pixel_grid;
 }	t_minimap;
 
 typedef struct s_map
@@ -229,6 +222,5 @@ int		return_error(char *message);
 
 void	free_strs(char **strs);
 void	free_grid(t_gridpos **grid);
-void	free_mini_grid(t_mini_gridpos **grid);
 
 #endif

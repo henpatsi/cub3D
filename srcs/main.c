@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:54:42 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/29 12:38:02 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/29 13:53:16 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,6 @@ int test_game(t_map *map, char **argv)
 		ft_putstr_fd("Failed to init mlx\n", 2);
 		return (1);
 	}
-	// --- for testing minimap ---
-	// map->images.initial = mlx_new_image(map->mlx, IMG_WIDTH, IMG_HEIGHT);
-	// if (map->images.initial == NULL)
-	// {
-	// 	mlx_close_window(map->mlx);
-	// 	ft_putstr_fd("Failed to create image\n", 2);
-	// 	return (1);
-	// }
-	// if (mlx_image_to_window(map->mlx, map->images.initial, 0, 0) == -1)
-	// {
-	// 	mlx_close_window(map->mlx);
-	// 	ft_putstr_fd("Failed to draw image onto the window\n", 2);
-	// 	return (1);
-	// }
 
 	if (load_map(map, argv[1]) == -1)
 	{
@@ -74,8 +60,8 @@ int test_game(t_map *map, char **argv)
 		return (1);
 	}
 
- 	if (create_minimap_grid(map, &map->minimap) == -1)
-  {
+	if (create_minimap_grid(map, &map->minimap) == -1)
+	{
 		mlx_terminate(map->mlx);
 		return (1);
 	}
@@ -90,8 +76,8 @@ int test_game(t_map *map, char **argv)
 	mlx_loop(map->mlx);
 	mlx_terminate(map->mlx);
 
-	free_mini_grid(map->minimap.grid);
-	free_mini_grid(map->minimap.pixel_grid);
+	free_grid(map->minimap.grid);
+	free_grid(map->minimap.pixel_grid);
 
 	return (0);
 }

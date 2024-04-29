@@ -6,13 +6,13 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 21:12:43 by ixu               #+#    #+#             */
-/*   Updated: 2024/04/27 21:39:02 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/29 13:49:44 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static void	init_minimap_grid(t_mini_gridpos **grid, int len)
+static void	init_minimap_grid(t_gridpos **grid, int len)
 {
 	int	y;
 	int	x;
