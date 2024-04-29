@@ -33,7 +33,8 @@ void print_grid(t_map *map)
 		y++;
 	}
 
-	printf("\nplayer x: %f, y: %f, rot: %f\n\n", map->player.x, map->player.y, map->player.x_rotation);
+	printf("\nplayer x: %f, y: %f, rot: %f\n", map->player.x, map->player.y, map->player.x_rotation);
+	printf("player dirx: %f, diry: %f, planex: %f planey: %f\n\n", map->player.dir.x, map->player.dir.y, map->player.cam_plane.x, map->player.cam_plane.y);
 }
 
 int test_game(t_map *map, char **argv)
@@ -52,6 +53,12 @@ int test_game(t_map *map, char **argv)
 	}
 
 	print_grid(map);
+
+	if (init_visuals(map) == -1)
+	{
+		mlx_terminate(map->mlx);
+		return (1);
+	}
 
 	mlx_key_hook(map->mlx, key_hook, map);
 	mlx_loop(map->mlx);
