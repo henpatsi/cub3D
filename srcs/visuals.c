@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 11:10:51 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/29 10:31:05 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/29 12:19:01 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,30 +48,44 @@ void	draw_vertical_line(t_map *map, t_vector start, int height,
 void	draw_wall(t_map *map, int x, t_hitinfo hit)
 {
 	t_vector	start;
-	uint32_t	color;
+	mlx_image_t	*wall_image;
 	uint32_t	scaled_wall_height;
 
 	if (hit.side == NORTH)
-		color = 0xFF0000FF;
+		wall_image = map->images.north;
 	if (hit.side == SOUTH)
-		color = 0x00FF00FF;
+		wall_image = map->images.south;
 	if (hit.side == EAST)
-		color = 0x0000FFFF;
+		wall_image = map->images.east;
 	if (hit.side == WEST)
-		color = 0xFF00FFFF;
+		wall_image = map->images.west;
+
 	scaled_wall_height = (uint32_t)(WALL_HEIGHT / hit.distance);
 	start.x = x;
 	start.y = 0;
+	
 	if (scaled_wall_height >= map->images.draw->height)
 	{
-		draw_vertical_line(map, start, map->images.draw->height, color);
+		//draw_vertical_line(map, start, map->images.draw->height, color);
 		return ;
 	}
 	else
 	{
 		draw_vertical_line(map, start, (map->images.draw->height / 2) - (scaled_wall_height / 2), map->ceiling_color);
 		start.y += (map->images.draw->height / 2) - (scaled_wall_height / 2);
-		draw_vertical_line(map, start, scaled_wall_height, color);
+
+		uint32_t y = 0;
+		while(y < scaled_wall_height)
+		{
+			int image_y_offset = (int)((double) y / (double) scaled_wall_height * (double) wall_image->height) * 4 * wall_image->width;
+			int image_x = (int)(hit.side_ratio * (double) wall_image->width) * 4;
+			//printf("image_x = %d\n", image_x);
+			uint32_t color;
+			ft_memcpy(&color, &wall_image->pixels[image_x + image_y_offset], 4);
+			mlx_put_pixel(map->images.draw, start.x, start.y + y, color);
+			y++;
+		}
+
 		start.y += scaled_wall_height;
 		draw_vertical_line(map, start, map->images.draw->height - start.y, map->floor_color);
 	}

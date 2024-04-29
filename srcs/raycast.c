@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 13:05:12 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/29 10:02:14 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/29 11:47:57 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,12 @@ int	grid_raycast(t_hitinfo *hit, t_map *map, t_vector origin, t_vector dir)
 		if (map->grid[raydata.grid_y][raydata.grid_x].type == WALL)
 		{
 			hit->hit = true;
+			hit->x = origin.x + hit->distance * dir.x;
+			hit->y = origin.y + hit->distance * dir.y;
+			if (hit->side == NORTH || hit->side == SOUTH)
+				hit->side_ratio = hit->x - floor(hit->x);
+			else
+				hit->side_ratio = hit->y - floor(hit->y);
 			return (1);
 		}
 	}
