@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 13:05:12 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/25 15:16:00 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/29 09:30:25 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	grid_raycast(t_hitinfo *hit, t_map *map, t_vector origin, t_vector direction
 
 	hit->distance = 0;
 	hit->side = 0;
+	hit->hit = false;
 
 	init_raydata(&raydata, origin, direction);
 
@@ -82,7 +83,10 @@ int	grid_raycast(t_hitinfo *hit, t_map *map, t_vector origin, t_vector direction
 	{
 		//printf("x: %d, y: %d, grid type %d\n", raydata.grid_x, raydata.grid_y, map->grid[raydata.grid_y][raydata.grid_x].type);
 		if (map->grid[raydata.grid_y][raydata.grid_x].type == WALL)
+		{
+			hit->hit = true;
 			return (1);
+		}
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 11:10:51 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/25 15:22:36 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/29 09:49:04 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,77 +23,77 @@ int	init_visuals(t_map *map)
 	return (update_visuals(map));
 }
 
+t_vector	calculate_ray_dir(t_map *map, int x)
+{
+	t_vector	ray_dir;
+	double		screen_position;
+	
+	screen_position = 2 * (double) x / (double) map->images.draw->width - 1;
+	ray_dir.x = map->player.dir.x + map->player.cam_plane.x * screen_position;
+	ray_dir.y = map->player.dir.y + map->player.cam_plane.y * screen_position;
+	return (ray_dir);
+}
+
+void draw_vertical_line(t_map *map, t_vector start, int height, uint32_t color)
+{
+	int	y;
+
+	y = 0;
+	while (y < height)
+	{
+		mlx_put_pixel(map->images.draw, start.x, start.y + y, color);
+		y++;
+	}
+}
+
+void	draw_wall(t_map *map, int x, t_hitinfo hit)
+{
+	t_vector	start;
+
+	uint32_t color;
+	if (hit.side == NORTH)
+		color = 0xFF0000FF;
+	if (hit.side == SOUTH)
+		color = 0x00FF00FF;
+	if (hit.side == EAST)
+		color = 0x0000FFFF;
+	if (hit.side == WEST)
+		color = 0xFF00FFFF;
+		
+	uint32_t scaled_wall_height = (uint32_t) (WALL_HEIGHT / hit.distance);
+
+	start.x = x;
+	start.y = 0;
+
+	if (scaled_wall_height >= map->images.draw->height)
+	{
+		draw_vertical_line(map, start, map->images.draw->height, color);
+		return ;
+	}
+	else
+	{
+		draw_vertical_line(map, start, (map->images.draw->height / 2) - (scaled_wall_height / 2), map->ceiling_color);
+		start.y += (map->images.draw->height / 2) - (scaled_wall_height / 2);
+		draw_vertical_line(map, start, scaled_wall_height, color);
+		start.y += scaled_wall_height;
+		draw_vertical_line(map, start, map->images.draw->height - start.y, map->floor_color);
+	}
+}
+
 int	update_visuals(t_map *map)
 {
-	uint32_t x;
-	uint32_t y;
-
-	t_hitinfo 	hit;
 	t_vector	origin;
+	t_hitinfo	hit;
+	uint32_t	x;
+
 	origin.x = map->player.x;
 	origin.y = map->player.y;
-	if (grid_raycast(&hit, map, origin, map->player.dir) == 1)
-		printf("hit wall, distance: %f, side: %d\n", hit.distance, hit.side);
-
 	x = 0;
 	while (x < map->images.draw->width)
 	{
-		t_vector ray_dir;
-		double screen_position = 2 * (double) x / (double) map->images.draw->width - 1;
-		ray_dir.x = map->player.dir.x + map->player.cam_plane.x * screen_position;
-		ray_dir.y = map->player.dir.y + map->player.cam_plane.y * screen_position;
-		//printf("ray dir x: %f, y: %f\n", ray_dir.x, ray_dir.y);
-		
-		uint32_t color;
-		if (hit.side == NORTH)
-			color = 0xFF0000FF;
-		if (hit.side == SOUTH)
-			color = 0x00FF00FF;
-		if (hit.side == EAST)
-			color = 0x0000FFFF;
-		if (hit.side == WEST)
-			color = 0xFF00FFFF;
-
-		y = 0;
-		
-		if (grid_raycast(&hit, map, origin, ray_dir) == 1)
-		{
-			double wall_height = 200;
-			uint32_t scaled_wall_height = (uint32_t) (wall_height / hit.distance);
-			uint32_t target = (map->images.draw->height / 2) - (scaled_wall_height / 2);
-			while (y < target)
-			{
-				mlx_put_pixel(map->images.draw, x, y, map->ceiling_color);
-				y++;
-			}
-			target += scaled_wall_height;
-			while (y < target)
-			{
-				mlx_put_pixel(map->images.draw, x, y, color);
-				y++;
-			}
-			while (y < map->images.draw->height)
-			{
-				mlx_put_pixel(map->images.draw, x, y, map->floor_color);
-				y++;
-			}
-		}
-		else
-		{
-			while (y < 200 + 100 / 2)
-			{
-				mlx_put_pixel(map->images.draw, x, y, map->ceiling_color);
-				y++;
-			}
-			while (y < map->images.draw->height)
-			{
-				mlx_put_pixel(map->images.draw, x, y, map->floor_color);
-				y++;
-			}
-		}
-		
+		if (grid_raycast(&hit, map, origin, calculate_ray_dir(map, x)) == 1)
+			draw_wall(map, x, hit);
 		x++;
 	}
-
 	return (1);
 }

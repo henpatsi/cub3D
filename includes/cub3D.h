@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/25 12:28:08 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/29 09:30:04 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 
 # define MOVE_SPEED 10
 # define ROTATE_SPEED 200
+# define WALL_HEIGHT 200
 
 // ENUMS
 
@@ -64,6 +65,7 @@ typedef struct s_hitinfo
 {
 	double		distance;
 	t_wall_side	side;
+	bool		hit;
 }	t_hitinfo;
 
 typedef struct s_images
