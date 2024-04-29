@@ -6,7 +6,7 @@
 #    By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/22 08:30:50 by hpatsi            #+#    #+#              #
-#    Updated: 2024/04/25 19:19:49 by ixu              ###   ########.fr        #
+#    Updated: 2024/04/28 18:34:04 by ixu              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,8 @@ SRCS_DIR = ./srcs/
 
 VALIDATE_DIR = ./srcs/validate/
 
+MINIMAP_DIR = ./srcs/minimap/
+
 # C FILES
 
 SOURCE_FILES = main controls visuals raycast load_map load_config load_grid error free
@@ -27,8 +29,12 @@ SOURCE_FILES = main controls visuals raycast load_map load_config load_grid erro
 VALIDATE_FILES = validate validate_utils grid_init validate_map \
 					validate_map_utils validate_free validate_error
 
+MINIMAP_FILES = create_minimap init_minimap load_minimap print_minimap \
+				draw_minimap draw_minimap_utils
+
 ALL_SRC_FILES = $(addsuffix .c, $(SOURCE_FILES)) \
-			$(addsuffix .c, $(VALIDATE_FILES))
+			$(addsuffix .c, $(VALIDATE_FILES)) \
+			$(addsuffix .c, $(MINIMAP_FILES))
 
 OBJECTS = $(addprefix $(OBJS_DIR), $(ALL_SRC_FILES:.c=.o))
 
@@ -66,6 +72,9 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 	$(CC) -c -o $@ $<
 
 $(OBJS_DIR)%.o: $(VALIDATE_DIR)%.c
+	$(CC) -c -o $@ $<
+
+$(OBJS_DIR)%.o: $(MINIMAP_DIR)%.c
 	$(CC) -c -o $@ $<
 
 $(LIBFT):
