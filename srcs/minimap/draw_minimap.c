@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:28:58 by ixu               #+#    #+#             */
-/*   Updated: 2024/04/29 22:49:24 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/29 23:24:53 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ static void	draw_player(t_map *map, mlx_image_t *image)
 
 void	draw_minimap(t_map *map, mlx_image_t *image)
 {
-	int	x;
-	int	y;
-	int	len;
-	int	shift_x;
-	int	shift_y;
+	int		x;
+	int		y;
+	int		len;
+	double	shift_x;
+	double	shift_y;
 
 	shift_x = (map->player.x - floor(map->player.x) - 0.5) * SCALE;
 	shift_y = (map->player.y - floor(map->player.y) - 0.5) * SCALE;
@@ -74,14 +74,14 @@ void	draw_minimap(t_map *map, mlx_image_t *image)
 			if (map->minimap.pixel_grid[y][x].type == EMPTY
 				|| map->minimap.pixel_grid[y][x].type == PLAYER)
 				{
-					if (x >= shift_x && x <= D * SCALE * 2 + shift_x
-						&& y >= shift_y && y <= D * SCALE * 2 + shift_y)
+					if (x >= shift_x + 0.5 * SCALE && x <= D * SCALE * 2 + shift_x
+						&& y >= shift_y + 0.5 * SCALE && y <= D * SCALE * 2 + shift_y)
 						mlx_put_pixel(image, x + PAD - shift_x, y + PAD - shift_y, BLACK);
 				}
 			else if (map->minimap.pixel_grid[y][x].type == WALL)
 			{
-				if (x >= shift_x && x <= D * SCALE * 2 + shift_x
-						&& y >= shift_y && y <= D * SCALE * 2 + shift_y)
+				if (x >= shift_x + 0.5 * SCALE && x <= D * SCALE * 2 + shift_x
+						&& y >= shift_y + 0.5 * SCALE && y <= D * SCALE * 2 + shift_y)
 					mlx_put_pixel(image, x + PAD - shift_x, y + PAD - shift_y, DARK_GREY);
 			}
 		}
