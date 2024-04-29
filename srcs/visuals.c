@@ -6,20 +6,18 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 11:10:51 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/29 09:49:04 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/29 10:04:37 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-
 int	init_visuals(t_map *map)
 {
-	// Canvas for drawing
-	map->images.draw = mlx_new_image(map->mlx, map->mlx->width, map->mlx->height);
+	map->images.draw = mlx_new_image(map->mlx, map->mlx->width,
+			map->mlx->height);
 	mlx_image_to_window(map->mlx, map->images.draw, 0, 0);
 	mlx_set_instance_depth(map->images.draw->instances, 1);
-
 	return (update_visuals(map));
 }
 
@@ -27,14 +25,15 @@ t_vector	calculate_ray_dir(t_map *map, int x)
 {
 	t_vector	ray_dir;
 	double		screen_position;
-	
+
 	screen_position = 2 * (double) x / (double) map->images.draw->width - 1;
 	ray_dir.x = map->player.dir.x + map->player.cam_plane.x * screen_position;
 	ray_dir.y = map->player.dir.y + map->player.cam_plane.y * screen_position;
 	return (ray_dir);
 }
 
-void draw_vertical_line(t_map *map, t_vector start, int height, uint32_t color)
+void	draw_vertical_line(t_map *map, t_vector start, int height,
+		uint32_t color)
 {
 	int	y;
 
@@ -49,8 +48,9 @@ void draw_vertical_line(t_map *map, t_vector start, int height, uint32_t color)
 void	draw_wall(t_map *map, int x, t_hitinfo hit)
 {
 	t_vector	start;
+	uint32_t	color;
+	uint32_t		scaled_wall_height;
 
-	uint32_t color;
 	if (hit.side == NORTH)
 		color = 0xFF0000FF;
 	if (hit.side == SOUTH)
@@ -59,12 +59,9 @@ void	draw_wall(t_map *map, int x, t_hitinfo hit)
 		color = 0x0000FFFF;
 	if (hit.side == WEST)
 		color = 0xFF00FFFF;
-		
-	uint32_t scaled_wall_height = (uint32_t) (WALL_HEIGHT / hit.distance);
-
+	scaled_wall_height = (uint32_t)(WALL_HEIGHT / hit.distance);
 	start.x = x;
 	start.y = 0;
-
 	if (scaled_wall_height >= map->images.draw->height)
 	{
 		draw_vertical_line(map, start, map->images.draw->height, color);

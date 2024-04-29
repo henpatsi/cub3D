@@ -6,82 +6,82 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 13:05:12 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/29 09:30:25 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/29 10:02:14 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	init_raydata(t_raydata *raydata, t_vector origin, t_vector direction)
+void	init_raydata(t_raydata *rdata, t_vector origin, t_vector direction)
 {
-	raydata->grid_x = (int) origin.x;
-	raydata->grid_y = (int) origin.y;
-	raydata->delta_x = fabs(1 / direction.x);
-	raydata->delta_y = fabs(1 / direction.y);
+	rdata->grid_x = (int) origin.x;
+	rdata->grid_y = (int) origin.y;
+	rdata->delta_x = fabs(1 / direction.x);
+	rdata->delta_y = fabs(1 / direction.y);
 	if (direction.x > 0)
-		raydata->dist_to_x = (raydata->grid_x + 1 - origin.x) * raydata->delta_x;
+		rdata->dist_to_x = (rdata->grid_x + 1 - origin.x) * rdata->delta_x;
 	else
-		raydata->dist_to_x = (origin.x - raydata->grid_x) * raydata->delta_x;
+		rdata->dist_to_x = (origin.x - rdata->grid_x) * rdata->delta_x;
 	if (direction.y > 0)
-		raydata->dist_to_y = (raydata->grid_y + 1 - origin.y) * raydata->delta_y;
+		rdata->dist_to_y = (rdata->grid_y + 1 - origin.y) * rdata->delta_y;
 	else
-		raydata->dist_to_y = (origin.y - raydata->grid_y) * raydata->delta_y;
+		rdata->dist_to_y = (origin.y - rdata->grid_y) * rdata->delta_y;
 }
 
-int	get_next_edge(t_hitinfo *hit, t_map *map, t_vector direction, t_raydata *raydata)
+void	get_next_y_edge(t_hitinfo *hit, t_vector dir, t_raydata *raydata)
 {
-	if (raydata->dist_to_y < raydata->dist_to_x)
+	if (dir.y > 0)
 	{
-		if (direction.y > 0)
-		{
-			raydata->grid_y += 1;
-			hit->side = SOUTH;
-		}
-		else
-		{
-			raydata->grid_y -= 1;
-			hit->side = NORTH;
-		}
-		hit->distance = raydata->dist_to_y;
-		raydata->dist_to_y += raydata->delta_y;
+		raydata->grid_y += 1;
+		hit->side = SOUTH;
 	}
 	else
 	{
-		if (direction.x > 0)
-		{
-			raydata->grid_x += 1;
-			hit->side = WEST;
-		}
-		else
-		{
-			raydata->grid_x -= 1;
-			hit->side = EAST;
-		}
-		hit->distance = raydata->dist_to_x;
-		raydata->dist_to_x += raydata->delta_x;
+		raydata->grid_y -= 1;
+		hit->side = NORTH;
 	}
+	hit->distance = raydata->dist_to_y;
+	raydata->dist_to_y += raydata->delta_y;
+}
+
+void	get_next_x_edge(t_hitinfo *hit, t_vector dir, t_raydata *raydata)
+{
+	if (dir.x > 0)
+	{
+		raydata->grid_x += 1;
+		hit->side = WEST;
+	}
+	else
+	{
+		raydata->grid_x -= 1;
+		hit->side = EAST;
+	}
+	hit->distance = raydata->dist_to_x;
+	raydata->dist_to_x += raydata->delta_x;
+}
+
+int	get_next_edge(t_hitinfo *hit, t_map *map, t_vector dir, t_raydata *raydata)
+{
+	if (raydata->dist_to_y < raydata->dist_to_x)
+		get_next_y_edge(hit, dir, raydata);
+	else
+		get_next_x_edge(hit, dir, raydata);
 	if (raydata->grid_y >= map->height || raydata->grid_x >= map->width
-			|| raydata->grid_y < 0 || raydata->grid_x < 0)
+		|| raydata->grid_y < 0 || raydata->grid_x < 0)
 		return (0);
 	return (1);
 }
 
-int	grid_raycast(t_hitinfo *hit, t_map *map, t_vector origin, t_vector direction)
+int	grid_raycast(t_hitinfo *hit, t_map *map, t_vector origin, t_vector dir)
 {
 	t_raydata	raydata;
 
 	hit->distance = 0;
 	hit->side = 0;
 	hit->hit = false;
-
-	init_raydata(&raydata, origin, direction);
-
-	//printf("distance to closest x = %f\n", raydata.dist_to_x);
-	//printf("distance to closest y = %f\n", raydata.dist_to_y);
-
-	while (get_next_edge(hit, map, direction, &raydata))
+	init_raydata(&raydata, origin, dir);
+	while (get_next_edge(hit, map, dir, &raydata))
 	{
-		//printf("x: %d, y: %d, grid type %d\n", raydata.grid_x, raydata.grid_y, map->grid[raydata.grid_y][raydata.grid_x].type);
 		if (map->grid[raydata.grid_y][raydata.grid_x].type == WALL)
 		{
 			hit->hit = true;
