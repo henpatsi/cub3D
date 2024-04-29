@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:52:45 by ixu               #+#    #+#             */
-/*   Updated: 2024/04/28 10:22:42 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/29 12:06:35 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	load_minimap_grid(t_map *map)
 			while (x >= (int)map->player.x - D && x <= (int)map->player.x + D)
 			{
 				if (x >= 0 && x < map->width)
-					map->minimap->grid[my][mx].type = map->grid[y][x].type;
+					map->minimap.grid[my][mx].type = map->grid[y][x].type;
 				x++;
 				mx++;
 			}
@@ -38,7 +38,7 @@ void	load_minimap_grid(t_map *map)
 		y++;
 		my++;
 	}
-	map->minimap->grid[D][D].type = PLAYER;
+	map->minimap.grid[D][D].type = PLAYER;
 }
 
 void	load_pixel_grid(t_minimap *minimap)

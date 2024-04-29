@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/28 18:33:28 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/29 12:22:00 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ typedef struct s_map
 	t_gridpos	**grid;
 	t_images	images;
 	t_player	player;
-	t_minimap	*minimap;
+	t_minimap	minimap;
 	mlx_t		*mlx;
 }	t_map;
 
