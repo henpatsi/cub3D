@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/30 14:34:24 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/30 16:43:29 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,11 @@
 # define CUB3D_H
 
 # include <stdio.h> // printf, remove later
-
-// open
 # include <fcntl.h>
-
+# include <stdlib.h>
 # include <math.h>
-
 # include "libft.h"
 # include "MLX42.h"
-
-// exit, EXIT_FAILURE
-# include <stdlib.h>
 
 # define WIN_WIDTH 1024
 # define WIN_HEIGHT 1024

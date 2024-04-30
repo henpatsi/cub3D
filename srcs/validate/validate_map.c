@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 12:09:09 by ixu               #+#    #+#             */
-/*   Updated: 2024/04/26 15:15:03 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/30 16:34:22 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	validate_map(char **grid, t_map *map)
 
 	row = -1;
 	player_found = false;
+	start_pos = (t_vector){0, 0};
 	while (++row < map->height)
 	{
 		col = -1;

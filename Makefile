@@ -6,7 +6,7 @@
 #    By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/22 08:30:50 by hpatsi            #+#    #+#              #
-#    Updated: 2024/04/30 15:33:17 by ixu              ###   ########.fr        #
+#    Updated: 2024/04/30 17:11:44 by ixu              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ LOAD_DIR = $(SRCS_DIR)load/
 
 GAME_DIR = $(SRCS_DIR)game/
 
-MINIMAP_DIR = $(SRCS_DIR)minimap/
+MINIMAP_DIR = ./srcs/minimap/
 
 # C FILES
 
@@ -102,7 +102,7 @@ $(MLX42_DIR):
 clean:
 	make clean -C $(LIBFT_DIR)
 	rm -rf $(OBJS_DIR)
-	make -C $(MLX42_DIR) clean
+	make clean -C $(MLX42_DIR)
 
 fclean: clean
 	rm -f $(LIBFT)
