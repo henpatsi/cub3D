@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/30 11:38:59 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/30 14:34:24 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@
 
 # define WIN_WIDTH 1024
 # define WIN_HEIGHT 1024
-# define IMG_WIDTH 1024
-# define IMG_HEIGHT 1024
 
 # define PI 3.141592654
 
@@ -184,11 +182,10 @@ int		load_config(t_map *map, int map_fd);
 int		load_grid(t_map *map, int map_fd);
 
 /* MINIMAP */
-// create_minimap.c
-int		create_minimap_grid(t_map *map, t_minimap *minimap);
-int		create_minimap_pixel_grid(t_minimap *minimap);
 // init_minimap.c
-void	init_minimap(t_minimap* minimap);
+int		init_minimap(t_map *map);
+// reset_minimap.c
+void	reset_minimap(t_minimap* minimap);
 // load_minimap.c
 void	load_minimap_grid(t_map *map);
 void	load_pixel_grid(t_minimap *minimap);

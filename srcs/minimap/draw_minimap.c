@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:28:58 by ixu               #+#    #+#             */
-/*   Updated: 2024/04/30 11:38:38 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/30 14:12:02 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	draw_minimap(t_map *map, mlx_image_t *image)
 
 void	reload_and_draw_minimap(t_map *map,	mlx_image_t *image)
 {
-	init_minimap(&map->minimap);
+	reset_minimap(&map->minimap);
 	load_minimap_grid(map);
 	load_pixel_grid(&map->minimap);
 	draw_minimap(map, image);

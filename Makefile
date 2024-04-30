@@ -6,7 +6,7 @@
 #    By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/22 08:30:50 by hpatsi            #+#    #+#              #
-#    Updated: 2024/04/30 10:46:30 by ixu              ###   ########.fr        #
+#    Updated: 2024/04/30 15:33:17 by ixu              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ LOAD_DIR = $(SRCS_DIR)load/
 
 GAME_DIR = $(SRCS_DIR)game/
 
-MINIMAP_DIR = ./srcs/minimap/
+MINIMAP_DIR = $(SRCS_DIR)minimap/
 
 # C FILES
 
@@ -33,7 +33,7 @@ SOURCE_FILES = main error free
 VALIDATE_FILES = validate validate_utils grid_init validate_map \
 					validate_map_utils validate_free validate_error
 
-MINIMAP_FILES = create_minimap init_minimap load_minimap print_minimap \
+MINIMAP_FILES = init_minimap reset_minimap load_minimap print_minimap \
 				draw_minimap draw_minimap_utils
 
 LOAD_FILES = load_map load_config load_grid
@@ -41,7 +41,7 @@ LOAD_FILES = load_map load_config load_grid
 GAME_FILES = controls visuals raycast
 
 ALL_SRC_FILES = $(addsuffix .c, $(SOURCE_FILES) $(VALIDATE_FILES) \
-			 $(LOAD_FILES) $(GAME_FILES) $(MINIMAP_FILES))
+				$(LOAD_FILES) $(GAME_FILES) $(MINIMAP_FILES))
 
 OBJECTS = $(addprefix $(OBJS_DIR), $(ALL_SRC_FILES:.c=.o))
 
@@ -102,7 +102,7 @@ $(MLX42_DIR):
 clean:
 	make clean -C $(LIBFT_DIR)
 	rm -rf $(OBJS_DIR)
-	make depend -C $(MLX42_DIR)
+	make -C $(MLX42_DIR) clean
 
 fclean: clean
 	rm -f $(LIBFT)
