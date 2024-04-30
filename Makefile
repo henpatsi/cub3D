@@ -6,7 +6,7 @@
 #    By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/22 08:30:50 by hpatsi            #+#    #+#              #
-#    Updated: 2024/04/28 18:34:04 by ixu              ###   ########.fr        #
+#    Updated: 2024/04/30 10:46:30 by ixu              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,13 +18,17 @@ OBJS_DIR = ./objs/
 
 SRCS_DIR = ./srcs/
 
-VALIDATE_DIR = ./srcs/validate/
+VALIDATE_DIR = $(SRCS_DIR)validate/
+
+LOAD_DIR = $(SRCS_DIR)load/
+
+GAME_DIR = $(SRCS_DIR)game/
 
 MINIMAP_DIR = ./srcs/minimap/
 
 # C FILES
 
-SOURCE_FILES = main controls visuals raycast load_map load_config load_grid error free
+SOURCE_FILES = main error free
 
 VALIDATE_FILES = validate validate_utils grid_init validate_map \
 					validate_map_utils validate_free validate_error
@@ -32,9 +36,12 @@ VALIDATE_FILES = validate validate_utils grid_init validate_map \
 MINIMAP_FILES = create_minimap init_minimap load_minimap print_minimap \
 				draw_minimap draw_minimap_utils
 
-ALL_SRC_FILES = $(addsuffix .c, $(SOURCE_FILES)) \
-			$(addsuffix .c, $(VALIDATE_FILES)) \
-			$(addsuffix .c, $(MINIMAP_FILES))
+LOAD_FILES = load_map load_config load_grid
+
+GAME_FILES = controls visuals raycast
+
+ALL_SRC_FILES = $(addsuffix .c, $(SOURCE_FILES) $(VALIDATE_FILES) \
+			 $(LOAD_FILES) $(GAME_FILES) $(MINIMAP_FILES))
 
 OBJECTS = $(addprefix $(OBJS_DIR), $(ALL_SRC_FILES:.c=.o))
 
@@ -56,7 +63,7 @@ DEPENDENCIES = -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -lm
 
 CFLAGS += -Wall -Wextra -Werror $(HEADERS)
 
-CC = cc $(CFLAGS) -g
+CC = cc $(CFLAGS) -g -O2
 
 # RULES
 
@@ -77,6 +84,12 @@ $(OBJS_DIR)%.o: $(VALIDATE_DIR)%.c
 $(OBJS_DIR)%.o: $(MINIMAP_DIR)%.c
 	$(CC) -c -o $@ $<
 
+$(OBJS_DIR)%.o: $(LOAD_DIR)%.c
+	$(CC) -c -o $@ $<
+
+$(OBJS_DIR)%.o: $(GAME_DIR)%.c
+	$(CC) -c -o $@ $<
+
 $(LIBFT):
 	make -C $(LIBFT_DIR)
 
@@ -88,7 +101,7 @@ $(MLX42_DIR):
 
 clean:
 	make clean -C $(LIBFT_DIR)
-	rm -fr $(OBJS_DIR)
+	rm -rf $(OBJS_DIR)
 	make depend -C $(MLX42_DIR)
 
 fclean: clean

@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/29 22:53:09 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/30 11:38:59 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,9 @@
 // distance of minimap to the edge of the window
 # define PAD 15
 
-// a list of colors in hexadecimal format for testing
 # define BLACK 0x000000ff
-# define WHITE 0xffffffff
-# define RED 0xff0000ff
-# define GREEN 0x00ff00ff
-# define BLUE 0x0000ffff
-# define YELLOW 0xffff00ff
-# define CYAN 0x00ffffff
 # define MAGENTA 0xff00ffff
-# define LIGHT_GREY 0xd3d3d3ff
-# define MEDIUM_GREY 0x808080ff
-# define DARK_GREY 0x696969ff
-# define LIGHT_PEACH 0xffdab9ff
-# define PALE_PINK 0xffd1dcff
-# define PALE_GREEN 0x98fb98ff
+# define GREY 0x555555ff
 
 # define DEBUG_MODE 1
 
@@ -101,18 +89,21 @@ typedef struct s_vector
 
 typedef struct s_ray_data
 {
-	int		grid_x; // the grid the ray is in
+	int		grid_x;
 	int		grid_y;
-	double	delta_x; // distance for ray from one x to next x
+	double	delta_x;
 	double	delta_y;
-	double	dist_to_x; // distance for ray from current pos to next x
+	double	dist_to_x;
 	double	dist_to_y;
 }	t_raydata;
 
 typedef struct s_hitinfo
 {
 	double		distance;
+	double		x;
+	double		y;
 	t_wall_side	side;
+	double		side_ratio;
 	bool		hit;
 }	t_hitinfo;
 
