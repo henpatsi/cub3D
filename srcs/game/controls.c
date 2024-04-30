@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 09:45:59 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/30 14:09:38 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/30 14:25:21 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,23 +60,22 @@ void	move_player(t_map *map, int forward, int right)
 	if (target_pos.x < 0 || target_pos.x >= map->width
 		|| target_pos.y < 0 || target_pos.y >= map->height)
 		return ;
-
 	target_pos = limit_target_to_walls(map, target_pos);
 
-	// Move player
+	// Moce player to target position
 	if (map->grid[(int) map->player.y][(int) target_pos.x].type != WALL)
 		map->player.x = target_pos.x;
 	if (map->grid[(int) target_pos.y][(int) map->player.x].type != WALL)
 		map->player.y = target_pos.y;
-	
-	// Apply player size padding
-	if (map->grid[(int) map->player.y][(int) (map->player.x + PLAYER_SIZE)].type == WALL)
-		map->player.x = (int) (map->player.x + PLAYER_SIZE) - PLAYER_SIZE;
-	else if (map->grid[(int) map->player.y][(int) (map->player.x - PLAYER_SIZE)].type == WALL)
+
+	// Limit distance to wall to at least player size
+	if (map->grid[(int) map->player.y][(int)(map->player.x + PLAYER_SIZE)].type == WALL)
+		map->player.x = (int)(map->player.x + PLAYER_SIZE) - PLAYER_SIZE;
+	else if (map->grid[(int) map->player.y][(int)(map->player.x - PLAYER_SIZE)].type == WALL)
 		map->player.x = (int) map->player.x + PLAYER_SIZE;
-	if (map->grid[(int) (map->player.y + PLAYER_SIZE)][(int) map->player.x].type == WALL)
-		map->player.y = (int) (map->player.y + PLAYER_SIZE) - PLAYER_SIZE;
-	else if (map->grid[(int) (map->player.y - PLAYER_SIZE)][(int) map->player.x].type == WALL)
+	if (map->grid[(int)(map->player.y + PLAYER_SIZE)][(int) map->player.x].type == WALL)
+		map->player.y = (int)(map->player.y + PLAYER_SIZE) - PLAYER_SIZE;
+	else if (map->grid[(int)(map->player.y - PLAYER_SIZE)][(int) map->player.x].type == WALL)
 		map->player.y = (int) map->player.y + PLAYER_SIZE;
 }
 
