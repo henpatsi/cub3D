@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/30 08:46:16 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/30 11:38:59 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,22 +46,23 @@
 // distance of minimap to the edge of the window
 # define PAD 15
 
-// a list of colors in hexadecimal format for testing
 # define BLACK 0x000000ff
-# define WHITE 0xffffffff
-# define RED 0xff0000ff
-# define GREEN 0x00ff00ff
-# define BLUE 0x0000ffff
-# define YELLOW 0xffff00ff
-# define CYAN 0x00ffffff
 # define MAGENTA 0xff00ffff
-# define LIGHT_GREY 0xd3d3d3ff
-# define MEDIUM_GREY 0x808080ff
-# define DARK_GREY 0x696969ff
+# define GREY 0x555555ff
 
 # define DEBUG_MODE 1
 
 // ENUMS
+
+typedef enum e_flags
+{
+	NO_FLAG = 1 << 0,
+	SO_FLAG = 1 << 1,
+	WE_FLAG = 1 << 2,
+	EA_FLAG = 1 << 3,
+	F_FLAG  = 1 << 4,
+	C_FLAG  = 1 << 5
+}	t_flags;
 
 typedef enum e_wall_side
 {
@@ -122,13 +123,6 @@ typedef struct s_gridpos
 	t_gridpos_type	type;
 }	t_gridpos;
 
-typedef struct s_mini_gridpos
-{
-	int					x;
-	int					y;
-	t_gridpos_type		type;
-}	t_mini_gridpos;
-
 typedef struct s_player
 {
 	double		x;
@@ -140,10 +134,10 @@ typedef struct s_player
 
 typedef	struct s_minimap
 {
-	int				len;
-	int				pixel_grid_len;
-	t_mini_gridpos	**grid;
-	t_mini_gridpos	**pixel_grid;
+	int			len;
+	int			pixel_grid_len;
+	t_gridpos	**grid;
+	t_gridpos	**pixel_grid;
 }	t_minimap;
 
 typedef struct s_map
@@ -158,16 +152,6 @@ typedef struct s_map
 	t_minimap	minimap;
 	mlx_t		*mlx;
 }	t_map;
-
-typedef enum e_flags
-{
-	NO_FLAG = 1 << 0,
-	SO_FLAG = 1 << 1,
-	WE_FLAG = 1 << 2,
-	EA_FLAG = 1 << 3,
-	F_FLAG  = 1 << 4,
-	C_FLAG  = 1 << 5
-}	t_flags;
 
 /* VALIDATE */
 // validate.c
@@ -232,6 +216,5 @@ int		return_error(char *message);
 
 void	free_strs(char **strs);
 void	free_grid(t_gridpos **grid);
-void	free_mini_grid(t_mini_gridpos **grid);
 
 #endif

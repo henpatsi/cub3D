@@ -6,13 +6,13 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:51:02 by ixu               #+#    #+#             */
-/*   Updated: 2024/04/27 21:02:22 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/29 13:50:39 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static void	print_minimap_grid(t_mini_gridpos **grid, int len)
+static void	print_minimap_grid(t_gridpos **grid, int len)
 {
 	int	y;
 	int	x;
@@ -38,8 +38,8 @@ static void	print_minimap_grid(t_mini_gridpos **grid, int len)
 
 void	print_minimap(t_minimap *minimap, bool scaled_up)
 {
-	int				len;
-	t_mini_gridpos	**grid;
+	int			len;
+	t_gridpos	**grid;
 
 	if (!scaled_up)
 	{
