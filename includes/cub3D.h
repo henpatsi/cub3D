@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/30 08:46:16 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/30 14:08:25 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@
 
 # define PI 3.141592654
 
-# define MOVE_SPEED 20
-# define ROTATE_SPEED 200
+# define MOVE_SPEED 10
+# define ROTATE_SPEED 400
 # define WALL_HEIGHT 200
+# define PLAYER_SIZE 0.1
 
 // distance from player to midpoint of one of minimap sides (apothem)
 # define D 10

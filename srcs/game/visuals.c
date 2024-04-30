@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 11:10:51 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/29 14:36:48 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/30 11:17:36 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int	init_visuals(t_map *map)
 
 uint32_t	abgr_to_rgba(uint32_t abgr)
 {
-	uint32_t rgba;
-	uint8_t	byte[4];
-	
+	uint32_t	rgba;
+	uint8_t		byte[4];
+
 	byte[0] = (abgr >> 24) & 0xFF;
 	byte[1] = (abgr >> 16) & 0xFF;
 	byte[2] = (abgr >> 8) & 0xFF;
@@ -42,10 +42,10 @@ uint32_t	abgr_to_rgba(uint32_t abgr)
 
 uint32_t	get_image_pixel(mlx_image_t *image, int x, int y)
 {
-	uint32_t color;
-	int image_x_offset;
-	int image_y_offset;
-	
+	uint32_t	color;
+	int			image_x_offset;
+	int			image_y_offset;
+
 	image_x_offset = x * 4;
 	image_y_offset = y * image->width * 4;
 	ft_memcpy(&color, &image->pixels[image_y_offset + image_x_offset], 4);
@@ -82,6 +82,10 @@ void	draw_wall(t_map *map, int x, t_hitinfo hit)
 	t_vector	start;
 	mlx_image_t	*wall_image;
 	uint32_t	scaled_wall_height;
+	int			image_x;
+	int			image_y;
+	uint32_t	y;
+	uint32_t	color;
 
 	if (hit.side == NORTH)
 		wall_image = map->images.north;
@@ -91,20 +95,17 @@ void	draw_wall(t_map *map, int x, t_hitinfo hit)
 		wall_image = map->images.east;
 	if (hit.side == WEST)
 		wall_image = map->images.west;
-
 	scaled_wall_height = (uint32_t)(WALL_HEIGHT / hit.distance);
 	start.x = x;
 	start.y = 0;
-
-	int image_x = round(hit.side_ratio * (double) wall_image->width);
-	
+	image_x = round(hit.side_ratio * (double) wall_image->width);
 	if (scaled_wall_height >= map->images.draw->height)
 	{
-		uint32_t y = 0;
-		while(y < map->images.draw->height)
+		y = 0;
+		while (y < map->images.draw->height)
 		{
-			int image_y = round(((double) y + (double) (scaled_wall_height - map->images.draw->height) / 2) / (double) scaled_wall_height * (double) wall_image->height);
-			uint32_t color = get_image_pixel(wall_image, image_x, image_y);
+			image_y = round(((double) y + (double)(scaled_wall_height - map->images.draw->height) / 2) / (double) scaled_wall_height * (double) wall_image->height);
+			color = get_image_pixel(wall_image, image_x, image_y);
 			mlx_put_pixel(map->images.draw, start.x, start.y + y, (uint32_t) color);
 			y++;
 		}
@@ -113,16 +114,14 @@ void	draw_wall(t_map *map, int x, t_hitinfo hit)
 	{
 		draw_vertical_line(map, start, (map->images.draw->height / 2) - (scaled_wall_height / 2), map->ceiling_color);
 		start.y += (map->images.draw->height / 2) - (scaled_wall_height / 2);
-
-		uint32_t y = 0;
-		while(y < scaled_wall_height)
+		y = 0;
+		while (y < scaled_wall_height)
 		{
-			int image_y = round((double) y / (double) scaled_wall_height * (double) wall_image->height);
-			uint32_t color = get_image_pixel(wall_image, image_x, image_y);
+			image_y = round((double) y / (double) scaled_wall_height * (double) wall_image->height);
+			color = get_image_pixel(wall_image, image_x, image_y);
 			mlx_put_pixel(map->images.draw, start.x, start.y + y, (uint32_t) color);
 			y++;
 		}
-
 		start.y += scaled_wall_height;
 		draw_vertical_line(map, start, map->images.draw->height - start.y, map->floor_color);
 	}
