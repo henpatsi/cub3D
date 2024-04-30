@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:28:58 by ixu               #+#    #+#             */
-/*   Updated: 2024/04/30 11:38:38 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/30 17:07:33 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,47 +48,45 @@ static void	draw_player(t_map *map, mlx_image_t *image)
 	draw_line(vec_back_right, vec_front_middle, image);
 }
 
-static bool	is_drawable(int x, int y, double shift_x, double shift_y)
+static bool	is_drawable(int x, int y, double move_x, double move_y)
 {
-	if (x >= shift_x + 0.5 * SCALE && x <= D * SCALE * 2 + shift_x
-		&& y >= shift_y + 0.5 * SCALE && y <= D * SCALE * 2 + shift_y)
+	if (x >= move_x + 0.5 * SCALE && x <= D * SCALE * 2 + move_x
+		&& y >= move_y + 0.5 * SCALE && y <= D * SCALE * 2 + move_y)
 		return (true);
 	else
 		return (false);
 }
 
-void	draw_minimap(t_map *map, mlx_image_t *image)
+void	draw_minimap(t_map *map, mlx_image_t *img)
 {
 	int		x;
 	int		y;
-	int		len;
-	double	shift_x;
-	double	shift_y;
+	double	move_x;
+	double	move_y;
 
-	shift_x = (map->player.x - floor(map->player.x) - 0.5) * SCALE;
-	shift_y = (map->player.y - floor(map->player.y) - 0.5) * SCALE;
-	len = map->minimap.pixel_grid_len;
+	move_x = (map->player.x - floor(map->player.x) - 0.5) * SCALE;
+	move_y = (map->player.y - floor(map->player.y) - 0.5) * SCALE;
 	y = -1;
-	while (++y < len)
+	while (++y < map->minimap.pixel_grid_len)
 	{
 		x = -1;
-		while (++x < len)
+		while (++x < map->minimap.pixel_grid_len)
 		{
 			if ((map->minimap.pixel_grid[y][x].type == EMPTY
 				|| map->minimap.pixel_grid[y][x].type == PLAYER)
-				&& is_drawable(x, y, shift_x, shift_y))
-				mlx_put_pixel(image, x + PAD - shift_x, y + PAD - shift_y, BLACK);
+				&& is_drawable(x, y, move_x, move_y))
+				mlx_put_pixel(img, x + PAD - move_x, y + PAD - move_y, BLACK);
 			else if (map->minimap.pixel_grid[y][x].type == WALL
-				&& is_drawable(x, y, shift_x, shift_y))
-				mlx_put_pixel(image, x + PAD - shift_x, y + PAD - shift_y, GREY);
+				&& is_drawable(x, y, move_x, move_y))
+				mlx_put_pixel(img, x + PAD - move_x, y + PAD - move_y, GREY);
 		}
 	}
-	draw_player(map, image);
+	draw_player(map, img);
 }
 
 void	reload_and_draw_minimap(t_map *map,	mlx_image_t *image)
 {
-	init_minimap(&map->minimap);
+	reset_minimap(&map->minimap);
 	load_minimap_grid(map);
 	load_pixel_grid(&map->minimap);
 	draw_minimap(map, image);
