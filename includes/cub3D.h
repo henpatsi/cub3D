@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/29 12:48:40 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/30 08:46:16 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,18 +88,21 @@ typedef struct s_vector
 
 typedef struct s_ray_data
 {
-	int		grid_x; // the grid the ray is in
+	int		grid_x;
 	int		grid_y;
-	double	delta_x; // distance for ray from one x to next x
+	double	delta_x;
 	double	delta_y;
-	double	dist_to_x; // distance for ray from current pos to next x
+	double	dist_to_x;
 	double	dist_to_y;
 }	t_raydata;
 
 typedef struct s_hitinfo
 {
 	double		distance;
+	double		x;
+	double		y;
 	t_wall_side	side;
+	double		side_ratio;
 	bool		hit;
 }	t_hitinfo;
 
