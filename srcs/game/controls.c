@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controls.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 09:45:59 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/29 12:48:45 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/30 09:09:26 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,8 @@ void	move_player(t_map *map, int forward, int right)
 	target_pos.y = map->player.y
 		+ (forward * map->mlx->delta_time * MOVE_SPEED * map->player.dir.y)
 		+ (right * map->mlx->delta_time * MOVE_SPEED * map->player.dir.x);
-	if (target_pos.x < 0 || target_pos.x >= map->width)
-		return ;
-	if (target_pos.y < 0 || target_pos.y >= map->height)
+	if (target_pos.x < 0 || target_pos.x >= map->width
+		|| target_pos.y < 0 || target_pos.y >= map->height)
 		return ;
 	if (map->grid[(int) target_pos.y][(int) target_pos.x].type == WALL)
 		return ;
