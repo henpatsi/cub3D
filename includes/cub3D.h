@@ -26,26 +26,28 @@
 // exit, EXIT_FAILURE
 # include <stdlib.h>
 
-# define WIN_WIDTH 1024
-# define WIN_HEIGHT 1024
-# define IMG_WIDTH 1024
-# define IMG_HEIGHT 1024
+# define WIN_WIDTH 512
+# define WIN_HEIGHT 512
+# define IMG_WIDTH 512
+# define IMG_HEIGHT 512
 
 # define PI 3.141592654
 
 # define MOVE_SPEED 10
 # define ROTATE_SPEED 400
 # define WALL_HEIGHT 200
+
+// the closest a player can get to a wall
 # define PLAYER_SIZE 0.1
 
 // distance from player to midpoint of one of minimap sides (apothem)
 # define D 10
 
 // scale factor for scaling up minimap for drawing onto the screen
-# define SCALE 10
+# define SCALE 7
 
 // distance of minimap to the edge of the window
-# define PAD 15
+# define PAD 10
 
 // a list of colors in hexadecimal format for testing
 # define BLACK 0x000000ff
