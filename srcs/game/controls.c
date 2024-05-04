@@ -95,7 +95,7 @@ void	rotate_player(t_map *map, int dir)
 	map->player.cam_plane.y = sin(rotation_rad);
 }
 
-void	key_hook(mlx_key_data_t keydata, void *param)
+void	input_hook(void *param)
 {
 	t_map	*map;
 
@@ -112,10 +112,8 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		rotate_player(map, 1);
 	if (mlx_is_key_down(map->mlx, MLX_KEY_LEFT))
 		rotate_player(map, -1);
-	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+	if (mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(map->mlx);
-	//printf("\nplayer x: %f, y: %f, rot: %f\n", map->player.x, map->player.y, map->player.x_rotation);
-	//printf("player vec x: %f, vec y: %f\n\n", map->player.dir.x, map->player.dir.y);
 	update_visuals(map);
 	reload_and_draw_minimap(map, map->images.draw);
 }

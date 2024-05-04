@@ -23,15 +23,15 @@
 // exit, EXIT_FAILURE
 # include <stdlib.h>
 
-# define WIN_WIDTH 512
-# define WIN_HEIGHT 512
-# define IMG_WIDTH 512
-# define IMG_HEIGHT 512
+# define WIN_WIDTH 1024
+# define WIN_HEIGHT 1024
+# define IMG_WIDTH 1024
+# define IMG_HEIGHT 1024
 
 # define PI 3.141592654
 
-# define MOVE_SPEED 10
-# define ROTATE_SPEED 400
+# define MOVE_SPEED 3
+# define ROTATE_SPEED 200
 # define WALL_HEIGHT 200
 
 // the closest a player can get to a wall
@@ -202,7 +202,7 @@ void	draw_line(t_vector v1, t_vector v2, mlx_image_t *image);
 
 // GAME
 
-void	key_hook(mlx_key_data_t keydata, void *param);
+void	input_hook(void *param);
 
 int		init_visuals(t_map *map);
 int		update_visuals(t_map *map);

@@ -60,7 +60,8 @@ int	test_game(t_map *map, char **argv)
 		mlx_terminate(map->mlx);
 		return (1);
 	}
-	mlx_key_hook(map->mlx, key_hook, map);
+	mlx_set_cursor_mode(map->mlx, MLX_MOUSE_HIDDEN);
+	mlx_loop_hook(map->mlx, input_hook, map);
 	mlx_loop(map->mlx);
 	mlx_terminate(map->mlx);
 	free_grid(map->minimap.grid);
