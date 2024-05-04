@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/30 16:43:29 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/04 17:13:50 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,16 @@
 // exit, EXIT_FAILURE
 # include <stdlib.h>
 
-# define WIN_WIDTH 512
-# define WIN_HEIGHT 512
-# define IMG_WIDTH 512
-# define IMG_HEIGHT 512
+# define WIN_WIDTH 1024
+# define WIN_HEIGHT 1024
+# define IMG_WIDTH 1024
+# define IMG_HEIGHT 1024
 
 # define PI 3.141592654
 
-# define MOVE_SPEED 10
-# define ROTATE_SPEED 400
+# define MOVE_SPEED 3
+# define ROTATE_SPEED 200
+# define MOUSE_SENSITIVITY 0.1
 # define WALL_HEIGHT 200
 
 // the closest a player can get to a wall
@@ -202,7 +203,10 @@ void	draw_line(t_vector v1, t_vector v2, mlx_image_t *image);
 
 // GAME
 
-void	key_hook(mlx_key_data_t keydata, void *param);
+void	keyboard_input_hook(void *param);
+void	cursor_input_hook(double xpos, double ypos, void *param);
+void	move_player(t_map *map, int forward, int right);
+void	rotate_player(t_map *map, double amount);
 
 int		init_visuals(t_map *map);
 int		update_visuals(t_map *map);
