@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+         #
+#    By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/22 08:30:50 by hpatsi            #+#    #+#              #
-#    Updated: 2024/04/30 08:45:24 by hpatsi           ###   ########.fr        #
+#    Updated: 2024/04/30 17:11:44 by ixu              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ SOURCE_FILES = main error free
 VALIDATE_FILES = validate validate_utils grid_init validate_map \
 					validate_map_utils validate_free validate_error
 
-MINIMAP_FILES = create_minimap init_minimap load_minimap print_minimap \
+MINIMAP_FILES = init_minimap reset_minimap load_minimap print_minimap \
 				draw_minimap draw_minimap_utils
 
 LOAD_FILES = load_map load_config load_grid
@@ -41,7 +41,7 @@ LOAD_FILES = load_map load_config load_grid
 GAME_FILES = controls visuals raycast
 
 ALL_SRC_FILES = $(addsuffix .c, $(SOURCE_FILES) $(VALIDATE_FILES) \
-			 $(LOAD_FILES) $(GAME_FILES) $(MINIMAP_FILES))
+				$(LOAD_FILES) $(GAME_FILES) $(MINIMAP_FILES))
 
 OBJECTS = $(addprefix $(OBJS_DIR), $(ALL_SRC_FILES:.c=.o))
 
@@ -63,7 +63,7 @@ DEPENDENCIES = -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -lm
 
 CFLAGS += -Wall -Wextra -Werror $(HEADERS)
 
-CC = cc $(CFLAGS) -g
+CC = cc $(CFLAGS) -g -O2
 
 # RULES
 
@@ -102,7 +102,7 @@ $(MLX42_DIR):
 clean:
 	make clean -C $(LIBFT_DIR)
 	rm -rf $(OBJS_DIR)
-	make depend -C $(MLX42_DIR)
+	make clean -C $(MLX42_DIR)
 
 fclean: clean
 	rm -f $(LIBFT)

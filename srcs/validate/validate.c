@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 12:27:31 by ixu               #+#    #+#             */
-/*   Updated: 2024/04/27 14:05:55 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/30 17:28:57 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,18 +73,22 @@ static int	parse_file(int fd, t_map *map, int *flags)
 
 static void	print_grid(char **grid, t_map *map)
 {
+	int	r;
+	int	c;
+
 	ft_printf("map width: %d\n", map->width);
 	ft_printf("map height: %d\n", map->height);
-	for (int r = 0; r < map->height; r++)
+	r = -1;
+	while (++r < map->height)
 	{
-		for (int c = 0; c < map->width; c++)
+		c = -1;
+		while (++c < map->width)
 		{
 			if (grid[r][c] == ' ')
 				ft_printf("%c", '-');
 			else
 				ft_printf("%c", grid[r][c]);
 		}
-	
 		ft_printf("\n");
 	}
 	ft_printf("\n");
@@ -118,7 +122,7 @@ static void	validate_file_content(char *file, t_map *map)
 		perror_and_exit("close() error");
 	if (map_start_line == 1 || !map_started(flags))
 		put_error_and_exit("Empty file, or file contains only newline \
-character, or error encountered when reading the file\n");
+character, or error occurred when reading the file\n");
 	grid = grid_init(file, map, map_start_line);
 	validate_map(grid, map);
 	if (DEBUG_MODE)

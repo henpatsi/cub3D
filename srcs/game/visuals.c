@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   visuals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 11:10:51 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/30 11:17:36 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/04/30 16:37:51 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void	draw_wall(t_map *map, int x, t_hitinfo hit)
 	uint32_t	y;
 	uint32_t	color;
 
+	wall_image = NULL;
 	if (hit.side == NORTH)
 		wall_image = map->images.north;
 	if (hit.side == SOUTH)

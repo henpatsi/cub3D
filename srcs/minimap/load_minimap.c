@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:52:45 by ixu               #+#    #+#             */
-/*   Updated: 2024/04/29 12:06:35 by ixu              ###   ########.fr       */
+/*   Updated: 2024/04/30 14:17:19 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ void	load_minimap_grid(t_map *map)
 
 void	load_pixel_grid(t_minimap *minimap)
 {
-	int				my;
-	int				mx;
-	int				py;
-	int				px;
-	t_mini_gridpos	**pixel_grid;
+	int			my;
+	int			mx;
+	int			py;
+	int			px;
+	t_gridpos	**pixel_grid;
 
 	pixel_grid = minimap->pixel_grid;
 	my = -1;
