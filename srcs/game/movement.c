@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 09:45:59 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/04 15:35:18 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/04 17:01:18 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ t_vector	limit_target_to_walls(t_map *map, t_vector target_pos)
 	if (grid_raycast(&hit, map, origin, dir) == 1)
 	{
 		if (dir.x > 0 && hit.x < target_pos.x)
-			target_pos.x = hit.x - 0.01;
+			target_pos.x = hit.x - 0.001;
 		else if (dir.x < 0 && hit.x  > target_pos.x)
-			target_pos.x = hit.x + 0.01;
+			target_pos.x = hit.x + 0.001;
 		if (dir.y > 0 && hit.y < target_pos.y)
-			target_pos.y = hit.y - 0.01;
+			target_pos.y = hit.y - 0.001;
 		else if (dir.y < 0 && hit.y > target_pos.y)
-			target_pos.y = hit.y + 0.01;
+			target_pos.y = hit.y + 0.001;
 	}
 	return (target_pos);
 }

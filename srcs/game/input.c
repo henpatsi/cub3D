@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 14:59:30 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/04 15:39:16 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/04 17:13:18 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,8 @@ void	cursor_input_hook(double xpos, double ypos, void *param)
 	t_map			*map;
 	static double	last_xpos;
 	
-	(void) ypos;
 	map = (t_map *) param;
-	rotate_player(map, (double)(xpos - last_xpos) * MOUSE_SENSITIVITY);
-	update_visuals(map);
+	(void) ypos;
+	rotate_player(map, (xpos - last_xpos) * MOUSE_SENSITIVITY);
 	last_xpos = xpos;
 }
