@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+         #
+#    By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/22 08:30:50 by hpatsi            #+#    #+#              #
-#    Updated: 2024/04/30 17:11:44 by ixu              ###   ########.fr        #
+#    Updated: 2024/05/04 15:02:50 by hpatsi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ MINIMAP_FILES = init_minimap reset_minimap load_minimap print_minimap \
 
 LOAD_FILES = load_map load_config load_grid
 
-GAME_FILES = controls visuals raycast
+GAME_FILES = input movement visuals raycast
 
 ALL_SRC_FILES = $(addsuffix .c, $(SOURCE_FILES) $(VALIDATE_FILES) \
 				$(LOAD_FILES) $(GAME_FILES) $(MINIMAP_FILES))

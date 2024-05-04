@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   controls.c                                         :+:      :+:    :+:   */
+/*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 09:45:59 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/30 14:25:21 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/04 15:35:18 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,13 @@ void	move_player(t_map *map, int forward, int right)
 	map->player.y = target_pos.y;
 }
 
-void	rotate_player(t_map *map, int dir)
+void	rotate_player(t_map *map, double amount)
 {
 	double	rotation;
 	double	rotation_rad;
 
 	rotation = map->player.x_rotation
-		+ (dir * map->mlx->delta_time * ROTATE_SPEED);
+		+ (amount * map->mlx->delta_time * ROTATE_SPEED);
 	if (rotation > 360)
 		rotation -= 360;
 	if (rotation < 0)
@@ -93,27 +93,4 @@ void	rotate_player(t_map *map, int dir)
 	map->player.dir.y = -cos(rotation_rad);
 	map->player.cam_plane.x = cos(rotation_rad);
 	map->player.cam_plane.y = sin(rotation_rad);
-}
-
-void	input_hook(void *param)
-{
-	t_map	*map;
-
-	map = (t_map *) param;
-	if (mlx_is_key_down(map->mlx, MLX_KEY_W))
-		move_player(map, 1, 0);
-	if (mlx_is_key_down(map->mlx, MLX_KEY_S))
-		move_player(map, -1, 0);
-	if (mlx_is_key_down(map->mlx, MLX_KEY_D))
-		move_player(map, 0, 1);
-	if (mlx_is_key_down(map->mlx, MLX_KEY_A))
-		move_player(map, 0, -1);
-	if (mlx_is_key_down(map->mlx, MLX_KEY_RIGHT))
-		rotate_player(map, 1);
-	if (mlx_is_key_down(map->mlx, MLX_KEY_LEFT))
-		rotate_player(map, -1);
-	if (mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(map->mlx);
-	update_visuals(map);
-	reload_and_draw_minimap(map, map->images.draw);
 }
