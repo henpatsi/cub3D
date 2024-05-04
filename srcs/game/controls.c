@@ -37,18 +37,23 @@ t_vector	limit_target_to_walls(t_map *map, t_vector target_pos)
 	dir.y = 0;
 	if (dir.x != 0 && grid_raycast(&hit, map, origin, dir) == 1)
 	{
-		if ((dir.x > 0 && hit.x < target_pos.x)
-			|| (dir.x < 0 && hit.x > target_pos.x))
-			target_pos.x = hit.x;
+		if (dir.x > 0 && hit.x - PLAYER_SIZE < target_pos.x)
+			target_pos.x = hit.x - PLAYER_SIZE;
+		else if (dir.x < 0 && hit.x + PLAYER_SIZE > target_pos.x)
+			target_pos.x = hit.x + PLAYER_SIZE;
+		
 	}
 	dir.x = 0;
 	dir.y = target_pos.y - origin.y;
 	if (dir.y != 0 && grid_raycast(&hit, map, origin, dir) == 1)
 	{
-		if ((dir.y > 0 && hit.y < target_pos.y)
-			|| (dir.y < 0 && hit.y > target_pos.y))
-			target_pos.y = hit.y;
+		if (dir.y > 0 && hit.y - PLAYER_SIZE < target_pos.y)
+			target_pos.y = hit.y - PLAYER_SIZE;
+		else if (dir.y < 0 && hit.y + PLAYER_SIZE > target_pos.y)
+			target_pos.y = hit.y + PLAYER_SIZE;
 	}
+	printf("tpos x: %f\n", target_pos.x);
+	printf("tpos y: %f\n", target_pos.y);
 	return (target_pos);
 }
 
@@ -61,22 +66,8 @@ void	move_player(t_map *map, int forward, int right)
 		|| target_pos.y < 0 || target_pos.y >= map->height)
 		return ;
 	target_pos = limit_target_to_walls(map, target_pos);
-
-	// Moce player to target position
-	if (map->grid[(int) map->player.y][(int) target_pos.x].type != WALL)
-		map->player.x = target_pos.x;
-	if (map->grid[(int) target_pos.y][(int) map->player.x].type != WALL)
-		map->player.y = target_pos.y;
-
-	// Limit distance to wall to at least player size
-	if (map->grid[(int) map->player.y][(int)(map->player.x + PLAYER_SIZE)].type == WALL)
-		map->player.x = (int)(map->player.x + PLAYER_SIZE) - PLAYER_SIZE;
-	else if (map->grid[(int) map->player.y][(int)(map->player.x - PLAYER_SIZE)].type == WALL)
-		map->player.x = (int) map->player.x + PLAYER_SIZE;
-	if (map->grid[(int)(map->player.y + PLAYER_SIZE)][(int) map->player.x].type == WALL)
-		map->player.y = (int)(map->player.y + PLAYER_SIZE) - PLAYER_SIZE;
-	else if (map->grid[(int)(map->player.y - PLAYER_SIZE)][(int) map->player.x].type == WALL)
-		map->player.y = (int) map->player.y + PLAYER_SIZE;
+	map->player.x = target_pos.x;
+	map->player.y = target_pos.y;
 }
 
 void	rotate_player(t_map *map, int dir)
