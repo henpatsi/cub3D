@@ -34,26 +34,31 @@ t_vector	limit_target_to_walls(t_map *map, t_vector target_pos)
 	origin.x = map->player.x;
 	origin.y = map->player.y;
 	dir.x = target_pos.x - origin.x;
-	dir.y = 0;
-	if (dir.x != 0 && grid_raycast(&hit, map, origin, dir) == 1)
-	{
-		if (dir.x > 0 && hit.x - PLAYER_SIZE < target_pos.x)
-			target_pos.x = hit.x - PLAYER_SIZE;
-		else if (dir.x < 0 && hit.x + PLAYER_SIZE > target_pos.x)
-			target_pos.x = hit.x + PLAYER_SIZE;
-		
-	}
-	dir.x = 0;
 	dir.y = target_pos.y - origin.y;
-	if (dir.y != 0 && grid_raycast(&hit, map, origin, dir) == 1)
+	if (grid_raycast(&hit, map, origin, dir) == 1)
 	{
-		if (dir.y > 0 && hit.y - PLAYER_SIZE < target_pos.y)
-			target_pos.y = hit.y - PLAYER_SIZE;
-		else if (dir.y < 0 && hit.y + PLAYER_SIZE > target_pos.y)
-			target_pos.y = hit.y + PLAYER_SIZE;
+		if (dir.x > 0 && hit.x < target_pos.x)
+			target_pos.x = hit.x - 0.01;
+		else if (dir.x < 0 && hit.x  > target_pos.x)
+			target_pos.x = hit.x + 0.01;
+		if (dir.y > 0 && hit.y < target_pos.y)
+			target_pos.y = hit.y - 0.01;
+		else if (dir.y < 0 && hit.y > target_pos.y)
+			target_pos.y = hit.y + 0.01;
 	}
-	printf("tpos x: %f\n", target_pos.x);
-	printf("tpos y: %f\n", target_pos.y);
+	return (target_pos);
+}
+
+t_vector	apply_player_size(t_map *map, t_vector target_pos)
+{
+	if (map->grid[(int) target_pos.y][(int)(target_pos.x + PLAYER_SIZE)].type == WALL)
+		target_pos.x = (int)(target_pos.x + PLAYER_SIZE) - PLAYER_SIZE;
+	else if (map->grid[(int) target_pos.y][(int)(target_pos.x - PLAYER_SIZE)].type == WALL)
+		target_pos.x = (int) target_pos.x + PLAYER_SIZE;
+	if (map->grid[(int)(target_pos.y + PLAYER_SIZE)][(int) target_pos.x].type == WALL)
+		target_pos.y = (int)(target_pos.y + PLAYER_SIZE) - PLAYER_SIZE;
+	else if (map->grid[(int)(target_pos.y - PLAYER_SIZE)][(int) target_pos.x].type == WALL)
+		target_pos.y = (int) target_pos.y + PLAYER_SIZE;
 	return (target_pos);
 }
 
@@ -66,6 +71,7 @@ void	move_player(t_map *map, int forward, int right)
 		|| target_pos.y < 0 || target_pos.y >= map->height)
 		return ;
 	target_pos = limit_target_to_walls(map, target_pos);
+	target_pos = apply_player_size(map, target_pos);
 	map->player.x = target_pos.x;
 	map->player.y = target_pos.y;
 }
