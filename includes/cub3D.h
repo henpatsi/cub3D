@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/04 17:13:50 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/04 17:36:23 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@
 # define D 10
 
 // scale factor for scaling up minimap for drawing onto the screen
-# define SCALE 7
+# define SCALE 10
 
 // distance of minimap to the edge of the window
-# define PAD 10
+# define PAD 15
 
 # define BLACK 0x000000ff
 # define MAGENTA 0xff00ffff
