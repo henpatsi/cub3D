@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:54:42 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/05 07:50:03 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/05 09:21:38 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	test_game(t_map *map, char **argv)
 	mlx_set_cursor_mode(map->mlx, MLX_MOUSE_HIDDEN);
 	mlx_cursor_hook(map->mlx, cursor_input_hook, map);
 	mlx_loop_hook(map->mlx, keyboard_input_hook, map);
+	mlx_loop_hook(map->mlx, update_visuals_hook, map);
 	mlx_loop(map->mlx);
 	mlx_terminate(map->mlx);
 	free_all(map);

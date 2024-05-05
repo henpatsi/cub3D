@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/05 07:50:23 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/05 09:21:34 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,6 +205,7 @@ void	draw_line(t_vector v1, t_vector v2, mlx_image_t *image);
 
 void	keyboard_input_hook(void *param);
 void	cursor_input_hook(double xpos, double ypos, void *param);
+void	update_visuals_hook(void *param);
 void	move_player(t_map *map, int forward, int right);
 void	rotate_player(t_map *map, double amount);
 

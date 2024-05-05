@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 14:59:30 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/04 18:12:35 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/05 09:24:21 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ void	keyboard_input_hook(void *param)
 		rotate_player(map, -1);
 	if (mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(map->mlx);
-	update_visuals(map);
-	reload_and_draw_minimap(map, map->canvas);
 }
 
 void	cursor_input_hook(double xpos, double ypos, void *param)
@@ -43,4 +41,21 @@ void	cursor_input_hook(double xpos, double ypos, void *param)
 	(void) ypos;
 	rotate_player(map, (xpos - map->mlx->width / 2) * MOUSE_SENSITIVITY);
 	mlx_set_mouse_pos(map->mlx, map->mlx->width / 2, map->mlx->height / 2);
+}
+
+void	update_visuals_hook(void *param)
+{
+	t_map	*map;
+	static t_vector	old_pos;
+	static double	old_rot;
+
+	map = (t_map *) param;
+	if (map->player.x == old_pos.x && map->player.y == old_pos.y
+		&& map->player.x_rotation == old_rot)
+		return ;
+	update_visuals(map);
+	reload_and_draw_minimap(map, map->canvas);
+	old_pos.x = map->player.x;
+	old_pos.y = map->player.y;
+	old_rot = map->player.x_rotation;
 }
