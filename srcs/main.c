@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:54:42 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/04 15:06:54 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/05 07:50:03 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,7 @@ int	test_game(t_map *map, char **argv)
 	mlx_loop_hook(map->mlx, keyboard_input_hook, map);
 	mlx_loop(map->mlx);
 	mlx_terminate(map->mlx);
-	free_grid(map->minimap.grid);
-	free_grid(map->minimap.pixel_grid);
+	free_all(map);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/04 17:36:23 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/05 07:50:23 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,14 +108,13 @@ typedef struct s_hitinfo
 	bool		hit;
 }	t_hitinfo;
 
-typedef struct s_images
+typedef struct s_textures
 {
-	mlx_image_t *north;
-	mlx_image_t *south;
-	mlx_image_t *east;
-	mlx_image_t *west;
-	mlx_image_t *draw;
-}	t_images;
+	mlx_texture_t *north;
+	mlx_texture_t *south;
+	mlx_texture_t *east;
+	mlx_texture_t *west;
+}	t_textures;
 
 typedef struct s_gridpos
 {
@@ -146,7 +145,8 @@ typedef struct s_map
 	int			width;
 	int			height;
 	t_gridpos	**grid;
-	t_images	images;
+	t_textures	textures;
+	mlx_image_t *canvas;
 	uint32_t	floor_color;
 	uint32_t	ceiling_color;
 	t_player	player;
@@ -219,5 +219,7 @@ int		return_error(char *message);
 
 void	free_strs(char **strs);
 void	free_grid(t_gridpos **grid);
+void	free_textures(t_textures textures);
+void	free_all(t_map *map);
 
 #endif

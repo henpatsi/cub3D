@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 14:59:30 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/04 17:23:01 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/04 18:12:35 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	keyboard_input_hook(void *param)
 	if (mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(map->mlx);
 	update_visuals(map);
-	reload_and_draw_minimap(map, map->images.draw);
+	reload_and_draw_minimap(map, map->canvas);
 }
 
 void	cursor_input_hook(double xpos, double ypos, void *param)
