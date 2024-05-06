@@ -1,5 +1,5 @@
 General:
-	☐ Check leaks in load map
+	☐ Check leaks on error in load map
 	☐ Check that all possible errors handle in load map
 	☐ Add sprite animation
 	☐ Add doors
@@ -21,3 +21,4 @@ Bug fixes:
 	✔ Fix player going through seam between two diagonal walls @done(24-04-30 10:00)
 	✔ Fix player going through walls at really high speeds (e.g. using a raycast) @done(24-04-30 14:10)
 	☐ Minimap has a (single pixel?) line gap when player is touching a west or north facing wall
+	✔ Getting texture pixel sometimes goes out of max range of texture @done(24-05-06 12:42)

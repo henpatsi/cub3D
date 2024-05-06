@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/05 09:21:34 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/06 12:37:47 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # define MOVE_SPEED 3
 # define ROTATE_SPEED 200
 # define MOUSE_SENSITIVITY 0.1
-# define WALL_HEIGHT 200
+# define WALL_HEIGHT 400
 
 // the closest a player can get to a wall
 # define PLAYER_SIZE 0.1
