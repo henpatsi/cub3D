@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:28:58 by ixu               #+#    #+#             */
-/*   Updated: 2024/04/30 17:07:33 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/06 21:56:22 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,11 @@ static void	draw_player(t_map *map, mlx_image_t *image)
 	draw_line(vec_back_right, vec_front_middle, image);
 }
 
-static bool	is_drawable(int x, int y, double move_x, double move_y)
+static bool	is_drawable(int x, int y, int move_x, int move_y)
 {
-	if (x >= move_x + 0.5 * SCALE && x <= D * SCALE * 2 + move_x
-		&& y >= move_y + 0.5 * SCALE && y <= D * SCALE * 2 + move_y)
+	if (x >= move_x + 0.5 * SCALE && x <= D * SCALE * 2 + move_x + 0.5 * SCALE
+		&& y >= move_y + 0.5 * SCALE
+		&& y <= D * SCALE * 2 + move_y + 0.5 * SCALE)
 		return (true);
 	else
 		return (false);
@@ -59,10 +60,10 @@ static bool	is_drawable(int x, int y, double move_x, double move_y)
 
 void	draw_minimap(t_map *map, mlx_image_t *img)
 {
-	int		x;
-	int		y;
-	double	move_x;
-	double	move_y;
+	int	x;
+	int	y;
+	int	move_x;
+	int	move_y;
 
 	move_x = (map->player.x - floor(map->player.x) - 0.5) * SCALE;
 	move_y = (map->player.y - floor(map->player.y) - 0.5) * SCALE;
