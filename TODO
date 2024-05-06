@@ -1,6 +1,8 @@
 General:
 	☐ Check leaks in load map
 	☐ Check that all possible errors handle in load map
+	☐ Add sprite animation
+	☐ Add doors
 
 Improvements:
 	✔ Fix stuck on walls when diagonal towards wall @done(24-04-30 09:27)
@@ -10,6 +12,9 @@ Improvements:
 		✔ Store image in correct form so abgr to rgba does not have to be called @done(24-05-05 08:56)
 		☐ Store height of each hit into buffer, draw in horizontal lines
 		✔ Dont draw every frame, only when someting moved @done(24-05-05 09:24)
+	☐ Movement
+		☐ Make move input set e.g. xmove and ymove values, then call move player with those values
+		☐ Prevent diagonal speed up by making simultaneous y and x moves scale to a single move
 
 Bug fixes:
 	☐ make re command does not work if MLX42 does not exist
