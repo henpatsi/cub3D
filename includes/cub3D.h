@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/06 12:37:47 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/07 10:44:14 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,15 @@
 # define BLACK 0x000000ff
 # define MAGENTA 0xff00ffff
 # define GREY 0x555555ff
+
+// animation parameters
+# define ANIM_DELAY 0.5
+# define FRAME_COUNT 5
+# define ANIM_FRAME_0 "textures/sprite_animations/gun/gun_1.png"
+# define ANIM_FRAME_1 "textures/sprite_animations/gun/gun_2.png"
+# define ANIM_FRAME_2 "textures/sprite_animations/gun/gun_3.png"
+# define ANIM_FRAME_3 "textures/sprite_animations/gun/gun_4.png"
+# define ANIM_FRAME_4 "textures/sprite_animations/gun/gun_5.png"
 
 # define DEBUG_MODE 1
 
@@ -140,6 +149,17 @@ typedef	struct s_minimap
 	t_gridpos	**pixel_grid;
 }	t_minimap;
 
+typedef struct s_anim
+{
+	int			active;
+	int			current_frame;
+	int			frame_count;
+	double		timer;
+	double		delay;
+	mlx_image_t	*canvas;
+	mlx_image_t	**images;
+}	t_anim;
+
 typedef struct s_map
 {
 	int			width;
@@ -151,6 +171,7 @@ typedef struct s_map
 	uint32_t	ceiling_color;
 	t_player	player;
 	t_minimap	minimap;
+	t_anim		animation;
 	mlx_t		*mlx;
 }	t_map;
 
@@ -178,11 +199,12 @@ void	perror_and_exit(char *message);
 void	put_error_and_exit(char *message);
 void	put_error_free_and_exit(char *message, char **grid, int row);
 
-// PREPARE MAP
+/* PREPARE MAP STRUCT */
 
 int		load_map(t_map *map, char *map_filename);
 int		load_config(t_map *map, int map_fd);
 int		load_grid(t_map *map, int map_fd);
+int		load_animations(mlx_t *mlx, t_anim	*animation);
 
 /* MINIMAP */
 // init_minimap.c
@@ -201,23 +223,33 @@ void	reload_and_draw_minimap(t_map *map, mlx_image_t *image);
 double	deg_to_rad(double degrees);
 void	draw_line(t_vector v1, t_vector v2, mlx_image_t *image);
 
-// GAME
+/* GAME */
 
+// hooks
 void	keyboard_input_hook(void *param);
+void	key_hook(mlx_key_data_t keydata, void* param);
 void	cursor_input_hook(double xpos, double ypos, void *param);
 void	update_visuals_hook(void *param);
+void	animation_hook(void *param);
+
+// movement
 void	move_player(t_map *map, int forward, int right);
 void	rotate_player(t_map *map, double amount);
 
+// visuals
 int		init_visuals(t_map *map);
 int		update_visuals(t_map *map);
+void	update_animation(mlx_t *mlx, t_anim	*animation);
 
+// raycast
 int		grid_raycast(t_hitinfo *hit, t_map *map, t_vector origin, t_vector direction);
 
-// HELPERS
+/* HELPERS */
 
+// error
 int		return_error(char *message);
 
+// free
 void	free_strs(char **strs);
 void	free_grid(t_gridpos **grid);
 void	free_textures(t_textures textures);

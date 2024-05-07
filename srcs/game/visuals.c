@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 11:10:51 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/06 12:42:49 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/07 09:38:47 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ uint32_t	get_image_pixel(mlx_texture_t *texture, int x, int y)
 	int			image_x_offset;
 	int			image_y_offset;
 
-	image_x_offset = x * 4;
-	image_y_offset = y * texture->width * 4;
+	image_x_offset = x * sizeof(uint32_t);
+	image_y_offset = y * texture->width * sizeof(uint32_t);
 	color = 0;
 	color += texture->pixels[image_y_offset + image_x_offset];
 	color = color << 8;
