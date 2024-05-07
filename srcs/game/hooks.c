@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 14:59:30 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/07 10:49:15 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/07 12:26:40 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ void	keyboard_input_hook(void *param)
 		mlx_close_window(map->mlx);
 }
 
-void	key_hook(mlx_key_data_t keydata, void* param)
+void	key_hook(mlx_key_data_t keydata, void *param)
 {
 	t_map	*map;
-	
+
 	map = (t_map *) param;
 	if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS)
 		map->animation.active = 1;
@@ -45,7 +45,7 @@ void	key_hook(mlx_key_data_t keydata, void* param)
 void	cursor_input_hook(double xpos, double ypos, void *param)
 {
 	t_map	*map;
-	
+
 	map = (t_map *) param;
 	(void) ypos;
 	rotate_player(map, (xpos - map->mlx->width / 2) * MOUSE_SENSITIVITY);
@@ -54,7 +54,7 @@ void	cursor_input_hook(double xpos, double ypos, void *param)
 
 void	update_visuals_hook(void *param)
 {
-	t_map	*map;
+	t_map			*map;
 	static t_vector	old_pos;
 	static double	old_rot;
 
@@ -72,7 +72,7 @@ void	update_visuals_hook(void *param)
 void	animation_hook(void *param)
 {
 	t_map	*map;
-	
+
 	map = (t_map *) param;
 	update_animation(map->mlx, &map->animation);
 }

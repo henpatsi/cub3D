@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:25:18 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/07 12:23:49 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/07 12:30:54 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ mlx_image_t	*image_from_png(mlx_t *mlx, char *path)
 		return (0);
 	image = mlx_texture_to_image(mlx, texture);
 	mlx_delete_texture(texture);
-	mlx_resize_image(image, image->width * ANIM_SCALE, image->height * ANIM_SCALE);
+	mlx_resize_image(image, image->width * ANIM_SCALE,
+		image->height * ANIM_SCALE);
 	return (image);
 }
 
@@ -30,7 +31,7 @@ int	init_anim_canvas(mlx_t *mlx, t_anim	*animation)
 {
 	int	xpos;
 	int	ypos;
-	
+
 	animation->canvas = mlx_new_image(mlx, animation->images[0]->width,
 			animation->images[0]->height);
 	if (animation->canvas == 0)

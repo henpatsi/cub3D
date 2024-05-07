@@ -6,7 +6,7 @@
 #    By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/22 08:30:50 by hpatsi            #+#    #+#              #
-#    Updated: 2024/05/07 09:25:26 by hpatsi           ###   ########.fr        #
+#    Updated: 2024/05/07 12:39:05 by hpatsi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -102,7 +102,7 @@ $(MLX42_DIR):
 clean:
 	make clean -C $(LIBFT_DIR)
 	rm -rf $(OBJS_DIR)
-	make clean -C $(MLX42_DIR)
+	if [ -d $(MLX42_DIR) ]; then make clean -C $(MLX42_DIR); fi
 
 fclean: clean
 	rm -f $(LIBFT)

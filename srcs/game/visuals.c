@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 11:10:51 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/07 09:38:47 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/07 12:31:47 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	draw_wall(t_map *map, int x, t_hitinfo hit)
 		y = 0;
 		while (y < scaled_wall_height)
 		{
-			image_y = round((double) y / (double) scaled_wall_height * (double) (wall_texture->height - 1));
+			image_y = round((double) y / (double) scaled_wall_height * (double)(wall_texture->height - 1));
 			color = get_image_pixel(wall_texture, image_x, image_y);
 			mlx_put_pixel(map->canvas, start.x, start.y + y, (uint32_t) color);
 			y++;
