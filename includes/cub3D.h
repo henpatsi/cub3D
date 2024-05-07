@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/07 10:44:14 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/07 11:34:42 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@
 # define GREY 0x555555ff
 
 // animation parameters
-# define ANIM_DELAY 0.5
+# define ANIM_DELAY 0.05
 # define FRAME_COUNT 5
 # define ANIM_FRAME_0 "textures/sprite_animations/gun/gun_1.png"
 # define ANIM_FRAME_1 "textures/sprite_animations/gun/gun_2.png"

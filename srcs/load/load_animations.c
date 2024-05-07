@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:25:18 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/07 10:47:31 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/07 11:45:16 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int	init_anim_canvas(mlx_t *mlx, t_anim	*animation)
 			animation->images[0]->height);
 	if (animation->canvas == 0)
 		return (-1);
-	if (mlx_image_to_window(mlx, animation->canvas, 0, 0) == -1)
-		return (-1);
+	mlx_image_to_window(mlx, animation->canvas, 200, 200);
+	mlx_set_instance_depth(animation->canvas->instances, 2);
 	ft_memcpy(animation->canvas->pixels, animation->images[0]->pixels,
 		animation->canvas->width * animation->canvas->height * sizeof(int32_t));
 	return (0);
