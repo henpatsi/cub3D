@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/07 12:02:06 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/07 14:02:43 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,6 +241,7 @@ void	rotate_player(t_map *map, double amount);
 int		init_visuals(t_map *map);
 int		update_visuals(t_map *map);
 void	update_animation(mlx_t *mlx, t_anim	*animation);
+void	draw_environment_line(t_map *map, int x, t_hitinfo hit);
 
 // raycast
 int		grid_raycast(t_hitinfo *hit, t_map *map, t_vector origin, t_vector direction);
