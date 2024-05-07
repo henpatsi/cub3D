@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 11:56:33 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/29 14:38:19 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/07 09:46:39 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ int	init_color_from_rgb(t_map *map, char **split_line)
 		map->floor_color = color;
 	if (ft_strcmp(split_line[0], "C") == 0)
 		map->ceiling_color = color;
+	free_strs(color_split);
 	return (1);
 }
 
-int	init_image_from_texture(t_map *map, char **split_line)
+int	init_wall_texture(t_map *map, char **split_line)
 {
 	mlx_texture_t	*texture;
-	mlx_image_t		*image;
 
 	if (split_line[1] == 0)
 		return (return_error("Failed to read texture config"));
@@ -52,18 +52,14 @@ int	init_image_from_texture(t_map *map, char **split_line)
 	texture = mlx_load_png(split_line[1]);
 	if (texture == 0)
 		return (-1);
-	image = mlx_texture_to_image(map->mlx, texture);
-	mlx_delete_texture(texture);
-	if (image == 0)
-		return (-1);
 	if (ft_strcmp(split_line[0], "NO") == 0)
-		map->images.north = image;
+		map->textures.north = texture;
 	if (ft_strcmp(split_line[0], "SO") == 0)
-		map->images.south = image;
+		map->textures.south = texture;
 	if (ft_strcmp(split_line[0], "WE") == 0)
-		map->images.west = image;
+		map->textures.west = texture;
 	if (ft_strcmp(split_line[0], "EA") == 0)
-		map->images.east = image;
+		map->textures.east = texture;
 	return (1);
 }
 
@@ -96,7 +92,10 @@ int	load_config(t_map *map, int map_fd)
 	{
 		split = read_split_line(map_fd);
 		if (split == 0)
+		{
+			free_textures(map->textures);
 			return (return_error("Failed to read config"));
+		}
 		if (ft_strcmp(split[0], "\n") == 0)
 		{
 			free_strs(split);
@@ -105,10 +104,13 @@ int	load_config(t_map *map, int map_fd)
 		if (ft_strcmp(split[0], "F") == 0 || ft_strcmp(split[0], "C") == 0)
 			ret = init_color_from_rgb(map, split);
 		else
-			ret = init_image_from_texture(map, split);
+			ret = init_wall_texture(map, split);
 		free_strs(split);
 		if (ret == -1)
+		{
+			free_textures(map->textures);
 			return (-1);
+		}
 		config_count++;
 	}
 	return (1);

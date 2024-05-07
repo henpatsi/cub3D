@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 11:54:33 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/07 13:34:12 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/07 14:13:09 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,26 @@ void	free_initial_grid(char **grid)
 		row++;
 	}
 	free(grid);
+}
+
+void	free_textures(t_textures textures)
+{
+	mlx_delete_texture(textures.north);
+	mlx_delete_texture(textures.south);
+	mlx_delete_texture(textures.east);
+	mlx_delete_texture(textures.west);
+}
+
+void	free_animation(t_anim *animation)
+{
+	free(animation->images);
+}
+
+void	free_all(t_map *map)
+{
+	free_grid(map->grid);
+	free_grid(map->minimap.grid);
+	free_grid(map->minimap.pixel_grid);
+	free_textures(map->textures);
+	free_animation(&map->animation);
 }

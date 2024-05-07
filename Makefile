@@ -6,7 +6,7 @@
 #    By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/22 08:30:50 by hpatsi            #+#    #+#              #
-#    Updated: 2024/05/07 13:42:04 by ixu              ###   ########.fr        #
+#    Updated: 2024/05/07 14:18:56 by ixu              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,9 +39,9 @@ VALIDATE_FILES_BONUS = validate_map_bonus validate_map_utils_bonus
 MINIMAP_FILES = init_minimap reset_minimap load_minimap print_minimap \
 				draw_minimap draw_minimap_utils
 
-LOAD_FILES = load_map load_config load_grid
+LOAD_FILES = load_map load_config load_grid load_animations
 
-GAME_FILES = input movement visuals raycast
+GAME_FILES = hooks movement visuals raycast
 
 ALL_SRC_FILES = $(addsuffix .c, $(SOURCE_FILES) $(VALIDATE_FILES_COMMON) \
 				$(VALIDATE_FILES_MANDATORY) $(LOAD_FILES) $(GAME_FILES) $(MINIMAP_FILES))
@@ -121,9 +121,9 @@ $(MLX42_DIR):
 clean:
 	make clean -C $(LIBFT_DIR)
 	rm -rf $(OBJS_DIR)
-	make clean -C $(MLX42_DIR)
 	rm -f .bonus
 	rm -f .base
+	if [ -d $(MLX42_DIR) ]; then make clean -C $(MLX42_DIR); fi
 
 fclean: clean
 	rm -f $(LIBFT)
