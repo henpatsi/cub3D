@@ -6,7 +6,7 @@
 #    By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/22 08:30:50 by hpatsi            #+#    #+#              #
-#    Updated: 2024/05/04 15:02:50 by hpatsi           ###   ########.fr        #
+#    Updated: 2024/05/07 09:25:26 by hpatsi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,9 +36,9 @@ VALIDATE_FILES = validate validate_utils grid_init validate_map \
 MINIMAP_FILES = init_minimap reset_minimap load_minimap print_minimap \
 				draw_minimap draw_minimap_utils
 
-LOAD_FILES = load_map load_config load_grid
+LOAD_FILES = load_map load_config load_grid load_animations
 
-GAME_FILES = input movement visuals raycast
+GAME_FILES = hooks movement visuals raycast
 
 ALL_SRC_FILES = $(addsuffix .c, $(SOURCE_FILES) $(VALIDATE_FILES) \
 				$(LOAD_FILES) $(GAME_FILES) $(MINIMAP_FILES))

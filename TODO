@@ -1,18 +1,24 @@
 General:
-	☐ Check leaks in load map
+	☐ Check leaks on error in load map
 	☐ Check that all possible errors handle in load map
+	☐ Add sprite animation
+	☐ Add doors
 
 Improvements:
 	✔ Fix stuck on walls when diagonal towards wall @done(24-04-30 09:27)
 	✔ Set minimum distance from wall (player size), set to that distance if would otherwise go in wall @done(24-04-30 09:59)
 	✔ Make movement calculate final new position then move, not x then y, weird if facing away from wall and moving diagonal towards it @done(24-05-04 17:39)
 	☐ Optimization of drawing
-		☐ Store image in correct form so abgr to rgba does not have to be called
+		✔ Store image in correct form so abgr to rgba does not have to be called @done(24-05-05 08:56)
 		☐ Store height of each hit into buffer, draw in horizontal lines
-		☐ Dont draw every frame, only when someting moved
+		✔ Dont draw every frame, only when someting moved @done(24-05-05 09:24)
+	☐ Movement
+		☐ Make move input set e.g. xmove and ymove values, then call move player with those values
+		☐ Prevent diagonal speed up by making simultaneous y and x moves scale to a single move
 
 Bug fixes:
 	☐ make re command does not work if MLX42 does not exist
 	✔ Fix player going through seam between two diagonal walls @done(24-04-30 10:00)
 	✔ Fix player going through walls at really high speeds (e.g. using a raycast) @done(24-04-30 14:10)
+	✔ Getting texture pixel sometimes goes out of max range of texture @done(24-05-06 12:42)
 	✔ Minimap has a (single pixel?) line gap when player is touching a west or north facing wall @done(24-05-06 22:00)
