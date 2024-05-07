@@ -1,7 +1,7 @@
 General:
 	☐ Check leaks on error in load map
 	☐ Check that all possible errors handle in load map
-	☐ Add sprite animation
+	✔ Add sprite animation @done(24-05-07 12:10)
 	☐ Add doors
 
 Improvements:
@@ -10,7 +10,7 @@ Improvements:
 	✔ Make movement calculate final new position then move, not x then y, weird if facing away from wall and moving diagonal towards it @done(24-05-04 17:39)
 	☐ Optimization of drawing
 		✔ Store image in correct form so abgr to rgba does not have to be called @done(24-05-05 08:56)
-		☐ Store height of each hit into buffer, draw in horizontal lines
+		☐ Store height of each hit into buffer, draw in horizontal lines (optional and a lot of work)
 		✔ Dont draw every frame, only when someting moved @done(24-05-05 09:24)
 	☐ Movement
 		☐ Make move input set e.g. xmove and ymove values, then call move player with those values

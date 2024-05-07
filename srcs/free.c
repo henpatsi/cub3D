@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 11:54:33 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/05 07:50:27 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/07 12:23:58 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,16 @@ void	free_textures(t_textures textures)
 	mlx_delete_texture(textures.west);
 }
 
+void	free_animation(t_anim *animation)
+{
+	free(animation->images);
+}
+
 void	free_all(t_map *map)
 {
 	free_grid(map->grid);
 	free_grid(map->minimap.grid);
 	free_grid(map->minimap.pixel_grid);
 	free_textures(map->textures);
+	free_animation(&map->animation);
 }
