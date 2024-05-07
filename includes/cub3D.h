@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/06 21:54:52 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/07 13:42:03 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@
 # define BLACK 0x000000ff
 # define MAGENTA 0xff00ffff
 # define GREY 0x555555ff
+# define BLUE 0x0000ffff
 
 # define DEBUG_MODE 1
 
@@ -77,6 +78,7 @@ typedef enum e_gridpos_type
 {
 	EMPTY,
 	WALL,
+	DOOR,
 	PLAYER
 }	t_gridpos_type;
 
@@ -168,9 +170,6 @@ void	validate_map(char **grid, t_map *map);
 // validate_map_utils.c
 bool	is_closed(int r, int c, t_map *map, char **grid);
 void	flood_fill(char **grid, t_map *map, int row, int col);
-// validate_free.c
-void	free_arr(char **arr);
-void	free_initial_grid(char **grid);
 // validate_error.c
 void	non_map_error(char *line, char **split_line);
 void	map_error(char *message, char **grid);
@@ -219,5 +218,6 @@ int		return_error(char *message);
 
 void	free_strs(char **strs);
 void	free_grid(t_gridpos **grid);
+void	free_initial_grid(char **grid);
 
 #endif

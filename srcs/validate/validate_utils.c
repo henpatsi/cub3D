@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 17:40:14 by ixu               #+#    #+#             */
-/*   Updated: 2024/04/24 23:50:52 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/07 13:42:05 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	validate_non_map_elements(char *line, int *flags)
 	if (split_line[0] == NULL || split_line[1] == NULL || split_line[2] != NULL)
 		non_map_error(line, split_line);
 	check_identifiers(split_line, line, flags);
-	free_arr(split_line);
+	free_strs(split_line);
 }
 
 bool	map_started(int flags)

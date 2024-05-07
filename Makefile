@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+         #
+#    By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/22 08:30:50 by hpatsi            #+#    #+#              #
-#    Updated: 2024/05/04 15:02:50 by hpatsi           ###   ########.fr        #
+#    Updated: 2024/05/07 13:42:04 by ixu              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,8 +30,11 @@ MINIMAP_DIR = ./srcs/minimap/
 
 SOURCE_FILES = main error free
 
-VALIDATE_FILES = validate validate_utils grid_init validate_map \
-					validate_map_utils validate_free validate_error
+VALIDATE_FILES_COMMON = validate validate_utils grid_init validate_error
+
+VALIDATE_FILES_MANDATORY = validate_map validate_map_utils
+
+VALIDATE_FILES_BONUS = validate_map_bonus validate_map_utils_bonus
 
 MINIMAP_FILES = init_minimap reset_minimap load_minimap print_minimap \
 				draw_minimap draw_minimap_utils
@@ -40,10 +43,15 @@ LOAD_FILES = load_map load_config load_grid
 
 GAME_FILES = input movement visuals raycast
 
-ALL_SRC_FILES = $(addsuffix .c, $(SOURCE_FILES) $(VALIDATE_FILES) \
-				$(LOAD_FILES) $(GAME_FILES) $(MINIMAP_FILES))
+ALL_SRC_FILES = $(addsuffix .c, $(SOURCE_FILES) $(VALIDATE_FILES_COMMON) \
+				$(VALIDATE_FILES_MANDATORY) $(LOAD_FILES) $(GAME_FILES) $(MINIMAP_FILES))
+
+ALL_SRC_FILES_BONUS = $(addsuffix .c, $(SOURCE_FILES) $(VALIDATE_FILES_COMMON) \
+						$(VALIDATE_FILES_BONUS) $(LOAD_FILES) $(GAME_FILES) $(MINIMAP_FILES))
 
 OBJECTS = $(addprefix $(OBJS_DIR), $(ALL_SRC_FILES:.c=.o))
+
+OBJECTS_BONUS = $(addprefix $(OBJS_DIR), $(ALL_SRC_FILES_BONUS:.c=.o))
 
 # LIBRARIES
 
@@ -69,8 +77,19 @@ CC = cc $(CFLAGS) -g -O2
 
 all: $(NAME)
 
-$(NAME): $(OBJS_DIR) $(OBJECTS) $(LIBFT) $(MLX42)
+$(NAME): $(OBJS_DIR) $(OBJECTS) $(LIBFT) $(MLX42) .base
 	$(CC) $(OBJECTS) $(LIBFT) $(MLX42) $(DEPENDENCIES) -o $(NAME)
+
+.base:
+	rm -f .bonus
+	touch .base
+
+bonus: .bonus
+
+.bonus: $(OBJS_DIR) $(OBJECTS_BONUS) $(LIBFT) $(MLX42)
+	$(CC) $(OBJECTS_BONUS) $(LIBFT) $(MLX42) $(DEPENDENCIES) -o $(NAME)
+	rm -f .base
+	touch .bonus
 
 $(OBJS_DIR):
 	mkdir $(OBJS_DIR)
@@ -103,6 +122,8 @@ clean:
 	make clean -C $(LIBFT_DIR)
 	rm -rf $(OBJS_DIR)
 	make clean -C $(MLX42_DIR)
+	rm -f .bonus
+	rm -f .base
 
 fclean: clean
 	rm -f $(LIBFT)

@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 11:54:33 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/29 13:51:33 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/07 13:34:12 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,19 @@ void	free_grid(t_gridpos **grid)
 	{
 		free(grid[y]);
 		y++;
+	}
+	free(grid);
+}
+
+void	free_initial_grid(char **grid)
+{
+	int	row;
+
+	row = 0;
+	while (grid[row] != NULL)
+	{
+		free(grid[row]);
+		row++;
 	}
 	free(grid);
 }

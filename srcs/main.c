@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:54:42 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/04 15:06:54 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/07 13:42:01 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	print_grid(t_map *map)
 		{
 			if (map->grid[y][x].type == EMPTY)
 				ft_printf(".");
+			else if (map->grid[y][x].type == DOOR)
+				ft_printf("D");
 			else
 				ft_printf("1");
 			x++;
