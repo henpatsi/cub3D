@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 13:12:51 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/08 10:03:08 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/08 14:02:32 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ void	draw_vertical_texture(t_draw_line_info dli, mlx_texture_t *texture,
 }
 
 void	draw_fs_wall_line(t_draw_line_info dli,
-		uint32_t scaled_wall_height, t_vector image_start,
+		uint32_t wall_height, t_vector image_start,
 		mlx_texture_t *wall_texture)
 {
-	image_start.y = ((double)(scaled_wall_height - dli.canvas->height) / 2)
-		/ (double) scaled_wall_height * (double) wall_texture->height;
+	image_start.y = ((double)(wall_height - dli.canvas->height) / 2)
+		/ (double) wall_height * (double) wall_texture->height;
 	dli.height = dli.canvas->height;
 	draw_vertical_texture(dli, wall_texture, image_start);
 }
@@ -73,11 +73,11 @@ void	draw_environment_line(t_map *map, int x, t_hitinfo hit)
 	{
 		dli.height = (map->canvas->height / 2) - (wall_height / 2);
 		draw_vertical_color(dli, map->ceiling_color);
-		dli.canvas_start.y += (map->canvas->height / 2) - (wall_height / 2);
+		dli.canvas_start.y += dli.height;
 		dli.height = wall_height;
 		image_start.y = 0;
 		draw_vertical_texture(dli, wall_texture, image_start);
-		dli.canvas_start.y += wall_height;
+		dli.canvas_start.y += dli.height;
 		dli.height = map->canvas->height - dli.canvas_start.y;
 		draw_vertical_color(dli, map->floor_color);
 	}

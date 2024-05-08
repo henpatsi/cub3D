@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 13:05:12 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/04/30 11:16:54 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/08 13:12:17 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ void	get_next_y_edge(t_hitinfo *hit, t_vector dir, t_raydata *raydata)
 	if (dir.y > 0)
 	{
 		raydata->grid_y += 1;
-		hit->side = SOUTH;
+		hit->side = NORTH;
 	}
 	else
 	{
 		raydata->grid_y -= 1;
-		hit->side = NORTH;
+		hit->side = SOUTH;
 	}
 	hit->distance = raydata->dist_to_y;
 	raydata->dist_to_y += raydata->delta_y;

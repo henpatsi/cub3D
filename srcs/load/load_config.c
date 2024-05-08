@@ -6,11 +6,33 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 11:56:33 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/08 11:18:20 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/08 14:15:52 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+int	check_valid_color(char **color_split)
+{
+	int	r;
+	int	g;
+	int	b;
+
+	if (color_split[0] == 0 || color_split[1] == 0 || color_split[2] == 0)
+		return (return_error("Color config rgb incomplete"));
+	if (color_split[3] != 0)
+		return (return_error("Color config rgb has extra values"));
+	r = ft_atoi(color_split[0]);
+	if (r < 0 || r > 255)
+		return (return_error("rgb values must be between 0 and 255"));
+	g = ft_atoi(color_split[1]);
+	if (g < 0 || g > 255)
+		return (return_error("rgb values must be between 0 and 255"));
+	b = ft_atoi(color_split[2]);
+	if (b < 0 || b > 255)
+		return (return_error("rgb values must be between 0 and 255"));
+	return (1);
+}
 
 int	init_color(t_map *map, char **split_line)
 {
@@ -18,14 +40,15 @@ int	init_color(t_map *map, char **split_line)
 	char		**color_split;
 
 	if (split_line[1] == 0)
-		return (return_error("Failed to read color config"));
+		return (return_error("Color config missing rgb"));
 	split_line[1][ft_strlen(split_line[1]) - 1] = 0;
 	color_split = ft_split(split_line[1], ',');
-	if (color_split == 0 || color_split[0] == 0 || color_split[1] == 0
-		|| color_split[2] == 0)
+	if (color_split == 0)
+		return (return_error("Failed to read color config"));
+	if (check_valid_color(color_split) == -1)
 	{
 		free_strs(color_split);
-		return (return_error("Failed to read color config"));
+		return (-1);
 	}
 	color = ft_atoi(color_split[0]);
 	color = (color << 8) + ft_atoi(color_split[1]);
