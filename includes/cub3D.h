@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/07 12:02:06 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/08 12:18:35 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@
 // animation parameters
 # define ANIM_DELAY 0.05
 # define FRAME_COUNT 5
-# define ANIM_SCALE 2
+# define ANIM_SCALE 3
 # define ANIM_FRAME_0 "textures/sprite_animations/gun/gun_1.png"
 # define ANIM_FRAME_1 "textures/sprite_animations/gun/gun_2.png"
 # define ANIM_FRAME_2 "textures/sprite_animations/gun/gun_3.png"
@@ -161,6 +161,13 @@ typedef struct s_anim
 	mlx_image_t	**images;
 }	t_anim;
 
+typedef struct s_draw_line_info
+{
+	mlx_image_t	*canvas;
+	t_vector	canvas_start;
+	int			height;
+}	t_draw_line_info;
+
 typedef struct s_map
 {
 	int			width;
@@ -241,6 +248,10 @@ void	rotate_player(t_map *map, double amount);
 int		init_visuals(t_map *map);
 int		update_visuals(t_map *map);
 void	update_animation(mlx_t *mlx, t_anim	*animation);
+void	draw_environment_line(t_map *map, int x, t_hitinfo hit);
+
+uint32_t	get_texture_pixel(mlx_texture_t *texture, int x, int y);
+mlx_texture_t	*get_hit_texture(t_map *map, t_hitinfo hit);
 
 // raycast
 int		grid_raycast(t_hitinfo *hit, t_map *map, t_vector origin, t_vector direction);
@@ -249,6 +260,7 @@ int		grid_raycast(t_hitinfo *hit, t_map *map, t_vector origin, t_vector directio
 
 // error
 int		return_error(char *message);
+int		exit_error(char *message);
 
 // free
 void	free_strs(char **strs);

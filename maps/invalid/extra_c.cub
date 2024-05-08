@@ -5,6 +5,7 @@ WE ./textures/west_texture.png
 
 F 220,100,0
 C 225,30,0
+C 255,30,0
 
 11111111
 10000001
