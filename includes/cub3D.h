@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/07 14:02:43 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/08 09:27:58 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,13 @@ typedef struct s_anim
 	mlx_image_t	**images;
 }	t_anim;
 
+typedef struct s_draw_line_info
+{
+	mlx_image_t	*canvas;
+	t_vector	canvas_start;
+	int			height;
+}	t_draw_line_info;
+
 typedef struct s_map
 {
 	int			width;
@@ -242,6 +249,9 @@ int		init_visuals(t_map *map);
 int		update_visuals(t_map *map);
 void	update_animation(mlx_t *mlx, t_anim	*animation);
 void	draw_environment_line(t_map *map, int x, t_hitinfo hit);
+
+uint32_t	get_texture_pixel(mlx_texture_t *texture, int x, int y);
+mlx_texture_t	*get_hit_texture(t_map *map, t_hitinfo hit);
 
 // raycast
 int		grid_raycast(t_hitinfo *hit, t_map *map, t_vector origin, t_vector direction);
