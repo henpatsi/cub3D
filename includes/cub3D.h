@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/08 11:00:13 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/08 12:18:35 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@
 // animation parameters
 # define ANIM_DELAY 0.05
 # define FRAME_COUNT 5
-# define ANIM_SCALE 2
+# define ANIM_SCALE 3
 # define ANIM_FRAME_0 "textures/sprite_animations/gun/gun_1.png"
 # define ANIM_FRAME_1 "textures/sprite_animations/gun/gun_2.png"
 # define ANIM_FRAME_2 "textures/sprite_animations/gun/gun_3.png"

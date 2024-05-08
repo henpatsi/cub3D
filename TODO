@@ -16,7 +16,9 @@ Improvements:
 		☐ Make move input set e.g. xmove and ymove values, then call move player with those values
 		☐ Prevent diagonal speed up by making simultaneous y and x moves scale to a single move
 	☐ Error
-		☐ "Empty file, or file contains only newline character, or error occurred when reading the file" could just be "Empty file"?
+		☐ "Empty file, or file contains only newline character, or error occurred when reading the file"
+			☐ Could just be "Empty file" for empty file or nl file?
+			☐ Also printed when giving a directory as arg
 		☐ "Invalid element: 11111111" (on missing config line), could this be more clear what is missing or something like "incomplete config"?
 		☐ Map that is missing map prints "Map missing start position", maybe this could be more explicit that map is missing?
 		☐ Duplicate of a color "Map contains an invalid character" but duplicate of a texture prints "Invalid element: NO ./textures/north_texture.png"
