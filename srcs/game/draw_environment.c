@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 13:12:51 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/07 14:50:27 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/08 09:08:12 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,17 @@ void	draw_vertical_color(t_map *map, t_vector start, int height,
 
 void	draw_vertical_texture(t_map *map, t_vector canvas_start, int height, mlx_texture_t	*texture, t_vector image_start)
 {
-	int	y;
-	int	image_x;
-	int	image_y;
+	int		y;
+	double	ratio;
+	int		texture_y;
 
-	image_x = image_start.x;
 	y = 0;
 	while (y < height)
 	{
-		double ratio = (double) y / (double) height;
-		image_y = round(ratio * (double)(texture->height - 1 - (image_start.y * 2))) + image_start.y;
-		mlx_put_pixel(map->canvas, canvas_start.x, canvas_start.y + y, get_texture_pixel(texture, image_x, image_y));
+		ratio = (double) y / (double) height;
+		texture_y = ((texture->height - 1 - (2 * image_start.y)) * ratio) + image_start.y;
+		mlx_put_pixel(map->canvas, canvas_start.x, canvas_start.y + y,
+				get_texture_pixel(texture, image_start.x, texture_y));
 		y++;
 	}
 }
@@ -90,16 +90,8 @@ void	draw_environment_line(t_map *map, int x, t_hitinfo hit)
 	image_start.x = round(hit.side_ratio * (double) wall_texture->width);
 	if (scaled_wall_height >= map->canvas->height)
 	{
-		// image_start.y = ((double)(scaled_wall_height - map->canvas->height) / 2) / (double) scaled_wall_height * (double) wall_texture->height;
-		// image_start.y = (int) image_start.y;
-		// draw_vertical_texture(map, start, map->canvas->height, wall_texture, image_start);
-		uint32_t y = 0;
-		while (y < map->canvas->height)
-		{
-			image_start.y = round(((double) y + (double)(scaled_wall_height - map->canvas->height) / 2) / (double) scaled_wall_height * (double) wall_texture->height);
-			mlx_put_pixel(map->canvas, start.x, start.y + y, get_texture_pixel(wall_texture, image_start.x, image_start.y));
-			y++;
-		}
+		image_start.y = ((double)(scaled_wall_height - map->canvas->height) / 2) / (double) scaled_wall_height * (double) wall_texture->height;
+		draw_vertical_texture(map, start, map->canvas->height, wall_texture, image_start);
 	}
 	else
 	{
