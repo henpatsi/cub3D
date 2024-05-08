@@ -15,10 +15,19 @@ Improvements:
 	☐ Movement
 		☐ Make move input set e.g. xmove and ymove values, then call move player with those values
 		☐ Prevent diagonal speed up by making simultaneous y and x moves scale to a single move
+	☐ Error
+		☐ "Empty file, or file contains only newline character, or error occurred when reading the file"
+			☐ Could just be "Empty file" for empty file or nl file?
+			☐ Also printed when giving a directory as arg
+		☐ "Invalid element: 11111111" (on missing config line), could this be more clear what is missing or something like "incomplete config"?
+		☐ Map that is missing map prints "Map missing start position", maybe this could be more explicit that map is missing?
+		☐ Duplicate of a color "Map contains an invalid character" but duplicate of a texture prints "Invalid element: NO ./textures/north_texture.png"
 
 Bug fixes:
-	☐ make re command does not work if MLX42 does not exist
+	✔ make re command does not work if MLX42 does not exist @done(24-05-08 11:04)
 	✔ Fix player going through seam between two diagonal walls @done(24-04-30 10:00)
 	✔ Fix player going through walls at really high speeds (e.g. using a raycast) @done(24-04-30 14:10)
 	✔ Getting texture pixel sometimes goes out of max range of texture @done(24-05-06 12:42)
 	✔ Minimap has a (single pixel?) line gap when player is touching a west or north facing wall @done(24-05-06 22:00)
+	✔ RGB not checked for errors @done(24-05-08 14:29)
+	☐ RGB still error because of atoi, e.g. 255,30a,0 is valid (fix with stricter atoi?)

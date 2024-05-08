@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 14:59:30 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/07 12:26:40 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/07 13:15:12 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,25 +75,4 @@ void	animation_hook(void *param)
 
 	map = (t_map *) param;
 	update_animation(map->mlx, &map->animation);
-}
-
-void	update_animation(mlx_t *mlx, t_anim	*animation)
-{
-	mlx_image_t	*frame_img;
-
-	if (!animation->active)
-		return ;
-	animation->timer += mlx->delta_time;
-	if (animation->timer < animation->delay)
-		return ;
-	animation->timer = 0;
-	animation->current_frame++;
-	if (animation->current_frame == animation->frame_count)
-	{
-		animation->active = 0;
-		animation->current_frame = 0;
-	}
-	frame_img = animation->images[animation->current_frame];
-	ft_memcpy(animation->canvas->pixels, frame_img->pixels,
-		frame_img->width * frame_img->height * sizeof(int32_t));
 }

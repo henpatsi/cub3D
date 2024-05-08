@@ -6,7 +6,7 @@
 #    By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/22 08:30:50 by hpatsi            #+#    #+#              #
-#    Updated: 2024/05/07 14:18:56 by ixu              ###   ########.fr        #
+#    Updated: 2024/05/08 14:43:11 by ixu              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,8 @@ MINIMAP_FILES = init_minimap reset_minimap load_minimap print_minimap \
 
 LOAD_FILES = load_map load_config load_grid load_animations
 
-GAME_FILES = hooks movement visuals raycast
+GAME_FILES = hooks movement visuals draw_environment draw_environment_helpers \
+				raycast
 
 ALL_SRC_FILES = $(addsuffix .c, $(SOURCE_FILES) $(VALIDATE_FILES_COMMON) \
 				$(VALIDATE_FILES_MANDATORY) $(LOAD_FILES) $(GAME_FILES) $(MINIMAP_FILES))

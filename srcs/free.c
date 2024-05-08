@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 11:54:33 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/07 14:13:09 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/08 14:42:28 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,14 @@ void	free_initial_grid(char **grid)
 
 void	free_textures(t_textures textures)
 {
-	mlx_delete_texture(textures.north);
-	mlx_delete_texture(textures.south);
-	mlx_delete_texture(textures.east);
-	mlx_delete_texture(textures.west);
+	if (textures.north)
+		mlx_delete_texture(textures.north);
+	if (textures.south)
+		mlx_delete_texture(textures.south);
+	if (textures.east)
+		mlx_delete_texture(textures.east);
+	if (textures.west)
+		mlx_delete_texture(textures.west);
 }
 
 void	free_animation(t_anim *animation)
