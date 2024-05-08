@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:28:58 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/07 13:22:11 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/08 20:45:00 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	get_vectors(t_vector *vec_front_middle, \
 	vec_back_right->y = center + radius * sin(deg_to_rad(30 + rot));
 }
 
-static void	draw_player(t_map *map, mlx_image_t *image)
+static void	draw_player(t_map *map)
 {
 	double		center;
 	t_vector	vec_center;
@@ -42,10 +42,10 @@ static void	draw_player(t_map *map, mlx_image_t *image)
 	vec_center.x = center;
 	vec_center.y = center;
 	get_vectors(&vec_front_middle, &vec_back_left, &vec_back_right, map);
-	draw_line(vec_front_middle, vec_back_left, image);
-	draw_line(vec_back_left, vec_center, image);
-	draw_line(vec_center, vec_back_right, image);
-	draw_line(vec_back_right, vec_front_middle, image);
+	draw_line(vec_front_middle, vec_back_left, map->canvas);
+	draw_line(vec_back_left, vec_center, map->canvas);
+	draw_line(vec_center, vec_back_right, map->canvas);
+	draw_line(vec_back_right, vec_front_middle, map->canvas);
 }
 
 static bool	is_drawable(int x, int y, int move_x, int move_y)
@@ -58,13 +58,15 @@ static bool	is_drawable(int x, int y, int move_x, int move_y)
 		return (false);
 }
 
-void	draw_minimap(t_map *map, mlx_image_t *img)
+void	draw_minimap(t_map *map)
 {
-	int	x;
-	int	y;
-	int	move_x;
-	int	move_y;
+	int			x;
+	int			y;
+	int			move_x;
+	int			move_y;
+	mlx_image_t *img;
 
+	img = map->canvas;
 	move_x = (map->player.x - floor(map->player.x) - 0.5) * SCALE;
 	move_y = (map->player.y - floor(map->player.y) - 0.5) * SCALE;
 	y = -1;
@@ -85,13 +87,13 @@ void	draw_minimap(t_map *map, mlx_image_t *img)
 				mlx_put_pixel(img, x + PAD - move_x, y + PAD - move_y, BLUE);
 		}
 	}
-	draw_player(map, img);
+	draw_player(map);
 }
 
-void	reload_and_draw_minimap(t_map *map,	mlx_image_t *image)
+void	update_minimap(t_map *map)
 {
 	reset_minimap(&map->minimap);
 	load_minimap_grid(map);
 	load_pixel_grid(&map->minimap);
-	draw_minimap(map, image);
+	draw_minimap(map);
 }

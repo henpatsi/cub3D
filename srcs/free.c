@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 11:54:33 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/08 14:42:28 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/08 21:05:43 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	free_textures(t_textures textures)
 		mlx_delete_texture(textures.east);
 	if (textures.west)
 		mlx_delete_texture(textures.west);
+	if (textures.closed_door)
+		mlx_delete_texture(textures.closed_door);
 }
 
 void	free_animation(t_anim *animation)

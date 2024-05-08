@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   visuals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 11:10:51 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/07 14:02:35 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/08 21:04:47 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	update_animation(mlx_t *mlx, t_anim	*animation)
 		return ;
 	animation->timer += mlx->delta_time;
 	if (animation->timer < animation->delay)
-		return ;
+		return ;	
 	animation->timer = 0;
 	animation->current_frame++;
 	if (animation->current_frame == animation->frame_count)

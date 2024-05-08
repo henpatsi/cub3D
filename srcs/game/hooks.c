@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 14:59:30 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/07 13:15:12 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/08 21:04:48 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,20 @@ void	keyboard_input_hook(void *param)
 		mlx_close_window(map->mlx);
 }
 
+bool	next_to_door(t_map *map)
+{
+	int	x;
+	int	y;
+
+	x = (int)map->player.x;
+	y = (int)map->player.y;
+	if (map->grid[y][x + 1].type == DOOR || map->grid[y][x - 1].type == DOOR
+		|| map->grid[y + 1][x].type == DOOR 
+		|| map->grid[y - 1][x].type == DOOR)
+		return (true);
+	return (false);
+}
+
 void	key_hook(mlx_key_data_t keydata, void *param)
 {
 	t_map	*map;
@@ -40,6 +54,17 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	map = (t_map *) param;
 	if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS)
 		map->animation.active = 1;
+	if (keydata.key == MLX_KEY_Q && keydata.action == MLX_PRESS
+		&& next_to_door(map))
+	{
+		// if (map->door_open)
+		// 	close_door(map);
+		// else
+		// 	open_door(map);
+		map->door_open = !map->door_open;
+		update_visuals(map);
+		update_minimap(map);
+	}
 }
 
 void	cursor_input_hook(double xpos, double ypos, void *param)
@@ -63,7 +88,7 @@ void	update_visuals_hook(void *param)
 		&& map->player.x_rotation == old_rot)
 		return ;
 	update_visuals(map);
-	reload_and_draw_minimap(map, map->canvas);
+	update_minimap(map);
 	old_pos.x = map->player.x;
 	old_pos.y = map->player.y;
 	old_rot = map->player.x_rotation;

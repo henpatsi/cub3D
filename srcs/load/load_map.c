@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 10:17:11 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/08 11:50:17 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/08 19:15:27 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ int	load_map(t_map *map, char *map_filename)
 		exit(1);
 	}
 	close(map_fd);
+	map->door_open = false;
 	return (1);
 }
