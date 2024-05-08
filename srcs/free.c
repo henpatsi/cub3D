@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 11:54:33 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/07 12:25:22 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/08 10:27:25 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,14 @@ void	free_grid(t_gridpos **grid)
 
 void	free_textures(t_textures textures)
 {
-	mlx_delete_texture(textures.north);
-	mlx_delete_texture(textures.south);
-	mlx_delete_texture(textures.east);
-	mlx_delete_texture(textures.west);
+	if (textures.north)
+		mlx_delete_texture(textures.north);
+	if (textures.south)
+		mlx_delete_texture(textures.south);
+	if (textures.east)
+		mlx_delete_texture(textures.east);
+	if (textures.west)
+		mlx_delete_texture(textures.west);
 }
 
 void	free_animation(t_anim *animation)

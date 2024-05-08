@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/08 09:27:58 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/08 11:00:13 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,6 +260,7 @@ int		grid_raycast(t_hitinfo *hit, t_map *map, t_vector origin, t_vector directio
 
 // error
 int		return_error(char *message);
+int		exit_error(char *message);
 
 // free
 void	free_strs(char **strs);

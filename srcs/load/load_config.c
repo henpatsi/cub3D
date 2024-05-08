@@ -6,13 +6,13 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 11:56:33 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/07 09:46:39 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/08 11:18:20 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int	init_color_from_rgb(t_map *map, char **split_line)
+int	init_color(t_map *map, char **split_line)
 {
 	uint32_t	color;
 	char		**color_split;
@@ -28,12 +28,9 @@ int	init_color_from_rgb(t_map *map, char **split_line)
 		return (return_error("Failed to read color config"));
 	}
 	color = ft_atoi(color_split[0]);
-	color = color << 8;
-	color += ft_atoi(color_split[1]);
-	color = color << 8;
-	color += ft_atoi(color_split[2]);
-	color = color << 8;
-	color += 255;
+	color = (color << 8) + ft_atoi(color_split[1]);
+	color = (color << 8) + ft_atoi(color_split[2]);
+	color = (color << 8) + 255;
 	if (ft_strcmp(split_line[0], "F") == 0)
 		map->floor_color = color;
 	if (ft_strcmp(split_line[0], "C") == 0)
@@ -102,7 +99,7 @@ int	load_config(t_map *map, int map_fd)
 			continue ;
 		}
 		if (ft_strcmp(split[0], "F") == 0 || ft_strcmp(split[0], "C") == 0)
-			ret = init_color_from_rgb(map, split);
+			ret = init_color(map, split);
 		else
 			ret = init_wall_texture(map, split);
 		free_strs(split);
