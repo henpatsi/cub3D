@@ -96,8 +96,8 @@ printf ${HEADER_COLOR}"\n\n----- LEAKS -----\n\n"${NC}
 EXPECTED_LINES=4
 for file in $INVALID_MAP_DIR*; do
 	leaks --atExit -q -- $CUB3D $file 1>$LEAKS_LOG 2>$TRASH_LOG
-	LINES=$(sed -n '$=' $LEAKS_LOG)
-	if [ $LINES -eq $EXPECTED_LINES ]; then
+	LEAKS=$( grep "total leaked bytes" $LEAKS_LOG | awk '{print $3}' )
+	if [ $LEAKS -eq 0 ]; then
 		echo -e ${GREEN}"$( basename $file ): [OK]"${NC}
 	else
 		echo -e ${RED}"$( basename $file ): [KO]"${NC}
