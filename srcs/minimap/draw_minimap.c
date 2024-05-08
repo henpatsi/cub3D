@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:28:58 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/08 20:45:00 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/08 22:02:32 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,12 @@ void	draw_minimap(t_map *map)
 			else if (map->minimap.pixel_grid[y][x].type == WALL
 				&& is_drawable(x, y, move_x, move_y))
 				mlx_put_pixel(img, x + PAD - move_x, y + PAD - move_y, GREY);
-			else if (map->minimap.pixel_grid[y][x].type == DOOR
+			else if (map->minimap.pixel_grid[y][x].type == CLOSED_DOOR
 				&& is_drawable(x, y, move_x, move_y))
 				mlx_put_pixel(img, x + PAD - move_x, y + PAD - move_y, BLUE);
+			else if (map->minimap.pixel_grid[y][x].type == OPEN_DOOR 
+				&& is_drawable(x, y, move_x, move_y))
+				mlx_put_pixel(img, x + PAD - move_x, y + PAD - move_y, BLACK);
 		}
 	}
 	draw_player(map);

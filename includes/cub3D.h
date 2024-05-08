@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/08 21:04:45 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/08 22:13:22 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ typedef enum e_gridpos_type
 {
 	EMPTY,
 	WALL,
-	DOOR,
+	CLOSED_DOOR,
+	OPEN_DOOR,
 	PLAYER
 }	t_gridpos_type;
 
@@ -167,6 +168,13 @@ typedef struct s_draw_line_info
 	int			height;
 }	t_draw_line_info;
 
+// typedef struct s_door
+// {
+// 	int		x;
+// 	int		y;
+// 	bool	door_open;
+// }	t_door;
+
 typedef struct s_map
 {
 	int			width;
@@ -179,7 +187,8 @@ typedef struct s_map
 	t_player	player;
 	t_minimap	minimap;
 	t_anim		animation;
-	bool		door_open;
+	// int			door_count;
+	// t_door		*doors;
 	mlx_t		*mlx;
 }	t_map;
 
@@ -264,6 +273,9 @@ mlx_texture_t	*get_hit_texture(t_map *map, t_hitinfo hit);
 
 // raycast
 int		grid_raycast(t_hitinfo *hit, t_map *map, t_vector origin, t_vector direction);
+
+// doors
+
 
 /* HELPERS */
 

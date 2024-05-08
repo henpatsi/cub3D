@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 14:19:17 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/07 12:58:25 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/08 21:52:02 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	init_gridpos(t_map *map, int x, int y, char gridchar)
 	if (gridchar == '1')
 		gridpos->type = WALL;
 	else if (gridchar == '2')
-		gridpos->type = DOOR;
+		gridpos->type = CLOSED_DOOR;
 	else
 		gridpos->type = EMPTY;
 	if (gridchar == 'N' || gridchar == 'S'

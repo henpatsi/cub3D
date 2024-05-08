@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 14:59:30 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/08 21:04:48 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/08 22:16:21 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,21 @@ void	keyboard_input_hook(void *param)
 		mlx_close_window(map->mlx);
 }
 
+bool	is_door(t_map *map, int y, int x)
+{
+	if (map->grid[y][x].type == CLOSED_DOOR)
+	{
+		map->grid[y][x].type = OPEN_DOOR;
+		return (true);
+	}
+	if (map->grid[y][x].type == OPEN_DOOR)
+	{
+		map->grid[y][x].type = CLOSED_DOOR;
+		return (true);
+	}	
+	return (false);
+}
+
 bool	next_to_door(t_map *map)
 {
 	int	x;
@@ -40,9 +55,8 @@ bool	next_to_door(t_map *map)
 
 	x = (int)map->player.x;
 	y = (int)map->player.y;
-	if (map->grid[y][x + 1].type == DOOR || map->grid[y][x - 1].type == DOOR
-		|| map->grid[y + 1][x].type == DOOR 
-		|| map->grid[y - 1][x].type == DOOR)
+	if (is_door(map, y + 1, x) || is_door(map, y - 1, x)
+		|| is_door(map, y, x + 1) || is_door(map, y, x - 1))
 		return (true);
 	return (false);
 }
@@ -57,11 +71,6 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_Q && keydata.action == MLX_PRESS
 		&& next_to_door(map))
 	{
-		// if (map->door_open)
-		// 	close_door(map);
-		// else
-		// 	open_door(map);
-		map->door_open = !map->door_open;
 		update_visuals(map);
 		update_minimap(map);
 	}
