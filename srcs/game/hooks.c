@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 14:59:30 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/08 22:16:21 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/09 10:14:30 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,34 +31,6 @@ void	keyboard_input_hook(void *param)
 		rotate_player(map, -1);
 	if (mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(map->mlx);
-}
-
-bool	is_door(t_map *map, int y, int x)
-{
-	if (map->grid[y][x].type == CLOSED_DOOR)
-	{
-		map->grid[y][x].type = OPEN_DOOR;
-		return (true);
-	}
-	if (map->grid[y][x].type == OPEN_DOOR)
-	{
-		map->grid[y][x].type = CLOSED_DOOR;
-		return (true);
-	}	
-	return (false);
-}
-
-bool	next_to_door(t_map *map)
-{
-	int	x;
-	int	y;
-
-	x = (int)map->player.x;
-	y = (int)map->player.y;
-	if (is_door(map, y + 1, x) || is_door(map, y - 1, x)
-		|| is_door(map, y, x + 1) || is_door(map, y, x - 1))
-		return (true);
-	return (false);
 }
 
 void	key_hook(mlx_key_data_t keydata, void *param)

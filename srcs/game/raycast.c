@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 13:05:12 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/08 21:52:32 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/09 12:23:17 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	grid_raycast(t_hitinfo *hit, t_map *map, t_vector origin, t_vector dir)
 	hit->distance = 0;
 	hit->side = 0;
 	hit->hit_wall = false;
-	hit->hit_door = false;
+	hit->hit_closed_door = false;
 	init_raydata(&raydata, origin, dir);
 	while (get_next_edge(hit, map, dir, &raydata))
 	{
@@ -96,7 +96,7 @@ int	grid_raycast(t_hitinfo *hit, t_map *map, t_vector origin, t_vector dir)
 		}
 		else if (map->grid[raydata.grid_y][raydata.grid_x].type == CLOSED_DOOR)
 		{
-			hit->hit_door = true;
+			hit->hit_closed_door = true;
 			hit->x = origin.x + hit->distance * dir.x;
 			hit->y = origin.y + hit->distance * dir.y;
 			if (hit->side == NORTH || hit->side == SOUTH)

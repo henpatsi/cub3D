@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 09:22:55 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/08 20:57:02 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/09 12:22:59 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,42 @@ uint32_t	get_texture_pixel(mlx_texture_t *texture, int x, int y)
 	return (color);
 }
 
+bool	by_door(t_map *map, int y, int x)
+{
+	if (y < 0 || y >= map->height || x < 0 || x >= map->width)
+		return (false);
+	if (map->grid[y][x].type == OPEN_DOOR
+		|| map->grid[y][x].type == CLOSED_DOOR)
+		return (true);
+	return (false);
+}
+
 mlx_texture_t	*get_hit_texture(t_map *map, t_hitinfo hit)
 {
 	mlx_texture_t	*texture;
 
 	texture = NULL;
+	// printf("hit.y:%f, hit.x:%f\n", hit.y, hit.x);
 	if (hit.hit_wall)
 	{
-		if (hit.side == NORTH)
+		if (hit.side == NORTH && !by_door(map, hit.y - 0.5, hit.x))
 			texture = map->textures.north;
-		if (hit.side == SOUTH)
+		else if (hit.side == NORTH && by_door(map, hit.y - 0.5, hit.x))
+			texture = map->textures.door_sides;
+		else if (hit.side == SOUTH && !by_door(map, hit.y + 0.5, hit.x))
 			texture = map->textures.south;
-		if (hit.side == EAST)
+		else if (hit.side == SOUTH && by_door(map, hit.y + 0.5, hit.x))
+			texture = map->textures.door_sides;
+		else if (hit.side == EAST && !by_door(map, hit.y, hit.x + 0.5))
 			texture = map->textures.east;
-		if (hit.side == WEST)
+		else if (hit.side == EAST && by_door(map, hit.y, hit.x + 0.5))
+			texture = map->textures.door_sides;
+		else if (hit.side == WEST && !by_door(map, hit.y, hit.x - 0.5))
 			texture = map->textures.west;
+		else if (hit.side == WEST && by_door(map, hit.y, hit.x - 0.5))
+			texture = map->textures.door_sides;
 	}
-	else if (hit.hit_door)
+	else if (hit.hit_closed_door)
 		texture = map->textures.closed_door;
 	return (texture);
 }

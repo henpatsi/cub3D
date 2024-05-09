@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/08 22:13:22 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/09 12:23:03 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ typedef struct s_hitinfo
 	t_wall_side	side;
 	double		side_ratio;
 	bool		hit_wall;
-	bool		hit_door;
+	bool		hit_closed_door;
 }	t_hitinfo;
 
 typedef struct s_textures
@@ -124,6 +124,7 @@ typedef struct s_textures
 	mlx_texture_t *east;
 	mlx_texture_t *west;
 	mlx_texture_t *closed_door;
+	mlx_texture_t *door_sides;
 }	t_textures;
 
 typedef struct s_gridpos
@@ -275,7 +276,7 @@ mlx_texture_t	*get_hit_texture(t_map *map, t_hitinfo hit);
 int		grid_raycast(t_hitinfo *hit, t_map *map, t_vector origin, t_vector direction);
 
 // doors
-
+bool	next_to_door(t_map *map);
 
 /* HELPERS */
 
