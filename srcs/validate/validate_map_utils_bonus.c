@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 12:35:49 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/07 13:41:59 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/10 12:51:34 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,31 @@ bool	is_closed(int row, int col, t_map *map, char **grid)
 		|| grid[row][col] == ' ')
 		return (false);
 	return (true);
+}
+
+static bool	is_wall(int row, int col, t_map *map, char **grid)
+{
+	if (row < 0 || row >= map->height || col < 0 || col >= map->width)
+		return (false);
+	if (grid[row][col] == '1')
+		return (true);
+	return (false);
+}
+
+void	check_door_position(int r, int c, t_map *map, char **grid)
+{
+	if (is_wall(r + 1, c, map, grid))
+	{
+		if (!is_wall(r - 1, c, map, grid) || is_wall(r, c + 1, map, grid)
+			|| is_wall(r, c - 1, map, grid))
+			map_error("A door is positioned at a wrong tile\n", grid);
+	}
+	else if (is_wall(r, c + 1, map, grid))
+	{
+		if (!is_wall(r, c - 1, map, grid) || is_wall(r + 1, c, map, grid)
+			|| is_wall(r - 1, c, map, grid))
+			map_error("A door is positioned at a wrong tile\n", grid);
+	}
 }
 
 void	flood_fill(char **grid, t_map *map, int row, int col)

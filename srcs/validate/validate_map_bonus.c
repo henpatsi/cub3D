@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 12:22:00 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/10 11:38:22 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/10 12:46:55 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ static void	validate_walls(char **grid, t_map *map)
 					|| !is_closed(r, c - 1, map, grid))
 					map_error("Map not closed by walls\n", grid);
 			}
+			if (grid[r][c] == '2')
+				check_door_position(r, c, map, grid);
 			c++;
 		}
 		r++;
