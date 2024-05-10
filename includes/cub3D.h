@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/10 12:03:41 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/10 13:21:03 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,7 +234,7 @@ void	draw_line(t_vector v1, t_vector v2, mlx_image_t *image);
 /* GAME */
 
 // hooks
-void	keyboard_input_hook(void *param);
+void	movement_hook(void *param);
 void	key_hook(mlx_key_data_t keydata, void* param);
 void	cursor_input_hook(double xpos, double ypos, void *param);
 void	update_visuals_hook(void *param);

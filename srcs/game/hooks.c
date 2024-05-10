@@ -6,13 +6,13 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 14:59:30 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/07 13:15:12 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/10 13:20:55 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	keyboard_input_hook(void *param)
+void	movement_hook(void *param)
 {
 	t_map	*map;
 
@@ -29,8 +29,6 @@ void	keyboard_input_hook(void *param)
 		rotate_player(map, 1);
 	if (mlx_is_key_down(map->mlx, MLX_KEY_LEFT))
 		rotate_player(map, -1);
-	if (mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(map->mlx);
 }
 
 void	key_hook(mlx_key_data_t keydata, void *param)
@@ -40,6 +38,8 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	map = (t_map *) param;
 	if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS)
 		map->animation.active = 1;
+	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+		mlx_close_window(map->mlx);
 }
 
 void	cursor_input_hook(double xpos, double ypos, void *param)
