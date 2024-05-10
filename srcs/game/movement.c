@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 09:45:59 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/07 12:30:11 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/10 13:31:00 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ void	rotate_player(t_map *map, double amount)
 	double	rotation;
 	double	rotation_rad;
 
+	if (amount == 0)
+		return ;
 	rotation = map->player.x_rotation
 		+ (amount * map->mlx->delta_time * ROTATE_SPEED);
 	if (rotation > 360)

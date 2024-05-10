@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 14:59:30 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/10 13:20:55 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/10 13:50:20 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,28 @@
 void	movement_hook(void *param)
 {
 	t_map	*map;
+	int		forward_input;
+	int		right_input;
+	double	rotate_amount;
 
 	map = (t_map *) param;
+	forward_input = 0;
+	right_input = 0;
+	rotate_amount = 0.0;
 	if (mlx_is_key_down(map->mlx, MLX_KEY_W))
-		move_player(map, 1, 0);
+		forward_input += 1;
 	if (mlx_is_key_down(map->mlx, MLX_KEY_S))
-		move_player(map, -1, 0);
+		forward_input -= 1;
 	if (mlx_is_key_down(map->mlx, MLX_KEY_D))
-		move_player(map, 0, 1);
+		right_input += 1;
 	if (mlx_is_key_down(map->mlx, MLX_KEY_A))
-		move_player(map, 0, -1);
+		right_input -= 1;
 	if (mlx_is_key_down(map->mlx, MLX_KEY_RIGHT))
-		rotate_player(map, 1);
+		rotate_amount += 1;
 	if (mlx_is_key_down(map->mlx, MLX_KEY_LEFT))
-		rotate_player(map, -1);
+		rotate_amount -= 1;
+	move_player(map, forward_input, right_input);
+	rotate_player(map, rotate_amount);
 }
 
 void	key_hook(mlx_key_data_t keydata, void *param)
