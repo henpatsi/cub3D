@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 12:22:00 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/07 13:41:58 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/10 11:38:22 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ static void	validate_walls(char **grid, t_map *map)
 		c = 0;
 		while (c < map->width)
 		{
-			if (grid[r][c] == '0' || ft_strchr("NSEW", grid[r][c]) != NULL)
+			if (grid[r][c] == '0' || ft_strchr("NSEW", grid[r][c]) != NULL
+				|| grid[r][c] == '2')
 			{
 				if (!is_closed(r + 1, c, map, grid)
 					|| !is_closed(r - 1, c, map, grid)
