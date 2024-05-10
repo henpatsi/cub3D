@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 11:56:33 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/08 14:15:52 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/10 09:24:00 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ int	check_valid_color(char **color_split)
 	if (color_split[3] != 0)
 		return (return_error("Color config rgb has extra values"));
 	r = ft_atoi(color_split[0]);
-	if (r < 0 || r > 255)
+	if (!ft_stristype(color_split[0], ft_isdigit) || r > 255)
 		return (return_error("rgb values must be between 0 and 255"));
 	g = ft_atoi(color_split[1]);
-	if (g < 0 || g > 255)
+	if (!ft_stristype(color_split[1], ft_isdigit) || g > 255)
 		return (return_error("rgb values must be between 0 and 255"));
 	b = ft_atoi(color_split[2]);
-	if (b < 0 || b > 255)
+	if (!ft_stristype(color_split[2], ft_isdigit) || b > 255)
 		return (return_error("rgb values must be between 0 and 255"));
 	return (1);
 }
