@@ -12,9 +12,9 @@ Improvements:
 		✔ Store image in correct form so abgr to rgba does not have to be called @done(24-05-05 08:56)
 		☐ Store height of each hit into buffer, draw in horizontal lines (optional and a lot of work)
 		✔ Dont draw every frame, only when someting moved @done(24-05-05 09:24)
-	☐ Movement
-		☐ Make move input set e.g. xmove and ymove values, then call move player with those values
-		☐ Prevent diagonal speed up by making simultaneous y and x moves scale to a single move
+	✔ Movement @done(24-05-10 14:49)
+		✔ Make move input set e.g. xmove and ymove values, then call move player with those values @done(24-05-10 14:49)
+		✔ Prevent diagonal speed up by making simultaneous y and x moves scale to a single move @done(24-05-10 14:49)
 	☐ Error
 		☐ "Empty file, or file contains only newline character, or error occurred when reading the file"
 			☐ Could just be "Empty file" for empty file or nl file? (or "missing config" or "missing map")

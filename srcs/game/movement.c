@@ -6,13 +6,13 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 09:45:59 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/10 13:31:00 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/10 14:10:53 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-t_vector	get_target_position(t_map *map, int forward, int right)
+t_vector	get_target_position(t_map *map, double forward, double right)
 {
 	t_vector	target_pos;
 
@@ -66,10 +66,12 @@ t_vector	apply_player_size(t_map *map, t_vector target_pos)
 	return (target_pos);
 }
 
-void	move_player(t_map *map, int forward, int right)
+void	move_player(t_map *map, double forward, double right)
 {
 	t_vector	target_pos;
 
+	if (forward == 0 && right == 0)
+		return ;
 	target_pos = get_target_position(map, forward, right);
 	if (target_pos.x < 0 || target_pos.x >= map->width
 		|| target_pos.y < 0 || target_pos.y >= map->height)

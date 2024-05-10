@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/10 13:21:03 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/10 14:46:41 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define IMG_HEIGHT 1024
 
 # define PI 3.141592654
+# define NORMALIZE_VALUE 0.7071
 
 # define MOVE_SPEED 3
 # define ROTATE_SPEED 200
@@ -240,8 +241,10 @@ void	cursor_input_hook(double xpos, double ypos, void *param);
 void	update_visuals_hook(void *param);
 void	animation_hook(void *param);
 
+void	normalize_vector(t_vector	*vector);
+
 // movement
-void	move_player(t_map *map, int forward, int right);
+void	move_player(t_map *map, double forward, double right);
 void	rotate_player(t_map *map, double amount);
 
 // visuals

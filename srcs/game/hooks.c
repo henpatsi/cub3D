@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 14:59:30 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/10 13:50:20 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/10 14:45:49 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,27 @@
 
 void	movement_hook(void *param)
 {
-	t_map	*map;
-	int		forward_input;
-	int		right_input;
-	double	rotate_amount;
+	t_map		*map;
+	t_vector	movement_input;
+	double		rotate_amount;
 
 	map = (t_map *) param;
-	forward_input = 0;
-	right_input = 0;
+	ft_bzero(&movement_input, sizeof(t_vector));
 	rotate_amount = 0.0;
 	if (mlx_is_key_down(map->mlx, MLX_KEY_W))
-		forward_input += 1;
+		movement_input.y += 1;
 	if (mlx_is_key_down(map->mlx, MLX_KEY_S))
-		forward_input -= 1;
+		movement_input.y -= 1;
 	if (mlx_is_key_down(map->mlx, MLX_KEY_D))
-		right_input += 1;
+		movement_input.x += 1;
 	if (mlx_is_key_down(map->mlx, MLX_KEY_A))
-		right_input -= 1;
+		movement_input.x -= 1;
 	if (mlx_is_key_down(map->mlx, MLX_KEY_RIGHT))
 		rotate_amount += 1;
 	if (mlx_is_key_down(map->mlx, MLX_KEY_LEFT))
 		rotate_amount -= 1;
-	move_player(map, forward_input, right_input);
+	normalize_vector(&movement_input);
+	move_player(map, movement_input.y, movement_input.x);
 	rotate_player(map, rotate_amount);
 }
 
