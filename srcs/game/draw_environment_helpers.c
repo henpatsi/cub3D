@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 09:22:55 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/09 12:22:59 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/10 10:50:48 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ mlx_texture_t	*get_hit_texture(t_map *map, t_hitinfo hit)
 	mlx_texture_t	*texture;
 
 	texture = NULL;
-	// printf("hit.y:%f, hit.x:%f\n", hit.y, hit.x);
-	if (hit.hit_wall)
+	if (hit.hit_type == WALL)
 	{
 		if (hit.side == NORTH && !by_door(map, hit.y - 0.5, hit.x))
 			texture = map->textures.north;
@@ -66,7 +65,7 @@ mlx_texture_t	*get_hit_texture(t_map *map, t_hitinfo hit)
 		else if (hit.side == WEST && by_door(map, hit.y, hit.x - 0.5))
 			texture = map->textures.door_sides;
 	}
-	else if (hit.hit_closed_door)
+	else if (hit.hit_type == CLOSED_DOOR)
 		texture = map->textures.closed_door;
 	return (texture);
 }

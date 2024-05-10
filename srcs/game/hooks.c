@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 14:59:30 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/09 10:14:30 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/10 11:29:46 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,16 @@ void	keyboard_input_hook(void *param)
 
 void	key_hook(mlx_key_data_t keydata, void *param)
 {
-	t_map	*map;
+	t_map		*map;
+	// t_hitinfo	hit;
+	// t_vector	origin;
 
 	map = (t_map *) param;
 	if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS)
 		map->animation.active = 1;
+	// origin.x = map->player.x;
+	// origin.y = map->player.y;
+	// grid_raycast(&hit, map, origin, map->player.dir);
 	if (keydata.key == MLX_KEY_Q && keydata.action == MLX_PRESS
 		&& next_to_door(map))
 	{

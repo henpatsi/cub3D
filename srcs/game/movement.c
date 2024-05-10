@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 09:45:59 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/07 12:30:11 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/10 11:28:00 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,24 @@ t_vector	limit_target_to_walls(t_map *map, t_vector target_pos)
 t_vector	apply_player_size(t_map *map, t_vector target_pos)
 {
 	if (map->grid[(int) target_pos.y]
-		[(int)(target_pos.x + PLAYER_SIZE)].type == WALL)
+		[(int)(target_pos.x + PLAYER_SIZE)].type == WALL
+		|| map->grid[(int) target_pos.y]
+		[(int)(target_pos.x + PLAYER_SIZE)].type == CLOSED_DOOR)
 		target_pos.x = (int)(target_pos.x + PLAYER_SIZE) - PLAYER_SIZE;
 	else if (map->grid[(int) target_pos.y]
-		[(int)(target_pos.x - PLAYER_SIZE)].type == WALL)
+		[(int)(target_pos.x - PLAYER_SIZE)].type == WALL
+		|| map->grid[(int) target_pos.y]
+		[(int)(target_pos.x - PLAYER_SIZE)].type == CLOSED_DOOR)
 		target_pos.x = (int) target_pos.x + PLAYER_SIZE;
 	if (map->grid[(int)(target_pos.y + PLAYER_SIZE)]
-		[(int) target_pos.x].type == WALL)
+		[(int) target_pos.x].type == WALL
+		|| map->grid[(int)(target_pos.y + PLAYER_SIZE)]
+		[(int) target_pos.x].type == CLOSED_DOOR)
 		target_pos.y = (int)(target_pos.y + PLAYER_SIZE) - PLAYER_SIZE;
 	else if (map->grid[(int)(target_pos.y - PLAYER_SIZE)]
-		[(int) target_pos.x].type == WALL)
+		[(int) target_pos.x].type == WALL
+		|| map->grid[(int)(target_pos.y - PLAYER_SIZE)]
+		[(int) target_pos.x].type == CLOSED_DOOR)
 		target_pos.y = (int) target_pos.y + PLAYER_SIZE;
 	return (target_pos);
 }

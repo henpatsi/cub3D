@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/09 12:23:03 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/10 11:30:01 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,13 +108,12 @@ typedef struct s_ray_data
 
 typedef struct s_hitinfo
 {
-	double		distance;
-	double		x;
-	double		y;
-	t_wall_side	side;
-	double		side_ratio;
-	bool		hit_wall;
-	bool		hit_closed_door;
+	double			distance;
+	double			x;
+	double			y;
+	t_wall_side		side;
+	double			side_ratio;
+	t_gridpos_type	hit_type;
 }	t_hitinfo;
 
 typedef struct s_textures
