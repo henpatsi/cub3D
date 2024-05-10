@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 11:56:33 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/10 09:24:00 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/10 09:47:18 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,19 @@ int	check_valid_color(char **color_split)
 	int	b;
 
 	if (color_split[0] == 0 || color_split[1] == 0 || color_split[2] == 0)
-		return (return_error("Color config rgb incomplete"));
+		return (return_error("Error\nColor config rgb incomplete"));
 	if (color_split[3] != 0)
-		return (return_error("Color config rgb has extra values"));
+		return (return_error("Error\nColor config rgb has extra values"));
+	if (!ft_stristype(color_split[0], ft_isdigit)
+		|| !ft_stristype(color_split[1], ft_isdigit)
+		|| !ft_stristype(color_split[2], ft_isdigit))
+		return (return_error("Error\nrgb values can only contain digits"));
 	r = ft_atoi(color_split[0]);
-	if (!ft_stristype(color_split[0], ft_isdigit) || r > 255)
-		return (return_error("rgb values must be between 0 and 255"));
 	g = ft_atoi(color_split[1]);
-	if (!ft_stristype(color_split[1], ft_isdigit) || g > 255)
-		return (return_error("rgb values must be between 0 and 255"));
 	b = ft_atoi(color_split[2]);
-	if (!ft_stristype(color_split[2], ft_isdigit) || b > 255)
-		return (return_error("rgb values must be between 0 and 255"));
+	if (r > 255 || g > 255 || b > 255 || ft_strlen(color_split[0]) > 3
+		|| ft_strlen(color_split[1]) > 3 || ft_strlen(color_split[2]) > 3)
+		return (return_error("Error\nrgb values must be between 0 and 255"));
 	return (1);
 }
 
@@ -40,7 +41,7 @@ int	init_color(t_map *map, char **split_line)
 	char		**color_split;
 
 	if (split_line[1] == 0)
-		return (return_error("Color config missing rgb"));
+		return (return_error("Error\nColor config missing rgb"));
 	split_line[1][ft_strlen(split_line[1]) - 1] = 0;
 	color_split = ft_split(split_line[1], ',');
 	if (color_split == 0)
@@ -71,7 +72,7 @@ int	init_wall_texture(t_map *map, char **split_line)
 	split_line[1][ft_strlen(split_line[1]) - 1] = 0;
 	texture = mlx_load_png(split_line[1]);
 	if (texture == 0)
-		return (-1);
+		return (return_error("Check that path to texture is valid"));
 	if (ft_strcmp(split_line[0], "NO") == 0)
 		map->textures.north = texture;
 	if (ft_strcmp(split_line[0], "SO") == 0)
