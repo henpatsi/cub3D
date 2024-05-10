@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/10 12:43:30 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/10 16:07:27 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ typedef struct s_hitinfo
 	t_wall_side		side;
 	double			side_ratio;
 	t_gridpos_type	hit_type;
+	bool			hit_open_door;
 }	t_hitinfo;
 
 typedef struct s_textures
@@ -276,7 +277,8 @@ mlx_texture_t	*get_hit_texture(t_map *map, t_hitinfo hit);
 int		grid_raycast(t_hitinfo *hit, t_map *map, t_vector origin, t_vector direction);
 
 // doors
-bool	next_to_door(t_map *map);
+void	toggle_door_state(t_map *map, int y, int x);
+bool	next_to_door(t_map *map, t_gridpos *door_gridpos);
 
 /* HELPERS */
 
