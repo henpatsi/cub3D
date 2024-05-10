@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 11:54:33 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/09 10:22:36 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/10 16:53:04 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,4 @@ void	free_all(t_map *map)
 	free_grid(map->minimap.pixel_grid);
 	free_textures(map->textures);
 	free_animation(&map->animation);
-	// free(map->doors);
 }

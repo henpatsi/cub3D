@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 11:56:33 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/09 10:22:19 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/10 16:52:49 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ int	load_config(t_map *map, int map_fd)
 		}
 		config_count++;
 	}
-	map->textures.closed_door = mlx_load_png("textures/door/door_1.png");
+	map->textures.closed_door = mlx_load_png("textures/door/door.png");
 	map->textures.door_sides = mlx_load_png("textures/door/door_sides.png");
 	return (1);
 }

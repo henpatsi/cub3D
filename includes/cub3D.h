@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/10 16:07:27 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/10 17:01:57 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@
 # define PAD 15
 
 # define BLACK 0x000000ff
-# define MAGENTA 0xff00ffff
+# define ORANGE 0xffa500ff
 # define GREY 0x555555ff
-# define BLUE 0x0000ffff
+# define BLUE 0x6495efff
 
 // animation parameters
 # define ANIM_DELAY 0.05

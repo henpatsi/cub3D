@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 18:24:39 by ixu               #+#    #+#             */
-/*   Updated: 2024/04/28 18:33:18 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/10 16:59:15 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	draw_line(t_vector v1, t_vector v2, mlx_image_t *image)
 	current.y = v1.y;
 	while ((int)(v2.x - current.x) || (int)(v2.y - current.y))
 	{
-		mlx_put_pixel(image, (int)current.x, (int)current.y, MAGENTA);
+		mlx_put_pixel(image, (int)current.x, (int)current.y, ORANGE);
 		current.x = current.x + x_steps;
 		current.y = current.y + y_steps;
 	}
