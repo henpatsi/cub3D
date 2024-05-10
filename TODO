@@ -1,6 +1,6 @@
 General:
-	☐ Check leaks on error in load map
-	☐ Check that all possible errors handle in load map
+	✔ Check leaks on error in load map @done(24-05-10 13:12)
+	✔ Check that all possible errors handle in load map @done(24-05-10 13:12)
 	✔ Add sprite animation @done(24-05-07 12:10)
 	☐ Add doors
 
