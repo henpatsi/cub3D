@@ -6,7 +6,7 @@
 #    By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/22 08:30:50 by hpatsi            #+#    #+#              #
-#    Updated: 2024/05/08 09:23:50 by hpatsi           ###   ########.fr        #
+#    Updated: 2024/05/10 09:54:04 by hpatsi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -111,3 +111,6 @@ fclean: clean
 	rm -rf $(MLX42_DIR)
 
 re: fclean all
+
+leaks: all
+	leaks -q --atExit -- ./cub3D maps/map0.cub
