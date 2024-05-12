@@ -6,24 +6,11 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 11:54:33 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/10 16:53:04 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/12 17:29:52 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-void	free_strs(char **strs)
-{
-	int	i;
-
-	i = 0;
-	while (strs[i] != 0)
-	{
-		free(strs[i]);
-		i++;
-	}
-	free(strs);
-}
 
 void	free_grid(t_gridpos **grid)
 {

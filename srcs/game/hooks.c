@@ -6,31 +6,36 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 14:59:30 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/12 16:42:22 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/12 17:13:28 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	keyboard_input_hook(void *param)
+void	movement_hook(void *param)
 {
-	t_map	*map;
+	t_map		*map;
+	t_vector	movement_input;
+	double		rotate_amount;
 
 	map = (t_map *) param;
+	ft_bzero(&movement_input, sizeof(t_vector));
+	rotate_amount = 0.0;
 	if (mlx_is_key_down(map->mlx, MLX_KEY_W))
-		move_player(map, 1, 0);
+		movement_input.y += 1;
 	if (mlx_is_key_down(map->mlx, MLX_KEY_S))
-		move_player(map, -1, 0);
+		movement_input.y -= 1;
 	if (mlx_is_key_down(map->mlx, MLX_KEY_D))
-		move_player(map, 0, 1);
+		movement_input.x += 1;
 	if (mlx_is_key_down(map->mlx, MLX_KEY_A))
-		move_player(map, 0, -1);
+		movement_input.x -= 1;
 	if (mlx_is_key_down(map->mlx, MLX_KEY_RIGHT))
-		rotate_player(map, 1);
+		rotate_amount += 1;
 	if (mlx_is_key_down(map->mlx, MLX_KEY_LEFT))
-		rotate_player(map, -1);
-	if (mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(map->mlx);
+		rotate_amount -= 1;
+	normalize_vector(&movement_input);
+	move_player(map, movement_input.y, movement_input.x);
+	rotate_player(map, rotate_amount);
 }
 
 void	key_hook(mlx_key_data_t keydata, void *param)
@@ -42,6 +47,8 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		map->animation.active = 1;
 	if (keydata.key == MLX_KEY_Q && keydata.action == MLX_PRESS)
 		handle_door_actions(map);
+	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+		mlx_close_window(map->mlx);
 }
 
 void	cursor_input_hook(double xpos, double ypos, void *param)

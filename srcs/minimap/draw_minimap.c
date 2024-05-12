@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:28:58 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/08 22:02:32 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/12 18:14:45 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,55 +48,50 @@ static void	draw_player(t_map *map)
 	draw_line(vec_back_right, vec_front_middle, map->canvas);
 }
 
-static bool	is_drawable(int x, int y, int move_x, int move_y)
+static bool	is_drawable(int x, int y, int shift_x, int shift_y)
 {
-	if (x >= move_x + 0.5 * SCALE && x <= D * SCALE * 2 + move_x + 0.5 * SCALE
-		&& y >= move_y + 0.5 * SCALE
-		&& y <= D * SCALE * 2 + move_y + 0.5 * SCALE)
+	if (x >= shift_x + 0.5 * SCALE && x <= D * SCALE * 2 + shift_x + 0.5 * SCALE
+		&& y >= shift_y + 0.5 * SCALE
+		&& y <= D * SCALE * 2 + shift_y + 0.5 * SCALE)
 		return (true);
 	else
 		return (false);
 }
 
+static void	draw_pixel(t_gridpos px, t_map *map, int shift_x, int shift_y)
+{
+	int	new_x;
+	int	new_y;
+
+	new_x = px.x + PAD - shift_x;
+	new_y = px.y + PAD - shift_y;
+	if ((px.type == EMPTY || px.type == PLAYER || px.type == OPEN_DOOR)
+		&& is_drawable(px.x, px.y, shift_x, shift_y))
+		mlx_put_pixel(map->canvas, new_x, new_y, BLACK);
+	else if (px.type == WALL && is_drawable(px.x, px.y, shift_x, shift_y))
+		mlx_put_pixel(map->canvas, new_x, new_y, GREY);
+	else if (px.type == CLOSED_DOOR
+		&& is_drawable(px.x, px.y, shift_x, shift_y))
+		mlx_put_pixel(map->canvas, new_x, new_y, BLUE);
+}
+
 void	draw_minimap(t_map *map)
 {
-	int			x;
-	int			y;
-	int			move_x;
-	int			move_y;
-	mlx_image_t *img;
+	t_gridpos	px;
+	int			shift_x;
+	int			shift_y;
 
-	img = map->canvas;
-	move_x = (map->player.x - floor(map->player.x) - 0.5) * SCALE;
-	move_y = (map->player.y - floor(map->player.y) - 0.5) * SCALE;
-	y = -1;
-	while (++y < map->minimap.pixel_grid_len)
+	shift_x = (map->player.x - floor(map->player.x) - 0.5) * SCALE;
+	shift_y = (map->player.y - floor(map->player.y) - 0.5) * SCALE;
+	px.y = -1;
+	while (++px.y < map->minimap.pixel_grid_len)
 	{
-		x = -1;
-		while (++x < map->minimap.pixel_grid_len)
+		px.x = -1;
+		while (++px.x < map->minimap.pixel_grid_len)
 		{
-			if ((map->minimap.pixel_grid[y][x].type == EMPTY
-				|| map->minimap.pixel_grid[y][x].type == PLAYER)
-				&& is_drawable(x, y, move_x, move_y))
-				mlx_put_pixel(img, x + PAD - move_x, y + PAD - move_y, BLACK);
-			else if (map->minimap.pixel_grid[y][x].type == WALL
-				&& is_drawable(x, y, move_x, move_y))
-				mlx_put_pixel(img, x + PAD - move_x, y + PAD - move_y, GREY);
-			else if (map->minimap.pixel_grid[y][x].type == CLOSED_DOOR
-				&& is_drawable(x, y, move_x, move_y))
-				mlx_put_pixel(img, x + PAD - move_x, y + PAD - move_y, BLUE);
-			else if (map->minimap.pixel_grid[y][x].type == OPEN_DOOR 
-				&& is_drawable(x, y, move_x, move_y))
-				mlx_put_pixel(img, x + PAD - move_x, y + PAD - move_y, BLACK);
+			px.type = map->minimap.pixel_grid[px.y][px.x].type;
+			draw_pixel(px, map, shift_x, shift_y);
 		}
 	}
 	draw_player(map);
-}
-
-void	update_minimap(t_map *map)
-{
-	reset_minimap(&map->minimap);
-	load_minimap_grid(map);
-	load_pixel_grid(&map->minimap);
-	draw_minimap(map);
 }

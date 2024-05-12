@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 14:19:17 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/08 21:52:02 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/12 17:13:49 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ int	load_grid(t_map *map, int map_fd)
 		line = get_next_line(map_fd);
 		if (line == 0)
 		{
-			free(line);
 			free_grid(map->grid);
 			return (return_error("Failed to read map"));
 		}

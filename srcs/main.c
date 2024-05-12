@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:54:42 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/09 12:23:04 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/12 17:14:21 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	run_game(t_map *map)
 {
 	mlx_cursor_hook(map->mlx, cursor_input_hook, map);
 	mlx_key_hook(map->mlx, key_hook, map);
-	if (!mlx_loop_hook(map->mlx, keyboard_input_hook, map))
+	if (!mlx_loop_hook(map->mlx, movement_hook, map))
 		return (1);
 	if (!mlx_loop_hook(map->mlx, update_visuals_hook, map))
 		return (1);

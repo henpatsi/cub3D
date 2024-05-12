@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/12 16:42:38 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/12 18:19:51 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define WIN_HEIGHT 1024
 
 # define PI 3.141592654
+# define NORMALIZE_VALUE 0.7071
 
 # define MOVE_SPEED 3
 # define ROTATE_SPEED 200
@@ -57,7 +58,7 @@
 # define ANIM_FRAME_3 "textures/sprite_animations/gun/gun_4.png"
 # define ANIM_FRAME_4 "textures/sprite_animations/gun/gun_5.png"
 
-# define DEBUG_MODE 1
+# define DEBUG_MODE 0
 
 // ENUMS
 
@@ -224,8 +225,8 @@ int		load_animations(mlx_t *mlx, t_anim	*animation);
 // init_minimap
 int		init_minimap(t_map *map);
 
-// reset_minimap
-void	reset_minimap(t_minimap* minimap);
+// update_minimap
+void	update_minimap(t_map *map);
 
 // load_minimap
 void	load_minimap_grid(t_map *map);
@@ -245,14 +246,16 @@ void	draw_line(t_vector v1, t_vector v2, mlx_image_t *image);
 /* GAME */
 
 // hooks
-void	keyboard_input_hook(void *param);
+void	movement_hook(void *param);
 void	key_hook(mlx_key_data_t keydata, void* param);
 void	cursor_input_hook(double xpos, double ypos, void *param);
 void	update_visuals_hook(void *param);
 void	animation_hook(void *param);
 
+void	normalize_vector(t_vector	*vector);
+
 // movement
-void	move_player(t_map *map, int forward, int right);
+void	move_player(t_map *map, double forward, double right);
 void	rotate_player(t_map *map, double amount);
 
 // visuals
@@ -277,7 +280,6 @@ int		return_error(char *message);
 int		exit_error(char *message);
 
 // free
-void	free_strs(char **strs);
 void	free_grid(t_gridpos **grid);
 void	free_initial_grid(char **grid);
 void	free_textures(t_textures textures);

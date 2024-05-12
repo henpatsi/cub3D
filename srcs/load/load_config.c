@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 11:56:33 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/10 16:52:49 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/12 17:44:10 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,19 @@ int	check_valid_color(char **color_split)
 	int	b;
 
 	if (color_split[0] == 0 || color_split[1] == 0 || color_split[2] == 0)
-		return (return_error("Color config rgb incomplete"));
+		return (return_error("Error\nColor config rgb incomplete"));
 	if (color_split[3] != 0)
-		return (return_error("Color config rgb has extra values"));
+		return (return_error("Error\nColor config rgb has extra values"));
+	if (!ft_stristype(color_split[0], ft_isdigit)
+		|| !ft_stristype(color_split[1], ft_isdigit)
+		|| !ft_stristype(color_split[2], ft_isdigit))
+		return (return_error("Error\nrgb values can only contain digits"));
 	r = ft_atoi(color_split[0]);
-	if (r < 0 || r > 255)
-		return (return_error("rgb values must be between 0 and 255"));
 	g = ft_atoi(color_split[1]);
-	if (g < 0 || g > 255)
-		return (return_error("rgb values must be between 0 and 255"));
 	b = ft_atoi(color_split[2]);
-	if (b < 0 || b > 255)
-		return (return_error("rgb values must be between 0 and 255"));
+	if (r > 255 || g > 255 || b > 255 || ft_strlen(color_split[0]) > 3
+		|| ft_strlen(color_split[1]) > 3 || ft_strlen(color_split[2]) > 3)
+		return (return_error("Error\nrgb values must be between 0 and 255"));
 	return (1);
 }
 
@@ -39,15 +40,15 @@ int	init_color(t_map *map, char **split_line)
 	uint32_t	color;
 	char		**color_split;
 
-	if (split_line[1] == 0)
-		return (return_error("Color config missing rgb"));
+	if (split_line[1] == 0 || ft_strlen(split_line[1]) == 0)
+		return (return_error("Error\nColor config missing rgb"));
 	split_line[1][ft_strlen(split_line[1]) - 1] = 0;
 	color_split = ft_split(split_line[1], ',');
 	if (color_split == 0)
-		return (return_error("Failed to read color config"));
+		return (return_error("Failed to split rgb"));
 	if (check_valid_color(color_split) == -1)
 	{
-		free_strs(color_split);
+		ft_freestrs(color_split);
 		return (-1);
 	}
 	color = ft_atoi(color_split[0]);
@@ -58,7 +59,7 @@ int	init_color(t_map *map, char **split_line)
 		map->floor_color = color;
 	if (ft_strcmp(split_line[0], "C") == 0)
 		map->ceiling_color = color;
-	free_strs(color_split);
+	ft_freestrs(color_split);
 	return (1);
 }
 
@@ -66,12 +67,12 @@ int	init_wall_texture(t_map *map, char **split_line)
 {
 	mlx_texture_t	*texture;
 
-	if (split_line[1] == 0)
-		return (return_error("Failed to read texture config"));
+	if (split_line[1] == 0 || ft_strlen(split_line[1]) == 0)
+		return (return_error("Error\nTexture config missing path"));
 	split_line[1][ft_strlen(split_line[1]) - 1] = 0;
 	texture = mlx_load_png(split_line[1]);
 	if (texture == 0)
-		return (-1);
+		return (return_error("Check that path to texture is valid"));
 	if (ft_strcmp(split_line[0], "NO") == 0)
 		map->textures.north = texture;
 	if (ft_strcmp(split_line[0], "SO") == 0)
@@ -95,7 +96,7 @@ char	**read_split_line(int map_fd)
 	free(line);
 	if (split_line[0] == 0)
 	{
-		free_strs(split_line);
+		ft_freestrs(split_line);
 		return (0);
 	}
 	return (split_line);
@@ -112,28 +113,19 @@ int	load_config(t_map *map, int map_fd)
 	{
 		split = read_split_line(map_fd);
 		if (split == 0)
-		{
-			free_textures(map->textures);
-			return (return_error("Failed to read config"));
-		}
+			return (return_error("Failed to read config line"));
 		if (ft_strcmp(split[0], "\n") == 0)
-		{
-			free_strs(split);
-			continue ;
-		}
-		if (ft_strcmp(split[0], "F") == 0 || ft_strcmp(split[0], "C") == 0)
+			ret = 2;
+		else if (ft_strcmp(split[0], "F") == 0 || ft_strcmp(split[0], "C") == 0)
 			ret = init_color(map, split);
 		else
 			ret = init_wall_texture(map, split);
-		free_strs(split);
-		if (ret == -1)
-		{
-			free_textures(map->textures);
+		ft_freestrs(split);
+		if (ret == 2)
+			continue ;
+		else if (ret == -1)
 			return (-1);
-		}
 		config_count++;
 	}
-	map->textures.closed_door = mlx_load_png("textures/door/door.png");
-	map->textures.door_sides = mlx_load_png("textures/door/door_sides.png");
 	return (1);
 }

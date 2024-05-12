@@ -6,7 +6,7 @@
 #    By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/22 08:30:50 by hpatsi            #+#    #+#              #
-#    Updated: 2024/05/09 10:23:16 by ixu              ###   ########.fr        #
+#    Updated: 2024/05/12 18:18:17 by ixu              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,13 +36,13 @@ VALIDATE_FILES_MANDATORY = validate_map validate_map_utils
 
 VALIDATE_FILES_BONUS = validate_map_bonus validate_map_utils_bonus
 
-MINIMAP_FILES = init_minimap reset_minimap load_minimap print_minimap \
+MINIMAP_FILES = init_minimap update_minimap load_minimap print_minimap \
 				draw_minimap draw_minimap_utils
 
 LOAD_FILES = load_map load_config load_grid load_animations
 
-GAME_FILES = hooks movement visuals draw_environment draw_environment_helpers \
-				raycast door
+GAME_FILES = hooks hook_helpers movement visuals draw_environment \
+				draw_environment_helpers raycast door
 
 ALL_SRC_FILES = $(addsuffix .c, $(SOURCE_FILES) $(VALIDATE_FILES_COMMON) \
 				$(VALIDATE_FILES_MANDATORY) $(LOAD_FILES) $(GAME_FILES) $(MINIMAP_FILES))
@@ -131,4 +131,7 @@ fclean: clean
 	rm -f $(NAME)
 	rm -rf $(MLX42_DIR)
 
-re: fclean bonus
+re: fclean all
+
+leaks: all
+	leaks -q --atExit -- ./cub3D maps/map0.cub

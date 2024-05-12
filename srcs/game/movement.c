@@ -6,13 +6,13 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 09:45:59 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/10 11:28:00 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/12 17:13:37 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-t_vector	get_target_position(t_map *map, int forward, int right)
+t_vector	get_target_position(t_map *map, double forward, double right)
 {
 	t_vector	target_pos;
 
@@ -74,10 +74,12 @@ t_vector	apply_player_size(t_map *map, t_vector target_pos)
 	return (target_pos);
 }
 
-void	move_player(t_map *map, int forward, int right)
+void	move_player(t_map *map, double forward, double right)
 {
 	t_vector	target_pos;
 
+	if (forward == 0 && right == 0)
+		return ;
 	target_pos = get_target_position(map, forward, right);
 	if (target_pos.x < 0 || target_pos.x >= map->width
 		|| target_pos.y < 0 || target_pos.y >= map->height)
@@ -93,6 +95,8 @@ void	rotate_player(t_map *map, double amount)
 	double	rotation;
 	double	rotation_rad;
 
+	if (amount == 0)
+		return ;
 	rotation = map->player.x_rotation
 		+ (amount * map->mlx->delta_time * ROTATE_SPEED);
 	if (rotation > 360)
