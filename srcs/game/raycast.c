@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 13:05:12 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/10 16:07:28 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/12 16:50:51 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,20 +83,10 @@ int	grid_raycast(t_hitinfo *hit, t_map *map, t_vector origin, t_vector dir)
 	init_raydata(&raydata, origin, dir);
 	while (get_next_edge(hit, map, dir, &raydata))
 	{
-		if (map->grid[raydata.grid_y][raydata.grid_x].type == WALL)
+		if (map->grid[raydata.grid_y][raydata.grid_x].type == WALL
+			|| map->grid[raydata.grid_y][raydata.grid_x].type == CLOSED_DOOR)
 		{
-			hit->hit_type = WALL;
-			hit->x = origin.x + hit->distance * dir.x;
-			hit->y = origin.y + hit->distance * dir.y;
-			if (hit->side == NORTH || hit->side == SOUTH)
-				hit->side_ratio = hit->x - floor(hit->x);
-			else
-				hit->side_ratio = hit->y - floor(hit->y);
-			return (1);
-		}
-		else if (map->grid[raydata.grid_y][raydata.grid_x].type == CLOSED_DOOR)
-		{
-			hit->hit_type = CLOSED_DOOR;
+			hit->hit_type = map->grid[raydata.grid_y][raydata.grid_x].type;
 			hit->x = origin.x + hit->distance * dir.x;
 			hit->y = origin.y + hit->distance * dir.y;
 			if (hit->side == NORTH || hit->side == SOUTH)

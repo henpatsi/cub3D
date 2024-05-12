@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/10 17:01:57 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/12 16:42:38 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,13 +169,6 @@ typedef struct s_draw_line_info
 	int			height;
 }	t_draw_line_info;
 
-// typedef struct s_door
-// {
-// 	int		x;
-// 	int		y;
-// 	bool	door_open;
-// }	t_door;
-
 typedef struct s_map
 {
 	int			width;
@@ -188,8 +181,6 @@ typedef struct s_map
 	t_player	player;
 	t_minimap	minimap;
 	t_anim		animation;
-	// int			door_count;
-	// t_door		*doors;
 	mlx_t		*mlx;
 }	t_map;
 
@@ -276,9 +267,8 @@ mlx_texture_t	*get_hit_texture(t_map *map, t_hitinfo hit);
 // raycast
 int		grid_raycast(t_hitinfo *hit, t_map *map, t_vector origin, t_vector direction);
 
-// doors
-void	toggle_door_state(t_map *map, int y, int x);
-bool	next_to_door(t_map *map, t_gridpos *door_gridpos);
+// door
+void	handle_door_actions(t_map *map);
 
 /* HELPERS */
 
