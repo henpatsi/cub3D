@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 10:17:11 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/10 12:25:06 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/12 17:44:17 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,7 @@ int	load_map(t_map *map, char *map_filename)
 		exit(1);
 	}
 	close(map_fd);
+	map->textures.closed_door = mlx_load_png("textures/door/door.png");
+	map->textures.door_sides = mlx_load_png("textures/door/door_sides.png");
 	return (1);
 }

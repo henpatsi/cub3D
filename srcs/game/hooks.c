@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 14:59:30 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/10 14:45:49 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/12 17:13:28 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	map = (t_map *) param;
 	if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS)
 		map->animation.active = 1;
+	if (keydata.key == MLX_KEY_Q && keydata.action == MLX_PRESS)
+		handle_door_actions(map);
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		mlx_close_window(map->mlx);
 }
@@ -70,7 +72,7 @@ void	update_visuals_hook(void *param)
 		&& map->player.x_rotation == old_rot)
 		return ;
 	update_visuals(map);
-	reload_and_draw_minimap(map, map->canvas);
+	update_minimap(map);
 	old_pos.x = map->player.x;
 	old_pos.y = map->player.y;
 	old_rot = map->player.x_rotation;

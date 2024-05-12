@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_animations.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:25:18 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/07 12:30:54 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/08 18:27:09 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ int	init_anim_canvas(mlx_t *mlx, t_anim	*animation)
 	return (0);
 }
 
-int	load_animations(mlx_t *mlx, t_anim	*animation)
+int	load_animations(mlx_t *mlx, t_anim *animation)
 {
-	animation->images = ft_calloc(FRAME_COUNT, sizeof(mlx_image_t *));
+	animation->images = ft_calloc(FRAME_COUNT, sizeof(mlx_image_t *)); // malloc error
 	animation->images[0] = image_from_png(mlx, ANIM_FRAME_0);
 	animation->images[1] = image_from_png(mlx, ANIM_FRAME_1);
 	animation->images[2] = image_from_png(mlx, ANIM_FRAME_2);

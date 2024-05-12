@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:51:02 by ixu               #+#    #+#             */
-/*   Updated: 2024/04/29 13:50:39 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/08 22:01:31 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static void	print_minimap_grid(t_gridpos **grid, int len)
 				ft_printf("%c", '#');
 			else if (grid[y][x].type == EMPTY)
 				ft_printf("%c", '.');
+			else if (grid[y][x].type == CLOSED_DOOR)
+				ft_printf("%c", 'D');
 			else if (grid[y][x].type == PLAYER)
 				ft_printf("%c", 'P');
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/10 14:46:41 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/12 18:19:51 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,8 @@
 # include "libft.h"
 # include "MLX42.h"
 
-// exit, EXIT_FAILURE
-# include <stdlib.h>
-
 # define WIN_WIDTH 1024
 # define WIN_HEIGHT 1024
-# define IMG_WIDTH 1024
-# define IMG_HEIGHT 1024
 
 # define PI 3.141592654
 # define NORMALIZE_VALUE 0.7071
@@ -49,8 +44,9 @@
 # define PAD 15
 
 # define BLACK 0x000000ff
-# define MAGENTA 0xff00ffff
+# define ORANGE 0xffa500ff
 # define GREY 0x555555ff
+# define BLUE 0x6495efff
 
 // animation parameters
 # define ANIM_DELAY 0.05
@@ -62,7 +58,7 @@
 # define ANIM_FRAME_3 "textures/sprite_animations/gun/gun_4.png"
 # define ANIM_FRAME_4 "textures/sprite_animations/gun/gun_5.png"
 
-# define DEBUG_MODE 1
+# define DEBUG_MODE 0
 
 // ENUMS
 
@@ -88,6 +84,8 @@ typedef enum e_gridpos_type
 {
 	EMPTY,
 	WALL,
+	CLOSED_DOOR,
+	OPEN_DOOR,
 	PLAYER
 }	t_gridpos_type;
 
@@ -111,12 +109,13 @@ typedef struct s_ray_data
 
 typedef struct s_hitinfo
 {
-	double		distance;
-	double		x;
-	double		y;
-	t_wall_side	side;
-	double		side_ratio;
-	bool		hit;
+	double			distance;
+	double			x;
+	double			y;
+	t_wall_side		side;
+	double			side_ratio;
+	t_gridpos_type	hit_type;
+	bool			hit_open_door;
 }	t_hitinfo;
 
 typedef struct s_textures
@@ -125,6 +124,8 @@ typedef struct s_textures
 	mlx_texture_t *south;
 	mlx_texture_t *east;
 	mlx_texture_t *west;
+	mlx_texture_t *closed_door;
+	mlx_texture_t *door_sides;
 }	t_textures;
 
 typedef struct s_gridpos
@@ -185,23 +186,27 @@ typedef struct s_map
 }	t_map;
 
 /* VALIDATE */
-// validate.c
+
+// validate
 void	validate_input(int argc, char **argv, t_map *map);
-// validate_utils.c
+
+// validate_utils
 void	validate_non_map_elements(char *line, int *flags);
 bool	map_started(int flags);
 void	get_map_dimensions(char *line, t_map *map);
-// grid_init.c
+
+// grid_init
 char	**grid_init(char *file, t_map *map, int map_start_line);
-// validate_map.c
+
+// validate_map
 void	validate_map(char **grid, t_map *map);
-// validate_map_utils.c
-bool	is_closed(int r, int c, t_map *map, char **grid);
+
+// validate_map_utils
+bool	is_closed(int row, int col, t_map *map, char **grid);
+void	check_door_position(int r, int c, t_map *map, char **grid);
 void	flood_fill(char **grid, t_map *map, int row, int col);
-// validate_free.c
-void	free_arr(char **arr);
-void	free_initial_grid(char **grid);
-// validate_error.c
+
+// validate_error
 void	non_map_error(char *line, char **split_line);
 void	map_error(char *message, char **grid);
 void	perror_and_exit(char *message);
@@ -216,19 +221,25 @@ int		load_grid(t_map *map, int map_fd);
 int		load_animations(mlx_t *mlx, t_anim	*animation);
 
 /* MINIMAP */
-// init_minimap.c
+
+// init_minimap
 int		init_minimap(t_map *map);
-// reset_minimap.c
-void	reset_minimap(t_minimap* minimap);
-// load_minimap.c
+
+// update_minimap
+void	update_minimap(t_map *map);
+
+// load_minimap
 void	load_minimap_grid(t_map *map);
 void	load_pixel_grid(t_minimap *minimap);
-// print_minimap.c
+
+// print_minimap
 void	print_minimap(t_minimap *minimap, bool scaled_up);
-// draw_minimap.c
-void	draw_minimap(t_map *map, mlx_image_t *image);
-void	reload_and_draw_minimap(t_map *map, mlx_image_t *image);
-// draw_minimap_utils.c
+
+// draw_minimap
+void	draw_minimap(t_map *map);
+void	update_minimap(t_map *map);
+
+// draw_minimap_utils
 double	deg_to_rad(double degrees);
 void	draw_line(t_vector v1, t_vector v2, mlx_image_t *image);
 
@@ -259,6 +270,9 @@ mlx_texture_t	*get_hit_texture(t_map *map, t_hitinfo hit);
 // raycast
 int		grid_raycast(t_hitinfo *hit, t_map *map, t_vector origin, t_vector direction);
 
+// door
+void	handle_door_actions(t_map *map);
+
 /* HELPERS */
 
 // error
@@ -267,6 +281,7 @@ int		exit_error(char *message);
 
 // free
 void	free_grid(t_gridpos **grid);
+void	free_initial_grid(char **grid);
 void	free_textures(t_textures textures);
 void	free_all(t_map *map);
 

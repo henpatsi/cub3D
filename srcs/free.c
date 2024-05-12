@@ -3,27 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 11:54:33 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/08 10:27:25 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/12 17:29:52 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-void	free_strs(char **strs)
-{
-	int	i;
-
-	i = 0;
-	while (strs[i] != 0)
-	{
-		free(strs[i]);
-		i++;
-	}
-	free(strs);
-}
 
 void	free_grid(t_gridpos **grid)
 {
@@ -38,6 +25,19 @@ void	free_grid(t_gridpos **grid)
 	free(grid);
 }
 
+void	free_initial_grid(char **grid)
+{
+	int	row;
+
+	row = 0;
+	while (grid[row] != NULL)
+	{
+		free(grid[row]);
+		row++;
+	}
+	free(grid);
+}
+
 void	free_textures(t_textures textures)
 {
 	if (textures.north)
@@ -48,6 +48,10 @@ void	free_textures(t_textures textures)
 		mlx_delete_texture(textures.east);
 	if (textures.west)
 		mlx_delete_texture(textures.west);
+	if (textures.closed_door)
+		mlx_delete_texture(textures.closed_door);
+	if (textures.door_sides)
+		mlx_delete_texture(textures.door_sides);
 }
 
 void	free_animation(t_anim *animation)

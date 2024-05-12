@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:48:51 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/04 20:18:38 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/08 20:49:05 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,6 @@ int	init_minimap(t_map *map)
 		return (-1);
 	if (create_minimap_pixel_grid(&map->minimap) == -1)
 		return (-1);
-	draw_minimap(map, map->canvas);
+	draw_minimap(map);
 	return (0);
 }

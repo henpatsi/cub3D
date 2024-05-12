@@ -2,7 +2,9 @@ General:
 	✔ Check leaks on error in load map @done(24-05-10 13:12)
 	✔ Check that all possible errors handle in load map @done(24-05-10 13:12)
 	✔ Add sprite animation @done(24-05-07 12:10)
-	☐ Add doors
+	✔ Add doors @done(24-05-12 17:00)
+	☐ Check if all malloc() calls are protected, e.g. in load_animations.c, ft_calloc() return to be checked
+	☐ Check the work against norm errors except for MLX42 library, some small fixes to be done with libft
 
 Improvements:
 	✔ Fix stuck on walls when diagonal towards wall @done(24-04-30 09:27)
