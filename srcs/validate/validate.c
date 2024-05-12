@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 12:27:31 by ixu               #+#    #+#             */
-/*   Updated: 2024/04/30 17:28:57 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/12 22:54:20 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,51 +19,45 @@ static void	validate_file_extension(char *file)
 
 	filename = ft_strdup(file);
 	if (filename == NULL)
-	{
-		ft_putendl_fd("malloc() error", 2);
-		exit(EXIT_FAILURE);
-	}
+		put_error_and_exit("malloc() error\n");
 	extension = ft_strdup(".cub");
 	if (extension == NULL)
-	{
-		ft_putendl_fd("malloc() error", 2);
-		exit(EXIT_FAILURE);
-	}
+		put_error_and_exit("malloc() error\n");
 	if (ft_strcmp(filename + ft_strlen(filename) - 4, extension) != 0)
 	{
 		free(filename);
 		free(extension);
-		ft_putendl_fd("Invalid file extension", 2);
-		ft_putendl_fd("Usage: ./cub3D path_to_file.cub", 1);
+		ft_putstr_fd("Error\n", 2);
+		ft_putstr_fd("Invalid file extension\n", 2);
+		ft_putstr_fd("Usage: ./cub3D path_to_file.cub\n", 1);
 		exit(EXIT_FAILURE);
 	}
 	free(filename);
 	free(extension);
 }
 
-static int	parse_file(int fd, t_map *map, int *flags)
+static int	parse_file(int fd, t_map *map, int *config_flag, bool *map_started)
 {
 	int		last_line_before_map;
 	char	*line;
 
-	// int line_nbr = 0;
 	last_line_before_map = 0;
 	while (1)
 	{
 		line = get_next_line(fd);
-		// line_nbr++;
 		if (line == NULL)
 			break ;
-		// printf("line %3d: %s", line_nbr, line);
-		if (!map_started(*flags))
+		if (!*map_started)
+			*map_started = check_if_map_started(*config_flag, line);
+		if (!*map_started)
 			last_line_before_map++;
-		if (*line == '\n' && !map_started(*flags))
+		if (*line == '\n' && !*map_started)
 		{
 			free(line);
 			continue ;
 		}
-		if (!map_started(*flags))
-			validate_non_map_elements(line, flags);
+		if (!*map_started)
+			validate_non_map_elements(line, config_flag);
 		else
 			get_map_dimensions(line, map);
 		free(line);
@@ -71,27 +65,41 @@ static int	parse_file(int fd, t_map *map, int *flags)
 	return (last_line_before_map + 1);
 }
 
-static void	print_grid(char **grid, t_map *map)
+void	print_missing_config(int config_flag)
 {
-	int	r;
-	int	c;
+	if ((config_flag & NO_FLAG) == 0)
+		printf("- North texture\n");
+	if ((config_flag & SO_FLAG) == 0)
+		printf("- South texture\n");
+	if ((config_flag & WE_FLAG) == 0)
+		printf("- West texture\n");
+	if ((config_flag & EA_FLAG) == 0)
+		printf("- East texture\n");
+	if ((config_flag & F_FLAG) == 0)
+		printf("- Floor color\n");
+	if ((config_flag & C_FLAG) == 0)
+		printf("- Ceiling color\n");
+}
 
-	ft_printf("map width: %d\n", map->width);
-	ft_printf("map height: %d\n", map->height);
-	r = -1;
-	while (++r < map->height)
+static void	check_missing_content(int map_start_line, int config_flag, \
+								bool map_started, t_map *map)
+{
+	bool	config_missing;
+
+	if (map_start_line == 1)
+		put_error_and_exit("Empty file\n");
+	config_missing = check_if_config_missing(config_flag);
+	if (config_missing || !map_started || map->width == 0)
+		ft_putstr_fd("Error\n", 2);
+	if (config_missing)
 	{
-		c = -1;
-		while (++c < map->width)
-		{
-			if (grid[r][c] == ' ')
-				ft_printf("%c", '-');
-			else
-				ft_printf("%c", grid[r][c]);
-		}
-		ft_printf("\n");
+		ft_putstr_fd("Missing config:\n", 2);
+		print_missing_config(config_flag);
 	}
-	ft_printf("\n");
+	if (!map_started || map->width == 0)
+		ft_putstr_fd("Missing map\n", 2);
+	if (config_missing || !map_started || map->width == 0)
+		exit(EXIT_FAILURE);
 }
 
 /*
@@ -107,7 +115,8 @@ static void	print_grid(char **grid, t_map *map)
 static void	validate_file_content(char *file, t_map *map)
 {
 	int		fd;
-	int		flags;
+	int		config_flag;
+	bool	map_started;
 	int		map_start_line;
 	char	**grid;
 
@@ -116,13 +125,12 @@ static void	validate_file_content(char *file, t_map *map)
 		perror_and_exit("open() error");
 	map->width = 0;
 	map->height = 0;
-	flags = 0;
-	map_start_line = parse_file(fd, map, &flags);
+	config_flag = 0;
+	map_started = false;
+	map_start_line = parse_file(fd, map, &config_flag, &map_started);
 	if (close(fd) == -1)
 		perror_and_exit("close() error");
-	if (map_start_line == 1 || !map_started(flags))
-		put_error_and_exit("Empty file, or file contains only newline \
-character, or error occurred when reading the file\n");
+	check_missing_content(map_start_line, config_flag, map_started, map);
 	grid = grid_init(file, map, map_start_line);
 	validate_map(grid, map);
 	if (DEBUG_MODE)
@@ -134,8 +142,9 @@ void	validate_input(int argc, char **argv, t_map *map)
 {
 	if (argc != 2)
 	{
-		ft_putendl_fd("Invalid number of arguments", 2);
-		ft_putendl_fd("Usage: ./cub3D path_to_file.cub", 1);
+		ft_putstr_fd("Error\n", 2);
+		ft_putstr_fd("Invalid number of arguments\n", 2);
+		ft_putstr_fd("Usage: ./cub3D path_to_file.cub\n", 1);
 		exit(EXIT_FAILURE);
 	}
 	validate_file_extension(argv[1]);

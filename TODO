@@ -19,13 +19,14 @@ Improvements:
 		✔ Prevent diagonal speed up by making simultaneous y and x moves scale to a single move @done(24-05-10 14:49)
 	☐ Error
 		☐ "Empty file, or file contains only newline character, or error occurred when reading the file"
-			☐ Could just be "Empty file" for empty file or nl file? (or "missing config" or "missing map")
+			✔ Could just be "Empty file" for empty file or nl file? (or "missing config" or "missing map") @done(24-05-12 21:22)
 			☐ Also printed when giving a directory as arg
-		☐ "Invalid element: 11111111" (on missing config line), could this be more clear what is missing or something like "incomplete config"?
-		☐ Map that is missing map prints "Map missing start position", maybe this could be more explicit that map is missing?
-		☐ Duplicate of a color "Map contains an invalid character" but duplicate of a texture prints "Invalid element: NO ./textures/north_texture.png"
+				- to be checked what can be done
+		✔ "Invalid element: 11111111" (on missing config line), could this be more clear what is missing or something like "incomplete config"? @done(24-05-12 22:54)
+		✔ Map that is missing map prints "Map missing start position", maybe this could be more explicit that map is missing? @done(24-05-12 21:25)
+		✔ Duplicate of a color "Map contains an invalid character" but duplicate of a texture prints "Invalid element: NO ./textures/north_texture.png" @done(24-05-12 21:26)
 		☐ Make sure all errors follow the subject ""Error\n" followed by an explicit error message"
-
+			- adding "Error\n" in case of invalid texture?
 Bug fixes:
 	✔ make re command does not work if MLX42 does not exist @done(24-05-08 11:04)
 	✔ Fix player going through seam between two diagonal walls @done(24-04-30 10:00)

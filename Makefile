@@ -6,7 +6,7 @@
 #    By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/22 08:30:50 by hpatsi            #+#    #+#              #
-#    Updated: 2024/05/12 18:18:17 by ixu              ###   ########.fr        #
+#    Updated: 2024/05/12 21:09:01 by ixu              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ MINIMAP_DIR = ./srcs/minimap/
 
 # C FILES
 
-SOURCE_FILES = main error free
+SOURCE_FILES = main error free debug
 
 VALIDATE_FILES_COMMON = validate validate_utils grid_init validate_error
 
@@ -36,7 +36,7 @@ VALIDATE_FILES_MANDATORY = validate_map validate_map_utils
 
 VALIDATE_FILES_BONUS = validate_map_bonus validate_map_utils_bonus
 
-MINIMAP_FILES = init_minimap update_minimap load_minimap print_minimap \
+MINIMAP_FILES = init_minimap update_minimap load_minimap \
 				draw_minimap draw_minimap_utils
 
 LOAD_FILES = load_map load_config load_grid load_animations
