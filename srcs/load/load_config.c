@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_config.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 11:56:33 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/13 12:37:45 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/13 17:41:46 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int	init_color(t_map *map, char **split_line)
 
 	if (split_line[1] == 0 || ft_strlen(split_line[1]) == 0)
 		return (return_error("Error\nColor config missing rgb"));
-	split_line[1][ft_strlen(split_line[1]) - 1] = 0;
+	if (split_line[1][ft_strlen(split_line[1]) - 1] == '\n')
+		split_line[1][ft_strlen(split_line[1]) - 1] = 0;
 	color_split = ft_split(split_line[1], ',');
 	if (color_split == 0)
 		return (return_error("Failed to split rgb"));
@@ -69,7 +70,8 @@ int	init_wall_texture(t_map *map, char **split_line)
 
 	if (split_line[1] == 0 || ft_strlen(split_line[1]) == 0)
 		return (return_error("Error\nTexture config missing path"));
-	split_line[1][ft_strlen(split_line[1]) - 1] = 0;
+	if (split_line[1][ft_strlen(split_line[1]) - 1] == '\n')
+		split_line[1][ft_strlen(split_line[1]) - 1] = 0;
 	texture = mlx_load_png(split_line[1]);
 	if (texture == 0)
 	{
