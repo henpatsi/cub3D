@@ -6,7 +6,7 @@
 #    By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/22 08:30:50 by hpatsi            #+#    #+#              #
-#    Updated: 2024/05/13 10:40:58 by ixu              ###   ########.fr        #
+#    Updated: 2024/05/13 18:34:39 by ixu              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ OBJS_DIR = ./objs/
 
 SRCS_DIR = ./srcs/
 
-VALIDATE_DIR = $(SRCS_DIR)validate/
+VALIDATE_DIR = $(SRCS_DIR)validation/
 
 LOAD_DIR = $(SRCS_DIR)load/
 
@@ -30,12 +30,12 @@ MINIMAP_DIR = ./srcs/minimap/
 
 SOURCE_FILES = main error free debug
 
-VALIDATE_FILES_COMMON = validate validate_utils validate_config \
-						grid_init validate_error
+VALIDATION_FILES_COMMON = validation validation_utils validate_config \
+						init_char_grid
 
-VALIDATE_FILES_MANDATORY = validate_map validate_map_utils
+VALIDATION_FILES_MANDATORY = validate_map validate_map_utils
 
-VALIDATE_FILES_BONUS = validate_map_bonus validate_map_utils_bonus
+VALIDATION_FILES_BONUS = validate_map_bonus validate_map_utils_bonus
 
 MINIMAP_FILES = init_minimap update_minimap load_minimap \
 				draw_minimap draw_minimap_utils
@@ -45,11 +45,13 @@ LOAD_FILES = load_map load_config load_grid load_animations
 GAME_FILES = hooks hook_helpers movement visuals draw_environment \
 				draw_environment_helpers raycast door
 
-ALL_SRC_FILES = $(addsuffix .c, $(SOURCE_FILES) $(VALIDATE_FILES_COMMON) \
-				$(VALIDATE_FILES_MANDATORY) $(LOAD_FILES) $(GAME_FILES) $(MINIMAP_FILES))
+ALL_SRC_FILES = $(addsuffix .c, $(SOURCE_FILES) $(VALIDATION_FILES_COMMON) \
+				$(VALIDATION_FILES_MANDATORY) $(LOAD_FILES) $(GAME_FILES) \
+				$(MINIMAP_FILES))
 
-ALL_SRC_FILES_BONUS = $(addsuffix .c, $(SOURCE_FILES) $(VALIDATE_FILES_COMMON) \
-						$(VALIDATE_FILES_BONUS) $(LOAD_FILES) $(GAME_FILES) $(MINIMAP_FILES))
+ALL_SRC_FILES_BONUS = $(addsuffix .c, $(SOURCE_FILES) \
+						$(VALIDATION_FILES_COMMON) $(VALIDATION_FILES_BONUS) \
+						$(LOAD_FILES) $(GAME_FILES) $(MINIMAP_FILES))
 
 OBJECTS = $(addprefix $(OBJS_DIR), $(ALL_SRC_FILES:.c=.o))
 

@@ -6,13 +6,13 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 09:45:59 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/12 17:13:37 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/13 18:42:43 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-t_vector	get_target_position(t_map *map, double forward, double right)
+static t_vector	get_target_position(t_map *map, double forward, double right)
 {
 	t_vector	target_pos;
 
@@ -25,7 +25,7 @@ t_vector	get_target_position(t_map *map, double forward, double right)
 	return (target_pos);
 }
 
-t_vector	limit_target_to_walls(t_map *map, t_vector target_pos)
+static t_vector	limit_target_to_walls(t_map *map, t_vector target_pos)
 {
 	t_hitinfo	hit;
 	t_vector	origin;
@@ -49,7 +49,7 @@ t_vector	limit_target_to_walls(t_map *map, t_vector target_pos)
 	return (target_pos);
 }
 
-t_vector	apply_player_size(t_map *map, t_vector target_pos)
+static t_vector	apply_player_size(t_map *map, t_vector target_pos)
 {
 	if (map->grid[(int) target_pos.y]
 		[(int)(target_pos.x + PLAYER_SIZE)].type == WALL

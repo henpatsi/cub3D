@@ -6,13 +6,13 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 21:07:22 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/12 21:38:51 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/13 18:36:00 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	print_grid(char **grid, t_map *map)
+void	print_char_grid(char **grid, t_map *map)
 {
 	int	r;
 	int	c;

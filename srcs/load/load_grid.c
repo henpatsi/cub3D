@@ -6,13 +6,13 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 14:19:17 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/12 17:13:49 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/13 18:52:19 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	init_player(t_map *map, int x, int y, char gridchar)
+static void	init_player(t_map *map, int x, int y, char gridchar)
 {
 	double	rotation_rad;
 
@@ -33,7 +33,7 @@ void	init_player(t_map *map, int x, int y, char gridchar)
 	map->player.cam_plane.y = sin(rotation_rad);
 }
 
-int	init_gridpos(t_map *map, int x, int y, char gridchar)
+static int	init_gridpos(t_map *map, int x, int y, char gridchar)
 {
 	t_gridpos	*gridpos;
 
@@ -52,7 +52,7 @@ int	init_gridpos(t_map *map, int x, int y, char gridchar)
 	return (1);
 }
 
-int	load_grid_row(t_map *map, int y, char *line)
+static int	load_grid_row(t_map *map, int y, char *line)
 {
 	int	x;
 

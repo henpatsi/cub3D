@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/13 12:30:47 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/13 18:47:40 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,13 +189,12 @@ typedef struct s_map
 	mlx_t		*mlx;
 }	t_map;
 
-/* VALIDATE */
+/* VALIDATION */
 
-// validate
+// validation
 void			validate_input(int argc, char **argv, t_map *map);
 
-// validate_utils
-
+// validation_utils
 void			print_missing_config(int config_flag);
 bool			check_if_config_missing(int flags);
 bool			check_if_line_contains_map_content(char *line);
@@ -205,8 +204,8 @@ void			get_map_dimensions(char *line, t_map *map);
 // validate_config
 void			validate_non_map_elements(char *line, int *flags);
 
-// grid_init
-char			**grid_init(char *file, t_map *map, int map_start_line);
+// init_char_grid
+char			**init_char_grid(char *file, t_map *map, int map_start_line);
 
 // validate_map
 void			validate_map(char **grid, t_map *map);
@@ -215,13 +214,6 @@ void			validate_map(char **grid, t_map *map);
 bool			is_closed(int row, int col, t_map *map, char **grid);
 void			check_door_position(int r, int c, t_map *map, char **grid);
 void			flood_fill(char **grid, t_map *map, int row, int col);
-
-// validate_error
-void			non_map_error(char *message, char *line, char **split_line);
-void			map_error(char *message, char **grid);
-void			perror_and_exit(char *message);
-void			put_error_and_exit(char *message);
-void			put_error_free_and_exit(char *message, char **grid, int row);
 
 /* PREPARE MAP STRUCT */
 
@@ -242,12 +234,8 @@ void			update_minimap(t_map *map);
 void			load_minimap_grid(t_map *map);
 void			load_pixel_grid(t_minimap *minimap);
 
-// print_minimap
-void			print_minimap(t_minimap *minimap, bool scaled_up);
-
 // draw_minimap
 void			draw_minimap(t_map *map);
-void			update_minimap(t_map *map);
 
 // draw_minimap_utils
 double			deg_to_rad(double degrees);
@@ -262,6 +250,7 @@ void			cursor_input_hook(double xpos, double ypos, void *param);
 void			update_visuals_hook(void *param);
 void			animation_hook(void *param);
 
+// hook_helpers
 void			normalize_vector(t_vector	*vector);
 
 // movement
@@ -272,8 +261,11 @@ void			rotate_player(t_map *map, double amount);
 int				init_visuals(t_map *map);
 void			update_visuals(t_map *map);
 void			update_animation(mlx_t *mlx, t_anim	*animation);
+
+// draw_environment
 void			draw_environment_line(t_map *map, int x, t_hitinfo hit);
 
+// draw_environment_helpers
 uint32_t		get_texture_pixel(mlx_texture_t *texture, int x, int y);
 mlx_texture_t	*get_hit_texture(t_map *map, t_hitinfo hit);
 
@@ -288,7 +280,10 @@ void			handle_door_actions(t_map *map);
 
 // error
 int				return_error(char *message);
-int				exit_error(char *message);
+void			put_error_and_exit(char *message);
+void			perror_and_exit(char *message);
+void			non_map_error(char *message, char *line, char **split_line);
+void			map_error(char *message, char **grid);
 
 // free
 void			free_grid(t_gridpos **grid);
@@ -298,7 +293,7 @@ void			free_animation(t_anim *animation);
 void			free_all(t_map *map);
 
 // debug
-void			print_grid(char **grid, t_map *map);
+void			print_char_grid(char **grid, t_map *map);
 void			print_minimap(t_minimap *minimap, bool scaled_up);
 
 #endif
