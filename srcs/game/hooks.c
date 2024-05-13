@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 14:59:30 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/13 10:10:39 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/13 12:01:29 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	t_map	*map;
 
 	map = (t_map *) param;
-	if (keydata.key == MLX_KEY_LEFT_CONTROL && keydata.action == MLX_PRESS)
-		map->animation.active = 1;
 	if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS)
+		map->animation.active = 1;
+	if (keydata.key == MLX_KEY_Q && keydata.action == MLX_PRESS)
 		handle_door_actions(map);
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		mlx_close_window(map->mlx);
