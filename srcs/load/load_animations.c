@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:25:18 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/13 10:02:28 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/13 10:21:43 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	init_anim_canvas(mlx_t *mlx, t_anim	*animation)
 
 int	load_animations(mlx_t *mlx, t_anim *animation)
 {
+	ft_bzero(animation, sizeof(t_anim));
 	animation->images = ft_calloc(FRAME_COUNT, sizeof(mlx_image_t *));
 	if (animation->images == 0)
 		return (-1);

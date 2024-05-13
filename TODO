@@ -26,8 +26,9 @@ Improvements:
 		☐ Map that is missing map prints "Map missing start position", maybe this could be more explicit that map is missing?
 		☐ Duplicate of a color "Map contains an invalid character" but duplicate of a texture prints "Invalid element: NO ./textures/north_texture.png"
 		☐ Make sure all errors follow the subject ""Error\n" followed by an explicit error message"
-	☐ Free
-		☐ init minimap does not necessarily have to free the minimap grid, as this is also handled in free_all
+	✔ Free @done(24-05-13 10:22)
+		✔ init minimap does not necessarily have to free the minimap grid, as this is also handled in free_all @done(24-05-13 10:22)
+		✔ load animations does not have to free because handled in free_all @done(24-05-13 10:22)
 
 Bug fixes:
 	✔ make re command does not work if MLX42 does not exist @done(24-05-08 11:04)

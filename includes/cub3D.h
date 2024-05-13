@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/13 10:06:10 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/13 10:25:02 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -284,6 +284,7 @@ int				exit_error(char *message);
 void			free_grid(t_gridpos **grid);
 void			free_char_grid(char **grid);
 void			free_textures(t_textures textures);
+void			free_animation(t_anim *animation);
 void			free_all(t_map *map);
 
 #endif

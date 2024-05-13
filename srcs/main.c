@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:54:42 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/13 10:01:30 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/13 10:27:51 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,28 @@
 
 int	initialize_game(t_map *map)
 {
-	ft_bzero(&map->animation, sizeof(t_anim));
-	ft_bzero(&map->minimap, sizeof(t_minimap));
 	map->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "cub3D", false);
 	if (map->mlx == 0)
 		return (-1);
 	if (init_visuals(map) == -1)
+	{
+		free_grid(map->grid);
+		free_textures(map->textures);
 		return (-1);
-	if (init_minimap(map) == -1)
-		return (-1);
+	}
 	if (load_animations(map->mlx, &map->animation) == -1)
+	{
+		free_grid(map->grid);
+		free_textures(map->textures);
 		return (-1);
+	}
+	if (init_minimap(map) == -1)
+	{
+		free_grid(map->grid);
+		free_textures(map->textures);
+		free_animation(&map->animation);
+		return (-1);
+	}
 	mlx_set_cursor_mode(map->mlx, MLX_MOUSE_HIDDEN);
 	return (1);
 }
@@ -55,7 +66,6 @@ int	main(int argc, char **argv)
 	if (initialize_game(&map) == -1)
 	{
 		mlx_terminate(map.mlx);
-		free_all(&map);
 		return (1);
 	}
 	ret = run_game(&map);
