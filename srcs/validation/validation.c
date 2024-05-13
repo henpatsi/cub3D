@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 12:27:31 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/13 18:39:03 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/13 21:17:22 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ static void	validate_file_content(char *file, t_map *map)
 	check_missing_content(map_start_line, config_flag, map_started, map);
 	grid = init_char_grid(file, map, map_start_line);
 	validate_map(grid, map);
-	if (DEBUG_MODE)
+	if (PRINT_MAP_AND_MINIMAP)
 		print_char_grid(grid, map);
 	free_char_grid(grid);
 }

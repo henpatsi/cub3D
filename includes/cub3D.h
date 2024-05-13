@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/13 18:47:40 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/13 21:38:28 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,11 @@
 # define CLOSED_DOOR_TEXTURE "textures/door/door.png"
 # define DOOR_SIDES_TEXTURE "textures/door/door_sides.png"
 
-# define DEBUG_MODE 0
+// set to 1 to print char grid (map content) and minimap grid
+# define PRINT_MAP_AND_MINIMAP 0
+
+// set to 1 to print minimap pixel grid 
+# define PRINT_ENLARGED_MINIMAP 0
 
 // ENUMS
 
