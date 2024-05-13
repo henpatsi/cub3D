@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 12:27:31 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/13 10:37:34 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/13 12:31:36 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,18 @@
 
 static void	validate_file_extension(char *file)
 {
-	char	*filename;
-	char	*extension;
-
-	filename = ft_strdup(file);
-	if (filename == NULL)
-		put_error_and_exit("malloc() error\n");
-	extension = ft_strdup(".cub");
-	if (extension == NULL)
-		put_error_and_exit("malloc() error\n");
-	if (ft_strcmp(filename + ft_strlen(filename) - 4, extension) != 0)
+	if (ft_strlen(file) < 5)
 	{
-		free(filename);
-		free(extension);
-		ft_putstr_fd("Error\n", 2);
-		ft_putstr_fd("Invalid file extension\n", 2);
-		ft_putstr_fd("Usage: ./cub3D path_to_file.cub\n", 1);
+		ft_putendl_fd("Invalid filename", 2);
+		ft_putendl_fd("Usage: ./cub3D path_to_file.cub", 1);
 		exit(EXIT_FAILURE);
 	}
-	free(filename);
-	free(extension);
+	if (ft_strcmp(file + ft_strlen(file) - 4, ".cub") != 0)
+	{
+		ft_putendl_fd("Invalid filename", 2);
+		ft_putendl_fd("Usage: ./cub3D path_to_file.cub", 1);
+		exit(EXIT_FAILURE);
+	}
 }
 
 static int	parse_file(int fd, t_map *map, int *config_flag, bool *map_started)
