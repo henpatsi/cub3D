@@ -6,13 +6,13 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 13:05:12 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/12 16:50:51 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/13 18:44:34 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	init_raydata(t_raydata *rdata, t_vector origin, t_vector direction)
+static void	init_raydata(t_raydata *rdata, t_vector origin, t_vector direction)
 {
 	rdata->grid_x = (int) origin.x;
 	rdata->grid_y = (int) origin.y;
@@ -28,7 +28,7 @@ void	init_raydata(t_raydata *rdata, t_vector origin, t_vector direction)
 		rdata->dist_to_y = (origin.y - rdata->grid_y) * rdata->delta_y;
 }
 
-void	get_next_y_edge(t_hitinfo *hit, t_vector dir, t_raydata *raydata)
+static void	get_next_y_edge(t_hitinfo *hit, t_vector dir, t_raydata *raydata)
 {
 	if (dir.y > 0)
 	{
@@ -44,7 +44,7 @@ void	get_next_y_edge(t_hitinfo *hit, t_vector dir, t_raydata *raydata)
 	raydata->dist_to_y += raydata->delta_y;
 }
 
-void	get_next_x_edge(t_hitinfo *hit, t_vector dir, t_raydata *raydata)
+static void	get_next_x_edge(t_hitinfo *hit, t_vector dir, t_raydata *raydata)
 {
 	if (dir.x > 0)
 	{
@@ -60,7 +60,8 @@ void	get_next_x_edge(t_hitinfo *hit, t_vector dir, t_raydata *raydata)
 	raydata->dist_to_x += raydata->delta_x;
 }
 
-int	get_next_edge(t_hitinfo *hit, t_map *map, t_vector dir, t_raydata *raydata)
+static int	get_next_edge(t_hitinfo *hit, t_map *map, t_vector dir, \
+				t_raydata *raydata)
 {
 	if (raydata->dist_to_y < raydata->dist_to_x)
 		get_next_y_edge(hit, dir, raydata);

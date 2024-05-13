@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   grid_init.c                                        :+:      :+:    :+:   */
+/*   init_char_grid.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 00:19:17 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/13 14:05:08 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/13 18:52:41 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,22 @@ static int	fill_in_grid(char *line, t_map *map, char **grid, int row)
 	}
 	grid[row][col] = '\0';
 	return (0);
+}
+
+static void	put_error_free_and_exit(char *message, char **grid, int row)
+{
+	int	i;
+
+	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd(message, 2);
+	i = 0;
+	while (i < row)
+	{
+		free(grid[i]);
+		i++;
+	}
+	free(grid);
+	exit(EXIT_FAILURE);
 }
 
 static void	close_file_and_exit(int fd)
@@ -75,7 +91,7 @@ static void	parse_file(int fd, int map_start_line, t_map *map, char **grid)
 	}
 }
 
-char	**grid_init(char *file, t_map *map, int map_start_line)
+char	**init_char_grid(char *file, t_map *map, int map_start_line)
 {
 	char	**grid;
 	int		fd;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   visuals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 11:10:51 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/13 09:55:19 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/13 18:45:45 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	init_visuals(t_map *map)
 	return (1);
 }
 
-t_vector	calculate_ray_dir(t_map *map, int x)
+static t_vector	calculate_ray_dir(t_map *map, int x)
 {
 	t_vector	ray_dir;
 	double		screen_position;

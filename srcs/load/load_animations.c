@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   load_animations.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 09:25:18 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/13 10:21:43 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/13 18:50:48 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-mlx_image_t	*image_from_png(mlx_t *mlx, char *path)
+static mlx_image_t	*image_from_png(mlx_t *mlx, char *path)
 {
 	mlx_texture_t	*texture;
 	mlx_image_t		*image;
@@ -36,7 +36,7 @@ mlx_image_t	*image_from_png(mlx_t *mlx, char *path)
 	return (image);
 }
 
-int	init_anim_canvas(mlx_t *mlx, t_anim	*animation)
+static int	init_anim_canvas(mlx_t *mlx, t_anim	*animation)
 {
 	int	xpos;
 	int	ypos;

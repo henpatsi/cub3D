@@ -6,13 +6,13 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 13:12:51 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/09 12:23:01 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/13 18:46:42 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	draw_vertical_color(t_draw_line_info dli, uint32_t color)
+static void	draw_vertical_color(t_draw_line_info dli, uint32_t color)
 {
 	int	y;
 
@@ -25,7 +25,7 @@ void	draw_vertical_color(t_draw_line_info dli, uint32_t color)
 	}
 }
 
-void	draw_vertical_texture(t_draw_line_info dli, mlx_texture_t *texture,
+static void	draw_vertical_texture(t_draw_line_info dli, mlx_texture_t *texture,
 		t_vector image_start)
 {
 	int		y;
@@ -44,7 +44,7 @@ void	draw_vertical_texture(t_draw_line_info dli, mlx_texture_t *texture,
 	}
 }
 
-void	draw_fs_wall_line(t_draw_line_info dli,
+static void	draw_fs_wall_line(t_draw_line_info dli,
 		uint32_t wall_height, t_vector image_start,
 		mlx_texture_t *wall_texture)
 {

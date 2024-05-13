@@ -6,13 +6,13 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 11:56:33 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/13 17:41:46 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/13 18:51:35 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int	check_valid_color(char **color_split, char *color_str)
+static int	check_valid_color(char **color_split, char *color_str)
 {
 	int	r;
 	int	g;
@@ -35,7 +35,7 @@ int	check_valid_color(char **color_split, char *color_str)
 	return (1);
 }
 
-int	init_color(t_map *map, char **split_line)
+static int	init_color(t_map *map, char **split_line)
 {
 	uint32_t	color;
 	char		**color_split;
@@ -64,7 +64,7 @@ int	init_color(t_map *map, char **split_line)
 	return (1);
 }
 
-int	init_wall_texture(t_map *map, char **split_line)
+static int	init_wall_texture(t_map *map, char **split_line)
 {
 	mlx_texture_t	*texture;
 
@@ -89,7 +89,7 @@ int	init_wall_texture(t_map *map, char **split_line)
 	return (1);
 }
 
-char	**read_split_line(int map_fd)
+static char	**read_split_line(int map_fd)
 {
 	char	*line;
 	char	**split_line;

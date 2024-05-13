@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validate.c                                         :+:      :+:    :+:   */
+/*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 12:27:31 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/13 12:47:06 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/13 21:17:22 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,10 @@ static void	validate_file_content(char *file, t_map *map)
 	if (close(fd) == -1)
 		perror_and_exit("close() error");
 	check_missing_content(map_start_line, config_flag, map_started, map);
-	grid = grid_init(file, map, map_start_line);
+	grid = init_char_grid(file, map, map_start_line);
 	validate_map(grid, map);
-	if (DEBUG_MODE)
-		print_grid(grid, map);
+	if (PRINT_MAP_AND_MINIMAP)
+		print_char_grid(grid, map);
 	free_char_grid(grid);
 }
 
