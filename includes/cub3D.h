@@ -6,14 +6,14 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/13 10:06:10 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/13 10:42:48 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include <stdio.h> // printf, remove later
+# include <stdio.h>
 # include <fcntl.h>
 # include <stdlib.h>
 # include <math.h>
@@ -62,7 +62,7 @@
 
 // ENUMS
 
-typedef enum e_flags
+typedef enum e_config_flag
 {
 	NO_FLAG = 1 << 0,
 	SO_FLAG = 1 << 1,
@@ -70,7 +70,7 @@ typedef enum e_flags
 	EA_FLAG = 1 << 3,
 	F_FLAG = 1 << 4,
 	C_FLAG = 1 << 5
-}	t_flags;
+}	t_config_flag;
 
 typedef enum e_wall_side
 {
@@ -191,9 +191,15 @@ typedef struct s_map
 void			validate_input(int argc, char **argv, t_map *map);
 
 // validate_utils
-void			validate_non_map_elements(char *line, int *flags);
-bool			map_started(int flags);
-void			get_map_dimensions(char *line, t_map *map);
+
+void	print_missing_config(int config_flag);
+bool	check_if_config_missing(int flags);
+bool	check_if_line_contains_map_content(char *line);
+bool	check_if_map_started(int flags, char *line);
+void	get_map_dimensions(char *line, t_map *map);
+
+// validate_config
+void	validate_non_map_elements(char *line, int *flags);
 
 // grid_init
 char			**grid_init(char *file, t_map *map, int map_start_line);
@@ -207,11 +213,11 @@ void			check_door_position(int r, int c, t_map *map, char **grid);
 void			flood_fill(char **grid, t_map *map, int row, int col);
 
 // validate_error
-void			non_map_error(char *line, char **split_line);
-void			map_error(char *message, char **grid);
-void			perror_and_exit(char *message);
-void			put_error_and_exit(char *message);
-void			put_error_free_and_exit(char *message, char **grid, int row);
+void	non_map_error(char *message, char *line, char **split_line);
+void	map_error(char *message, char **grid);
+void	perror_and_exit(char *message);
+void	put_error_and_exit(char *message);
+void	put_error_free_and_exit(char *message, char **grid, int row);
 
 /* PREPARE MAP STRUCT */
 
@@ -285,5 +291,9 @@ void			free_grid(t_gridpos **grid);
 void			free_char_grid(char **grid);
 void			free_textures(t_textures textures);
 void			free_all(t_map *map);
+
+// debug
+void	print_grid(char **grid, t_map *map);
+void	print_minimap(t_minimap *minimap, bool scaled_up);
 
 #endif
