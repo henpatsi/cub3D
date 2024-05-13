@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 00:19:17 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/12 21:04:21 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/13 14:05:08 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ static void	parse_file(int fd, int map_start_line, t_map *map, char **grid)
 		line_nbr++;
 		if (line == NULL && row == map->height)
 			break ;
-		else if (line == NULL && row != map->height)
-			put_error_free_and_exit("Error occurred when reading the file\n", \
+		else if ((line == NULL && row != map->height) || row > map->height)
+			put_error_free_and_exit("Error occurred when reading the file\n",
 				grid, row);
 		if (line_nbr < map_start_line)
 		{
@@ -80,7 +80,7 @@ char	**grid_init(char *file, t_map *map, int map_start_line)
 	char	**grid;
 	int		fd;
 
-	grid = (char **)malloc(sizeof(char *) * (map->height + 1));
+	grid = (char **)ft_calloc(sizeof(char *), (map->height + 1));
 	if (grid == NULL)
 		put_error_and_exit("malloc() error\n");
 	grid[map->height] = NULL;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 17:40:14 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/13 10:39:13 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/13 13:46:37 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 void	print_missing_config(int config_flag)
 {
 	if ((config_flag & NO_FLAG) == 0)
-		printf("- North texture\n");
+		ft_printf("- North texture\n");
 	if ((config_flag & SO_FLAG) == 0)
-		printf("- South texture\n");
+		ft_printf("- South texture\n");
 	if ((config_flag & WE_FLAG) == 0)
-		printf("- West texture\n");
+		ft_printf("- West texture\n");
 	if ((config_flag & EA_FLAG) == 0)
-		printf("- East texture\n");
+		ft_printf("- East texture\n");
 	if ((config_flag & F_FLAG) == 0)
-		printf("- Floor color\n");
+		ft_printf("- Floor color\n");
 	if ((config_flag & C_FLAG) == 0)
-		printf("- Ceiling color\n");
+		ft_printf("- Ceiling color\n");
 }
 
 bool	check_if_config_missing(int config_flag)
