@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
 /*   Updated: 2024/05/13 10:42:48 by ixu              ###   ########.fr       */
@@ -68,8 +68,8 @@ typedef enum e_config_flag
 	SO_FLAG = 1 << 1,
 	WE_FLAG = 1 << 2,
 	EA_FLAG = 1 << 3,
-	F_FLAG  = 1 << 4,
-	C_FLAG  = 1 << 5
+	F_FLAG = 1 << 4,
+	C_FLAG = 1 << 5
 }	t_config_flag;
 
 typedef enum e_wall_side
@@ -120,12 +120,12 @@ typedef struct s_hitinfo
 
 typedef struct s_textures
 {
-	mlx_texture_t *north;
-	mlx_texture_t *south;
-	mlx_texture_t *east;
-	mlx_texture_t *west;
-	mlx_texture_t *closed_door;
-	mlx_texture_t *door_sides;
+	mlx_texture_t	*north;
+	mlx_texture_t	*south;
+	mlx_texture_t	*east;
+	mlx_texture_t	*west;
+	mlx_texture_t	*closed_door;
+	mlx_texture_t	*door_sides;
 }	t_textures;
 
 typedef struct s_gridpos
@@ -144,7 +144,7 @@ typedef struct s_player
 	t_vector	cam_plane;
 }	t_player;
 
-typedef	struct s_minimap
+typedef struct s_minimap
 {
 	int			len;
 	int			pixel_grid_len;
@@ -176,7 +176,7 @@ typedef struct s_map
 	int			height;
 	t_gridpos	**grid;
 	t_textures	textures;
-	mlx_image_t *canvas;
+	mlx_image_t	*canvas;
 	uint32_t	floor_color;
 	uint32_t	ceiling_color;
 	t_player	player;
@@ -188,9 +188,10 @@ typedef struct s_map
 /* VALIDATE */
 
 // validate
-void	validate_input(int argc, char **argv, t_map *map);
+void			validate_input(int argc, char **argv, t_map *map);
 
 // validate_utils
+
 void	print_missing_config(int config_flag);
 bool	check_if_config_missing(int flags);
 bool	check_if_line_contains_map_content(char *line);
@@ -201,15 +202,15 @@ void	get_map_dimensions(char *line, t_map *map);
 void	validate_non_map_elements(char *line, int *flags);
 
 // grid_init
-char	**grid_init(char *file, t_map *map, int map_start_line);
+char			**grid_init(char *file, t_map *map, int map_start_line);
 
 // validate_map
-void	validate_map(char **grid, t_map *map);
+void			validate_map(char **grid, t_map *map);
 
 // validate_map_utils
-bool	is_closed(int row, int col, t_map *map, char **grid);
-void	check_door_position(int r, int c, t_map *map, char **grid);
-void	flood_fill(char **grid, t_map *map, int row, int col);
+bool			is_closed(int row, int col, t_map *map, char **grid);
+void			check_door_position(int r, int c, t_map *map, char **grid);
+void			flood_fill(char **grid, t_map *map, int row, int col);
 
 // validate_error
 void	non_map_error(char *message, char *line, char **split_line);
@@ -220,75 +221,76 @@ void	put_error_free_and_exit(char *message, char **grid, int row);
 
 /* PREPARE MAP STRUCT */
 
-int		load_map(t_map *map, char *map_filename);
-int		load_config(t_map *map, int map_fd);
-int		load_grid(t_map *map, int map_fd);
-int		load_animations(mlx_t *mlx, t_anim	*animation);
+int				load_map(t_map *map, char *map_filename);
+int				load_config(t_map *map, int map_fd);
+int				load_grid(t_map *map, int map_fd);
+int				load_animations(mlx_t *mlx, t_anim	*animation);
 
 /* MINIMAP */
 
 // init_minimap
-int		init_minimap(t_map *map);
+int				init_minimap(t_map *map);
 
 // update_minimap
-void	update_minimap(t_map *map);
+void			update_minimap(t_map *map);
 
 // load_minimap
-void	load_minimap_grid(t_map *map);
-void	load_pixel_grid(t_minimap *minimap);
+void			load_minimap_grid(t_map *map);
+void			load_pixel_grid(t_minimap *minimap);
 
 // print_minimap
-void	print_minimap(t_minimap *minimap, bool scaled_up);
+void			print_minimap(t_minimap *minimap, bool scaled_up);
 
 // draw_minimap
-void	draw_minimap(t_map *map);
-void	update_minimap(t_map *map);
+void			draw_minimap(t_map *map);
+void			update_minimap(t_map *map);
 
 // draw_minimap_utils
-double	deg_to_rad(double degrees);
-void	draw_line(t_vector v1, t_vector v2, mlx_image_t *image);
+double			deg_to_rad(double degrees);
+void			draw_line(t_vector v1, t_vector v2, mlx_image_t *image);
 
 /* GAME */
 
 // hooks
-void	movement_hook(void *param);
-void	key_hook(mlx_key_data_t keydata, void* param);
-void	cursor_input_hook(double xpos, double ypos, void *param);
-void	update_visuals_hook(void *param);
-void	animation_hook(void *param);
+void			movement_hook(void *param);
+void			key_hook(mlx_key_data_t keydata, void *param);
+void			cursor_input_hook(double xpos, double ypos, void *param);
+void			update_visuals_hook(void *param);
+void			animation_hook(void *param);
 
-void	normalize_vector(t_vector	*vector);
+void			normalize_vector(t_vector	*vector);
 
 // movement
-void	move_player(t_map *map, double forward, double right);
-void	rotate_player(t_map *map, double amount);
+void			move_player(t_map *map, double forward, double right);
+void			rotate_player(t_map *map, double amount);
 
 // visuals
-int		init_visuals(t_map *map);
-int		update_visuals(t_map *map);
-void	update_animation(mlx_t *mlx, t_anim	*animation);
-void	draw_environment_line(t_map *map, int x, t_hitinfo hit);
+int				init_visuals(t_map *map);
+void			update_visuals(t_map *map);
+void			update_animation(mlx_t *mlx, t_anim	*animation);
+void			draw_environment_line(t_map *map, int x, t_hitinfo hit);
 
-uint32_t	get_texture_pixel(mlx_texture_t *texture, int x, int y);
+uint32_t		get_texture_pixel(mlx_texture_t *texture, int x, int y);
 mlx_texture_t	*get_hit_texture(t_map *map, t_hitinfo hit);
 
 // raycast
-int		grid_raycast(t_hitinfo *hit, t_map *map, t_vector origin, t_vector direction);
+int				grid_raycast(t_hitinfo *hit, t_map *map,
+					t_vector origin, t_vector direction);
 
 // door
-void	handle_door_actions(t_map *map);
+void			handle_door_actions(t_map *map);
 
 /* HELPERS */
 
 // error
-int		return_error(char *message);
-int		exit_error(char *message);
+int				return_error(char *message);
+int				exit_error(char *message);
 
 // free
-void	free_grid(t_gridpos **grid);
-void	free_initial_grid(char **grid);
-void	free_textures(t_textures textures);
-void	free_all(t_map *map);
+void			free_grid(t_gridpos **grid);
+void			free_char_grid(char **grid);
+void			free_textures(t_textures textures);
+void			free_all(t_map *map);
 
 // debug
 void	print_grid(char **grid, t_map *map);

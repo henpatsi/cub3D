@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   grid_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 00:19:17 by ixu               #+#    #+#             */
 /*   Updated: 2024/05/12 21:04:21 by ixu              ###   ########.fr       */
@@ -21,7 +21,7 @@ static int	fill_in_grid(char *line, t_map *map, char **grid, int row)
 	if (grid[row] == NULL)
 	{
 		ft_putstr_fd("malloc() error\n", 2);
-		free_initial_grid(grid);
+		free_char_grid(grid);
 		free(line);
 		return (1);
 	}

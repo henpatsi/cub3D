@@ -4,7 +4,8 @@ General:
 	✔ Add sprite animation @done(24-05-07 12:10)
 	✔ Add doors @done(24-05-12 17:00)
 	☐ Check if all malloc() calls are protected, e.g. in load_animations.c, ft_calloc() return to be checked
-	☐ Check the work against norm errors except for MLX42 library, some small fixes to be done with libft
+	☐ Check the work against norm errors except for MLX42 library
+		✔ some small fixes to be done with libft @done(24-05-13 09:01)
 
 Improvements:
 	✔ Fix stuck on walls when diagonal towards wall @done(24-04-30 09:27)
@@ -25,6 +26,9 @@ Improvements:
 		✔ Map that is missing map prints "Map missing start position", maybe this could be more explicit that map is missing? @done(24-05-12 21:25)
 		✔ Duplicate of a color "Map contains an invalid character" but duplicate of a texture prints "Invalid element: NO ./textures/north_texture.png" @done(24-05-12 21:26)
 		✔ Make sure all errors follow the subject ""Error\n" followed by an explicit error message" @done(24-05-13 10:31)
+	☐ Free
+		☐ init minimap does not necessarily have to free the minimap grid, as this is also handled in free_all
+
 Bug fixes:
 	✔ make re command does not work if MLX42 does not exist @done(24-05-08 11:04)
 	✔ Fix player going through seam between two diagonal walls @done(24-04-30 10:00)
