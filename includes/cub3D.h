@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/12 23:00:26 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/13 10:42:48 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,17 +187,18 @@ typedef struct s_map
 
 /* VALIDATE */
 
-// tbd
-void	print_missing_config(int config_flag);
-
 // validate
 void	validate_input(int argc, char **argv, t_map *map);
 
 // validate_utils
-void	validate_non_map_elements(char *line, int *flags);
+void	print_missing_config(int config_flag);
 bool	check_if_config_missing(int flags);
+bool	check_if_line_contains_map_content(char *line);
 bool	check_if_map_started(int flags, char *line);
 void	get_map_dimensions(char *line, t_map *map);
+
+// validate_config
+void	validate_non_map_elements(char *line, int *flags);
 
 // grid_init
 char	**grid_init(char *file, t_map *map, int map_start_line);

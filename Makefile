@@ -6,7 +6,7 @@
 #    By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/22 08:30:50 by hpatsi            #+#    #+#              #
-#    Updated: 2024/05/12 21:09:01 by ixu              ###   ########.fr        #
+#    Updated: 2024/05/13 10:40:58 by ixu              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ MINIMAP_DIR = ./srcs/minimap/
 
 SOURCE_FILES = main error free debug
 
-VALIDATE_FILES_COMMON = validate validate_utils grid_init validate_error
+VALIDATE_FILES_COMMON = validate validate_utils validate_config \
+						grid_init validate_error
 
 VALIDATE_FILES_MANDATORY = validate_map validate_map_utils
 

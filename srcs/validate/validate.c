@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 12:27:31 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/12 22:54:20 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/13 10:37:34 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,29 +65,13 @@ static int	parse_file(int fd, t_map *map, int *config_flag, bool *map_started)
 	return (last_line_before_map + 1);
 }
 
-void	print_missing_config(int config_flag)
-{
-	if ((config_flag & NO_FLAG) == 0)
-		printf("- North texture\n");
-	if ((config_flag & SO_FLAG) == 0)
-		printf("- South texture\n");
-	if ((config_flag & WE_FLAG) == 0)
-		printf("- West texture\n");
-	if ((config_flag & EA_FLAG) == 0)
-		printf("- East texture\n");
-	if ((config_flag & F_FLAG) == 0)
-		printf("- Floor color\n");
-	if ((config_flag & C_FLAG) == 0)
-		printf("- Ceiling color\n");
-}
-
 static void	check_missing_content(int map_start_line, int config_flag, \
 								bool map_started, t_map *map)
 {
 	bool	config_missing;
 
 	if (map_start_line == 1)
-		put_error_and_exit("Empty file\n");
+		put_error_and_exit("Empty file or directory passed as argument\n");
 	config_missing = check_if_config_missing(config_flag);
 	if (config_missing || !map_started || map->width == 0)
 		ft_putstr_fd("Error\n", 2);
