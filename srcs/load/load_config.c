@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_config.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 11:56:33 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/12 17:44:10 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/13 09:05:08 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	init_wall_texture(t_map *map, char **split_line)
 	split_line[1][ft_strlen(split_line[1]) - 1] = 0;
 	texture = mlx_load_png(split_line[1]);
 	if (texture == 0)
-		return (return_error("Check that path to texture is valid"));
+		return (return_error("Check that wall textures are valid"));
 	if (ft_strcmp(split_line[0], "NO") == 0)
 		map->textures.north = texture;
 	if (ft_strcmp(split_line[0], "SO") == 0)

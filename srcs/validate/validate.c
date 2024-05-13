@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 12:27:31 by ixu               #+#    #+#             */
-/*   Updated: 2024/04/30 17:28:57 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/13 09:33:37 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ character, or error occurred when reading the file\n");
 	validate_map(grid, map);
 	if (DEBUG_MODE)
 		print_grid(grid, map);
-	free_initial_grid(grid);
+	free_char_grid(grid);
 }
 
 void	validate_input(int argc, char **argv, t_map *map)

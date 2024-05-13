@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_error.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:44:40 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/12 17:30:23 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/13 09:33:34 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	map_error(char *message, char **grid)
 {
 	ft_putstr_fd("Error\n", 2);
 	ft_putstr_fd(message, 2);
-	free_initial_grid(grid);
+	free_char_grid(grid);
 	exit(EXIT_FAILURE);
 }
 
