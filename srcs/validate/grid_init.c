@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 00:19:17 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/13 09:33:32 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/12 21:04:21 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ static void	parse_file(int fd, int map_start_line, t_map *map, char **grid)
 		else if (line == NULL && row != map->height)
 			put_error_free_and_exit("Error occurred when reading the file\n", \
 				grid, row);
-		// printf("line %3d: %s", line_nbr, line);
 		if (line_nbr < map_start_line)
 		{
 			free(line);
