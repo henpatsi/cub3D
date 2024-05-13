@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 10:36:01 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/13 10:37:00 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/13 16:40:52 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	validate_non_map_elements(char *line, int *config_flag)
 		ft_putstr_fd("Error\n", 2);
 		ft_putstr_fd("Missing config:\n", 2);
 		print_missing_config(*config_flag);
+		free(line);
+		ft_freestrs(split_line);
 		exit(EXIT_FAILURE);
 	}
 	if (split_line[0] == NULL || split_line[1] == NULL || split_line[2] != NULL)
