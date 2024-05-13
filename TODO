@@ -6,7 +6,7 @@ General:
 	☐ Check if all malloc() calls are protected
 		✔ in load_animations.c, ft_calloc() return to be checked @done(24-05-13 12:05)
 		✔ filename is not freed if extension = ft_strdup(".cub") fails (validate.c line 26) @done(24-05-13 12:08)
-	☐ Check the work against norm errors except for MLX42 library
+	✔ Check the work against norm errors except for MLX42 library @done(24-05-13 13:02)
 		✔ some small fixes to be done with libft @done(24-05-13 09:01)
 
 Improvements:
@@ -20,9 +20,10 @@ Improvements:
 	✔ Movement @done(24-05-10 14:49)
 		✔ Make move input set e.g. xmove and ymove values, then call move player with those values @done(24-05-10 14:49)
 		✔ Prevent diagonal speed up by making simultaneous y and x moves scale to a single move @done(24-05-10 14:49)
-	✔ Free @done(24-05-13 10:22)
+	☐ Free
 		✔ init minimap does not necessarily have to free the minimap grid, as this is also handled in free_all @done(24-05-13 10:22)
 		✔ load animations does not have to free because handled in free_all @done(24-05-13 10:22)
+		✔ if failing on validate.c parse_file at e.g. 11th iteration, invalid free in grid_init.c parse_file @done(24-05-13 14:05)
 	✔ Error @done(24-05-13 10:31)
 		✔ "Empty file, or file contains only newline character, or error occurred when reading the file" @done(24-05-13 10:23)
 			✔ Could just be "Empty file" for empty file or nl file? (or "missing config" or "missing map") @done(24-05-12 21:22)

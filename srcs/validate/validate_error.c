@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 09:44:40 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/12 22:37:59 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/13 13:23:08 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	put_error_free_and_exit(char *message, char **grid, int row)
 	i = 0;
 	while (i < row)
 	{
-		free(grid[row]);
+		free(grid[i]);
 		i++;
 	}
 	free(grid);
