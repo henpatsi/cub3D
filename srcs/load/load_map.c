@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 10:17:11 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/12 17:44:17 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/13 10:40:54 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ int	load_map(t_map *map, char *map_filename)
 	map_fd = open(map_filename, O_RDONLY);
 	if (map_fd == -1)
 		exit_error("Failed to open map");
-	if (load_config(map, map_fd) == -1)
+	map->textures.closed_door = mlx_load_png(CLOSED_DOOR_TEXTURE);
+	map->textures.door_sides = mlx_load_png(DOOR_SIDES_TEXTURE);
+	if (map->textures.closed_door == 0 || map->textures.door_sides == 0
+		|| load_config(map, map_fd) == -1)
 	{
 		close(map_fd);
 		free_textures(map->textures);
@@ -32,7 +35,5 @@ int	load_map(t_map *map, char *map_filename)
 		exit(1);
 	}
 	close(map_fd);
-	map->textures.closed_door = mlx_load_png("textures/door/door.png");
-	map->textures.door_sides = mlx_load_png("textures/door/door_sides.png");
 	return (1);
 }

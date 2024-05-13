@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/13 10:25:02 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/13 10:38:29 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,10 @@
 # define ANIM_FRAME_2 "textures/sprite_animations/gun/gun_3.png"
 # define ANIM_FRAME_3 "textures/sprite_animations/gun/gun_4.png"
 # define ANIM_FRAME_4 "textures/sprite_animations/gun/gun_5.png"
+
+// door textures
+# define CLOSED_DOOR_TEXTURE "textures/door/door.png"
+# define DOOR_SIDES_TEXTURE "textures/door/door_sides.png"
 
 # define DEBUG_MODE 0
 
