@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 11:54:33 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/12 17:29:52 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/13 09:35:36 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,25 @@
 
 void	free_grid(t_gridpos **grid)
 {
-	int	y;
+	int	row;
 
-	y = 0;
-	while (grid[y] != 0)
+	if (grid == 0)
+		return ;
+	row = 0;
+	while (grid[row] != NULL)
 	{
-		free(grid[y]);
-		y++;
+		free(grid[row]);
+		row++;
 	}
 	free(grid);
 }
 
-void	free_initial_grid(char **grid)
+void	free_char_grid(char **grid)
 {
 	int	row;
 
+	if (grid == 0)
+		return ;
 	row = 0;
 	while (grid[row] != NULL)
 	{

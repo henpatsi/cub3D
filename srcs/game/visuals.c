@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   visuals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 11:10:51 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/12 16:51:17 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/13 09:55:19 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,13 @@ int	init_visuals(t_map *map)
 {
 	map->canvas = mlx_new_image(map->mlx, map->mlx->width,
 			map->mlx->height);
-	mlx_image_to_window(map->mlx, map->canvas, 0, 0);
+	if (map->canvas == 0)
+		return (-1);
+	if (mlx_image_to_window(map->mlx, map->canvas, 0, 0) == -1)
+		return (-1);
 	mlx_set_instance_depth(map->canvas->instances, 0);
-	return (update_visuals(map));
+	update_visuals(map);
+	return (1);
 }
 
 t_vector	calculate_ray_dir(t_map *map, int x)
@@ -32,7 +36,7 @@ t_vector	calculate_ray_dir(t_map *map, int x)
 	return (ray_dir);
 }
 
-int	update_visuals(t_map *map)
+void	update_visuals(t_map *map)
 {
 	t_vector	origin;
 	t_hitinfo	hit;
@@ -47,7 +51,6 @@ int	update_visuals(t_map *map)
 			draw_environment_line(map, x, hit);
 		x++;
 	}
-	return (1);
 }
 
 void	update_animation(mlx_t *mlx, t_anim	*animation)
