@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 10:17:11 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/16 21:56:04 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/20 09:52:16 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ int	load_map(t_map *map, char *map_filename)
 	if (load_door_textures(map) == -1 || load_config(map, map_fd) == -1
 		|| load_grid(map, map_fd) == -1)
 	{
+		free_textures(map->textures);
 		if (close(map_fd) == -1)
 			perror("close() error");
-		free_textures(map->textures);
 		exit(1);
 	}
 	if (close(map_fd) == -1)

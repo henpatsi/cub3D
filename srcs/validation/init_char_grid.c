@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 00:19:17 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/16 12:34:51 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/20 09:52:50 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,10 @@ char	**init_char_grid(char *file, t_map *map, int map_start_line)
 		put_error_and_exit("malloc() error\n");
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-	{
-		free(grid);
 		perror_and_exit("open() error");
-	}
+	grid = (char **)ft_calloc(sizeof(char *), (map->height + 1));
+	if (grid == NULL)
+		put_error_and_exit("malloc() error\n");
 	parse_file(fd, map_start_line, map, grid);
 	if (close(fd) == -1)
 	{
