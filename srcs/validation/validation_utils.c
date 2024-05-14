@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 17:40:14 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/14 10:34:15 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/14 10:49:25 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,16 @@ bool	check_if_line_contains_map_content(char *line)
 	return (true);
 }
 
-bool	check_if_map_started(int config_flag, char *line, int *last_line_before_map)
+bool	check_if_map_started(int config_flag, char *line, int *conf_last_line)
 {
 	if (check_if_config_missing(config_flag))
 	{
-		*last_line_before_map += 1;
+		*conf_last_line += 1;
 		return (false);
 	}
 	if (check_if_line_contains_map_content(line))
 		return (true);
-	*last_line_before_map += 1;
+	*conf_last_line += 1;
 	return (false);
 }
 

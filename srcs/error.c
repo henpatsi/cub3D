@@ -6,35 +6,11 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 10:35:01 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/14 10:25:16 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/14 10:44:34 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-void	gnl_error_exit(int error)
-{
-	ft_putstr_fd("Error\n", 2);
-	if (error == GNL_FD_ERROR)
-		ft_putstr_fd("invalid fd\n", 2);
-	else if (error == GNL_READ_ERROR)
-		perror("read() error");
-	else if (error == GNL_MALLOC_ERROR)
-		ft_putstr_fd("malloc() error\n", 2);
-	exit (1);
-}
-
-int	gnl_error_return(int error)
-{
-	ft_putstr_fd("Error\n", 2);
-	if (error == GNL_FD_ERROR)
-		ft_putstr_fd("invalid fd\n", 2);
-	else if (error == GNL_READ_ERROR)
-		perror("read() error");
-	else if (error == GNL_MALLOC_ERROR)
-		ft_putstr_fd("malloc() error\n", 2);
-	return (-1);
-}
 
 int	return_error(char *message)
 {

@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 00:19:17 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/14 10:12:54 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/14 10:45:15 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,27 +37,6 @@ static int	fill_in_grid(char *line, t_map *map, char **grid, int row)
 	}
 	grid[row][col] = '\0';
 	return (0);
-}
-
-static void	gnl_error_free_and_exit(char **grid, int row, int gnl_error)
-{
-	int	i;
-
-	i = 0;
-	while (i < row)
-	{
-		free(grid[i]);
-		i++;
-	}
-	free(grid);
-	gnl_error_exit(gnl_error);
-}
-
-static void	close_file_and_exit(int fd)
-{
-	if (close(fd) == -1)
-		perror_and_exit("close() error");
-	exit(EXIT_FAILURE);
 }
 
 static void	parse_file(int fd, int map_start_line, t_map *map, char **grid)
