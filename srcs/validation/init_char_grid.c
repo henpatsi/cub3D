@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_char_grid.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 00:19:17 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/13 18:52:41 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/14 10:45:15 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,46 +39,23 @@ static int	fill_in_grid(char *line, t_map *map, char **grid, int row)
 	return (0);
 }
 
-static void	put_error_free_and_exit(char *message, char **grid, int row)
-{
-	int	i;
-
-	ft_putstr_fd("Error\n", 2);
-	ft_putstr_fd(message, 2);
-	i = 0;
-	while (i < row)
-	{
-		free(grid[i]);
-		i++;
-	}
-	free(grid);
-	exit(EXIT_FAILURE);
-}
-
-static void	close_file_and_exit(int fd)
-{
-	if (close(fd) == -1)
-		perror_and_exit("close() error");
-	exit(EXIT_FAILURE);
-}
-
 static void	parse_file(int fd, int map_start_line, t_map *map, char **grid)
 {
 	char	*line;
 	int		line_nbr;
 	int		row;
+	int		gnl_error;
 
 	line_nbr = 0;
 	row = 0;
 	while (1)
 	{
-		line = get_next_line(fd);
+		line = get_next_line(fd, &gnl_error);
 		line_nbr++;
-		if (line == NULL && row == map->height)
+		if (gnl_error != 0)
+			gnl_error_free_and_exit(grid, row, gnl_error);
+		if (line == NULL)
 			break ;
-		else if ((line == NULL && row != map->height) || row > map->height)
-			put_error_free_and_exit("Error occurred when reading the file\n",
-				grid, row);
 		if (line_nbr < map_start_line)
 		{
 			free(line);

@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 10:36:01 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/13 17:39:20 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/14 10:25:14 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,5 @@ void	validate_non_map_elements(char *line, int *config_flag)
 						line, split_line);
 	check_identifiers(split_line, line, config_flag);
 	ft_freestrs(split_line);
+	free(line);
 }

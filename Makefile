@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+         #
+#    By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/22 08:30:50 by hpatsi            #+#    #+#              #
-#    Updated: 2024/05/13 18:34:39 by ixu              ###   ########.fr        #
+#    Updated: 2024/05/14 10:44:55 by hpatsi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ MINIMAP_DIR = ./srcs/minimap/
 
 # C FILES
 
-SOURCE_FILES = main error free debug
+SOURCE_FILES = main error error2 free debug
 
 VALIDATION_FILES_COMMON = validation validation_utils validate_config \
 						init_char_grid

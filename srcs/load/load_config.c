@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_config.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 11:56:33 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/13 18:51:35 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/14 10:08:27 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,14 @@ static char	**read_split_line(int map_fd)
 {
 	char	*line;
 	char	**split_line;
+	int		gnl_error;
 
-	line = get_next_line(map_fd);
-	if (line == 0)
+	line = get_next_line(map_fd, &gnl_error);
+	if (line == 0 || gnl_error != 0)
+	{
+		gnl_error_return(gnl_error);
 		return (0);
+	}
 	split_line = ft_split(line, ' ');
 	free(line);
 	if (split_line[0] == 0)
@@ -118,7 +122,7 @@ int	load_config(t_map *map, int map_fd)
 	{
 		split = read_split_line(map_fd);
 		if (split == 0)
-			return (return_error("Failed to read config line"));
+			return (-1);
 		if (ft_strcmp(split[0], "\n") == 0)
 			ret = 2;
 		else if (ft_strcmp(split[0], "F") == 0 || ft_strcmp(split[0], "C") == 0)
