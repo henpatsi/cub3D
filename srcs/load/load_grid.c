@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_grid.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 14:19:17 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/13 18:52:19 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/14 10:08:31 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,18 +77,19 @@ int	load_grid(t_map *map, int map_fd)
 {
 	int		y;
 	char	*line;
+	int		gnl_error;
 
 	map->grid = ft_calloc(map->height + 1, sizeof(t_gridpos *));
 	if (map->grid == 0)
 		return (-1);
-	y = 0;
-	while (y < map->height)
+	y = -1;
+	while (++y < map->height)
 	{
-		line = get_next_line(map_fd);
-		if (line == 0)
+		line = get_next_line(map_fd, &gnl_error);
+		if (line == 0 || gnl_error != 0)
 		{
 			free_grid(map->grid);
-			return (return_error("Failed to read map"));
+			return (gnl_error_return(gnl_error));
 		}
 		if (load_grid_row(map, y, line) == -1)
 		{
@@ -97,7 +98,6 @@ int	load_grid(t_map *map, int map_fd)
 			return (-1);
 		}
 		free(line);
-		y++;
 	}
 	return (1);
 }

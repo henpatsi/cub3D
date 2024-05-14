@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/13 21:38:28 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/14 10:06:10 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -288,6 +288,8 @@ void			put_error_and_exit(char *message);
 void			perror_and_exit(char *message);
 void			non_map_error(char *message, char *line, char **split_line);
 void			map_error(char *message, char **grid);
+void			gnl_error_exit(int error);
+int				gnl_error_return(int error);
 
 // free
 void			free_grid(t_gridpos **grid);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 12:27:31 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/13 21:17:22 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/14 10:10:47 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,14 @@ static int	parse_file(int fd, t_map *map, int *config_flag, bool *map_started)
 {
 	int		last_line_before_map;
 	char	*line;
+	int		gnl_error;
 
 	last_line_before_map = 0;
 	while (1)
 	{
-		line = get_next_line(fd);
+		line = get_next_line(fd, &gnl_error);
+		if (gnl_error != 0)
+			gnl_error_exit(gnl_error);
 		if (line == NULL)
 			break ;
 		if (!*map_started)
