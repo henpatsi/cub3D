@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 00:19:17 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/14 10:45:15 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/14 14:34:09 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	fill_in_grid(char *line, t_map *map, char **grid, int row)
 	int	col;
 
 	col = 0;
-	grid[row] = (char *)malloc(sizeof(char) * (map->width + 1));
+	grid[row] = (char *)ft_calloc(sizeof(char), (map->width + 1));
 	if (grid[row] == NULL)
 	{
 		ft_putstr_fd("malloc() error\n", 2);
@@ -35,7 +35,6 @@ static int	fill_in_grid(char *line, t_map *map, char **grid, int row)
 		grid[row][col] = ' ';
 		col++;
 	}
-	grid[row][col] = '\0';
 	return (0);
 }
 
@@ -53,7 +52,7 @@ static void	parse_file(int fd, int map_start_line, t_map *map, char **grid)
 		line = get_next_line(fd, &gnl_error);
 		line_nbr++;
 		if (gnl_error != 0)
-			gnl_error_free_and_exit(grid, row, gnl_error);
+			gnl_error_free_and_exit(fd, grid, row, gnl_error);
 		if (line == NULL)
 			break ;
 		if (line_nbr < map_start_line)
@@ -73,18 +72,17 @@ char	**init_char_grid(char *file, t_map *map, int map_start_line)
 	char	**grid;
 	int		fd;
 
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		perror_and_exit("open() error");
 	grid = (char **)ft_calloc(sizeof(char *), (map->height + 1));
 	if (grid == NULL)
 		put_error_and_exit("malloc() error\n");
-	grid[map->height] = NULL;
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-	{
-		free(grid);
-		perror_and_exit("open() error");
-	}
 	parse_file(fd, map_start_line, map, grid);
 	if (close(fd) == -1)
+	{
+		free_char_grid(grid);
 		perror_and_exit("close() error");
+	}
 	return (grid);
 }

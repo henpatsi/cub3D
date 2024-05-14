@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/14 10:46:04 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/14 14:34:06 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -293,7 +293,8 @@ void			map_error(char *message, char **grid);
 // error2
 void			gnl_error_exit(int error);
 int				gnl_error_return(int error);
-void			gnl_error_free_and_exit(char **grid, int row, int gnl_error);
+void			gnl_error_free_and_exit(int fd, char **grid, int row,
+					int gnl_error);
 void			close_file_and_exit(int fd);
 
 // free
