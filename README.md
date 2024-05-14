@@ -10,7 +10,7 @@ Uses the [MLX42](https://github.com/codam-coding-college/MLX42) graphics library
  - Run `make`
 
 #### Running:
- - Run `./cub3d path_to_map`
+ - Run `./cub3D path_to_map`
  - Premade maps can be found in the maps folder
 
 #### Credits:
