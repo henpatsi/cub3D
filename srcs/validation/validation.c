@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 12:27:31 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/14 10:22:25 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/14 10:28:40 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	check_missing_content(int map_start_line, int config_flag, \
 	bool	config_missing;
 
 	if (map_start_line == 1)
-		put_error_and_exit("Empty file or directory passed as argument\n");
+		put_error_and_exit("Empty file\n");
 	config_missing = check_if_config_missing(config_flag);
 	if (config_missing || !map_started || map->width == 0)
 		ft_putstr_fd("Error\n", 2);

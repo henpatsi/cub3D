@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 10:35:01 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/14 10:14:01 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/14 10:25:16 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	gnl_error_exit(int error)
 	if (error == GNL_FD_ERROR)
 		ft_putstr_fd("invalid fd\n", 2);
 	else if (error == GNL_READ_ERROR)
-		ft_putstr_fd("read() error\n", 2);
+		perror("read() error");
 	else if (error == GNL_MALLOC_ERROR)
 		ft_putstr_fd("malloc() error\n", 2);
 	exit (1);
@@ -30,7 +30,7 @@ int	gnl_error_return(int error)
 	if (error == GNL_FD_ERROR)
 		ft_putstr_fd("invalid fd\n", 2);
 	else if (error == GNL_READ_ERROR)
-		ft_putstr_fd("read() error\n", 2);
+		perror("read() error");
 	else if (error == GNL_MALLOC_ERROR)
 		ft_putstr_fd("malloc() error\n", 2);
 	return (-1);
