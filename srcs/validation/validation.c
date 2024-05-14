@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 12:27:31 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/14 10:10:47 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/14 10:22:25 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	parse_file(int fd, t_map *map, int *config_flag, bool *map_started)
 	{
 		line = get_next_line(fd, &gnl_error);
 		if (gnl_error != 0)
-			gnl_error_exit(gnl_error);
+			return (gnl_error_return(gnl_error));
 		if (line == NULL)
 			break ;
 		if (!*map_started)
@@ -104,6 +104,8 @@ static void	validate_file_content(char *file, t_map *map)
 	map_start_line = parse_file(fd, map, &config_flag, &map_started);
 	if (close(fd) == -1)
 		perror_and_exit("close() error");
+	if (map_start_line == -1)
+		exit (1);
 	check_missing_content(map_start_line, config_flag, map_started, map);
 	grid = init_char_grid(file, map, map_start_line);
 	validate_map(grid, map);
