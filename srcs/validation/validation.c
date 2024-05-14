@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 12:27:31 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/14 10:22:25 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/14 10:37:12 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,7 @@ static int	parse_file(int fd, t_map *map, int *config_flag, bool *map_started)
 		if (line == NULL)
 			break ;
 		if (!*map_started)
-			*map_started = check_if_map_started(*config_flag, line);
-		if (!*map_started)
-			last_line_before_map++;
+			*map_started = check_if_map_started(*config_flag, line, &last_line_before_map);
 		if (*line == '\n' && !*map_started)
 		{
 			free(line);
@@ -50,7 +48,6 @@ static int	parse_file(int fd, t_map *map, int *config_flag, bool *map_started)
 			validate_non_map_elements(line, config_flag);
 		else
 			get_map_dimensions(line, map);
-		free(line);
 	}
 	return (last_line_before_map + 1);
 }

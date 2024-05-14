@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 17:40:14 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/13 18:30:45 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/14 10:34:15 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,16 @@ bool	check_if_line_contains_map_content(char *line)
 	return (true);
 }
 
-bool	check_if_map_started(int config_flag, char *line)
+bool	check_if_map_started(int config_flag, char *line, int *last_line_before_map)
 {
 	if (check_if_config_missing(config_flag))
+	{
+		*last_line_before_map += 1;
 		return (false);
+	}
 	if (check_if_line_contains_map_content(line))
 		return (true);
+	*last_line_before_map += 1;
 	return (false);
 }
 
@@ -81,4 +85,5 @@ void	get_map_dimensions(char *line, t_map *map)
 	}
 	if (width > map->width)
 		map->width = width;
+	free(line);
 }
