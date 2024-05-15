@@ -6,7 +6,7 @@
 #    By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/22 08:30:50 by hpatsi            #+#    #+#              #
-#    Updated: 2024/05/14 10:44:55 by hpatsi           ###   ########.fr        #
+#    Updated: 2024/05/15 14:01:53 by hpatsi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,7 +75,7 @@ DEPENDENCIES = -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -lm
 
 CFLAGS += -Wall -Wextra -Werror $(HEADERS)
 
-CC = cc $(CFLAGS) -g -O2
+CC = cc $(CFLAGS) -g -O2 -fsanitize=address
 
 # RULES
 
