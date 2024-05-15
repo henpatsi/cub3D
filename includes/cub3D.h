@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/14 10:46:04 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/15 12:36:58 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ typedef struct s_hitinfo
 	double			y;
 	t_wall_side		side;
 	double			side_ratio;
-	t_gridpos_type	hit_type;
+	t_gridpos		hit_tile;
 	bool			hit_open_door;
 }	t_hitinfo;
 
