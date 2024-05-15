@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/14 14:34:06 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/15 09:56:18 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <math.h>
 # include "libft.h"
 # include "MLX42.h"
+
+#include <stdlib.h> // breaks subject, atof
 
 # define WIN_WIDTH 1024
 # define WIN_HEIGHT 1024
@@ -48,15 +50,9 @@
 # define GREY 0x555555ff
 # define BLUE 0x6495efff
 
-// animation parameters
-# define ANIM_DELAY 0.05
-# define FRAME_COUNT 5
-# define ANIM_SCALE 3
-# define ANIM_FRAME_0 "textures/sprite_animations/gun/gun_1.png"
-# define ANIM_FRAME_1 "textures/sprite_animations/gun/gun_2.png"
-# define ANIM_FRAME_2 "textures/sprite_animations/gun/gun_3.png"
-# define ANIM_FRAME_3 "textures/sprite_animations/gun/gun_4.png"
-# define ANIM_FRAME_4 "textures/sprite_animations/gun/gun_5.png"
+// animation folders
+# define MAXIMUM_ANIMATIONS 100
+# define GUN_ANIM "textures/sprite_animations/gun/"
 
 // door textures
 # define CLOSED_DOOR_TEXTURE "textures/door/door.png"
@@ -164,9 +160,10 @@ typedef struct s_anim
 {
 	int			active;
 	int			current_frame;
-	int			frame_count;
+	double		frame_count;
 	double		timer;
 	double		delay;
+	double		scale;
 	mlx_image_t	*canvas;
 	mlx_image_t	**images;
 }	t_anim;
@@ -189,7 +186,7 @@ typedef struct s_map
 	uint32_t	ceiling_color;
 	t_player	player;
 	t_minimap	minimap;
-	t_anim		animation;
+	t_anim		animations[MAXIMUM_ANIMATIONS];
 	mlx_t		*mlx;
 }	t_map;
 
@@ -225,7 +222,7 @@ void			flood_fill(char **grid, t_map *map, int row, int col);
 int				load_map(t_map *map, char *map_filename);
 int				load_config(t_map *map, int map_fd);
 int				load_grid(t_map *map, int map_fd);
-int				load_animations(mlx_t *mlx, t_anim	*animation);
+int				load_animations(mlx_t *mlx, t_anim *animations);
 
 /* MINIMAP */
 
@@ -293,15 +290,14 @@ void			map_error(char *message, char **grid);
 // error2
 void			gnl_error_exit(int error);
 int				gnl_error_return(int error);
-void			gnl_error_free_and_exit(int fd, char **grid, int row,
-					int gnl_error);
+void			gnl_error_free_and_exit(int fd, char **grid, int gnl_error);
 void			close_file_and_exit(int fd);
 
 // free
 void			free_grid(t_gridpos **grid);
 void			free_char_grid(char **grid);
 void			free_textures(t_textures textures);
-void			free_animation(t_anim *animation);
+void			free_animations(t_anim *animations);
 void			free_all(t_map *map);
 
 // debug

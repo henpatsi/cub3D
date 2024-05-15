@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 00:19:17 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/14 14:34:09 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/15 09:38:15 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	parse_file(int fd, int map_start_line, t_map *map, char **grid)
 		line = get_next_line(fd, &gnl_error);
 		line_nbr++;
 		if (gnl_error != 0)
-			gnl_error_free_and_exit(fd, grid, row, gnl_error);
+			gnl_error_free_and_exit(fd, grid, gnl_error);
 		if (line == NULL)
 			break ;
 		if (line_nbr < map_start_line)

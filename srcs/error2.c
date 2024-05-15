@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 10:44:10 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/14 14:33:41 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/15 09:35:18 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	gnl_error_return(int error)
 	return (-1);
 }
 
-void	gnl_error_free_and_exit(int fd, char **grid, int row, int gnl_error)
+void	gnl_error_free_and_exit(int fd, char **grid, int gnl_error)
 {
 	if (close(fd) == -1)
 		perror_and_exit("close() error");
