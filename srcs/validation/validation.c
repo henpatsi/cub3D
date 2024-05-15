@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 12:27:31 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/14 10:52:32 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/15 15:35:22 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,9 @@ static void	validate_file_content(char *file, t_map *map)
 		exit (1);
 	check_missing_content(map_start_line, config_flag, map_started, map);
 	grid = init_char_grid(file, map, map_start_line);
-	validate_map(grid, map);
 	if (PRINT_MAP_AND_MINIMAP)
 		print_char_grid(grid, map);
+	validate_map(grid, map);
 	free_char_grid(grid);
 }
 
