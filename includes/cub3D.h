@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/15 15:39:27 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/15 15:42:32 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,6 +226,8 @@ int				load_map(t_map *map, char *map_filename);
 int				load_config(t_map *map, int map_fd);
 int				load_grid(t_map *map, int map_fd);
 int				load_animations(mlx_t *mlx, t_anim	*animation);
+
+int				check_texture_path(char *path);
 
 /* MINIMAP */
 

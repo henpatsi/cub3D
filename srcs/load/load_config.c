@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 11:56:33 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/14 10:08:27 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/15 14:58:34 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,14 @@ static int	init_wall_texture(t_map *map, char **split_line)
 		return (return_error("Error\nTexture config missing path"));
 	if (split_line[1][ft_strlen(split_line[1]) - 1] == '\n')
 		split_line[1][ft_strlen(split_line[1]) - 1] = 0;
-	texture = mlx_load_png(split_line[1]);
-	if (texture == 0)
+	if (check_texture_path(split_line[1]) == -1)
 	{
 		ft_putstr_fd("Error\nPath to texture is invalid: ", 2);
 		return (return_error(split_line[1]));
 	}
+	texture = mlx_load_png(split_line[1]);
+	if (texture == 0)
+		return (-1);
 	if (ft_strcmp(split_line[0], "NO") == 0)
 		map->textures.north = texture;
 	if (ft_strcmp(split_line[0], "SO") == 0)
