@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/15 15:42:32 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/15 20:44:08 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,12 @@ typedef struct s_vector
 	double	x;
 	double	y;
 }	t_vector;
+
+typedef struct s_coords
+{
+	int	r;
+	int	c;
+}	t_coords;
 
 typedef struct s_ray_data
 {

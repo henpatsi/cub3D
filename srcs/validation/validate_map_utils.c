@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:50:28 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/15 15:34:12 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/15 20:58:51 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,33 +20,45 @@ bool	is_closed(int row, int col, t_map *map, char **grid)
 	return (true);
 }
 
-static void	check_neighbor_tiles(char **grid, t_map *map, int *top, int (*stack)[2])
+static void	init_directions(int *dr, int *dc)
 {
-	int	dr[] = {-1, 1, 0, 0};
-	int	dc[] = {0, 0, -1, 1};
-	int	r;
-	int	c;
-	int	d;
-	int	nr;
-	int	nc;
+	dr[0] = -1;
+	dr[1] = 1;
+	dr[2] = 0;
+	dr[3] = 0;
+	dc[0] = 0;
+	dc[1] = 0;
+	dc[2] = -1;
+	dc[3] = 1;
+}
 
-	r = stack[*top][0];
-	c = stack[*top][1];
-	// printf("visited: (%d, %d)\n", r, c);
-	d = 0;
-	while (d < 4)
+static void	check_neighbor_tiles(char **grid, t_map *map, int *top, \
+			int (*stack)[2])
+{
+	int			dr[4];
+	int			dc[4];
+	t_coords	current;
+	t_coords	neighbor;
+	int			d;
+
+	init_directions(dr, dc);
+	current.r = stack[*top][0];
+	current.c = stack[*top][1];
+	d = -1;
+	while (++d < 4)
 	{
-		nr = r + dr[d];
-		nc = c + dc[d];
-		if (nr >= 0 && nr < map->height && nc >= 0 && nc < map->width
-			&& grid[nr][nc] != '*' && grid[nr][nc] != ' ')
+		neighbor.r = current.r + dr[d];
+		neighbor.c = current.c + dc[d];
+		if (neighbor.r >= 0 && neighbor.r < map->height
+			&& neighbor.c >= 0 && neighbor.c < map->width
+			&& grid[neighbor.r][neighbor.c] != '*'
+			&& grid[neighbor.r][neighbor.c] != ' ')
 		{
-			stack[*top][0] = nr;
-			stack[*top][1] = nc;
+			stack[*top][0] = neighbor.r;
+			stack[*top][1] = neighbor.c;
 			*top += 1;
-			grid[nr][nc] = '*';
+			grid[neighbor.r][neighbor.c] = '*';
 		}
-		d++;
 	}
 }
 
@@ -55,7 +67,7 @@ void	flood_fill(char **grid, t_map *map, int row, int col)
 	int	(*stack)[2];
 	int	top;
 
-	stack = ft_calloc(map->height * map->width, sizeof(int[2]));
+	stack = ft_calloc(map->height * map->width, sizeof(int [2]));
 	if (stack == NULL)
 	{
 		ft_putstr_fd("malloc() error\n", 2);
