@@ -8,8 +8,11 @@ General:
 		✔ filename is not freed if extension = ft_strdup(".cub") fails (validate.c line 26) @done(24-05-13 12:08)
 	✔ Check the work against norm errors except for MLX42 library @done(24-05-13 13:02)
 		✔ some small fixes to be done with libft @done(24-05-13 09:01)
-	☐ Segfault on big map (e.g. 1000 x 1000)
+	✔ Segfault on big map (e.g. 1000 x 1000) @done(24-05-15 21:39)
 	☐ .cub valid if has path before
+	☐ -fsanitize=address complains (on Linux) when game starts e.g. running program with maps/map0.cub:
+		SUMMARY: AddressSanitizer: 84301 byte(s) leaked in 1550 allocation(s).
+	☐ Starting orientation random on linux/windows, to be checked on MacOS
 
 Improvements:
 	✔ Fix stuck on walls when diagonal towards wall @done(24-04-30 09:27)
@@ -45,4 +48,4 @@ Bug fixes:
 	✔ Minimap has a (single pixel?) line gap when player is touching a west or north facing wall @done(24-05-06 22:00)
 	✔ RGB not checked for errors @done(24-05-08 14:29)
 	✔ RGB still error because of atoi, e.g. 255,30a,0 is valid (fix with stricter atoi?) @done(24-05-10 09:35)
-	☐ Wrong door opens in some cases where many doors are next to each other
+	✔ Wrong door opens in some cases where many doors are next to each other @done(24-05-15 19:58)
