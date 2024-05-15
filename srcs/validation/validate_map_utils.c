@@ -6,19 +6,11 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:50:28 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/15 20:58:51 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/15 21:22:16 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-bool	is_closed(int row, int col, t_map *map, char **grid)
-{
-	if (row < 0 || row >= map->height || col < 0 || col >= map->width
-		|| grid[row][col] == ' ')
-		return (false);
-	return (true);
-}
 
 static void	init_directions(int *dr, int *dc)
 {

@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 12:09:09 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/15 19:53:41 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/15 21:10:08 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,14 @@ static void	set_start(bool *player_found, t_vector *start_pos, int r, int c)
 	*player_found = true;
 	start_pos->x = (double)c;
 	start_pos->y = (double)r;
+}
+
+static bool	is_closed(int row, int col, t_map *map, char **grid)
+{
+	if (row < 0 || row >= map->height || col < 0 || col >= map->width
+		|| grid[row][col] == ' ')
+		return (false);
+	return (true);
 }
 
 static void	validate_walls(char **grid, t_map *map)
