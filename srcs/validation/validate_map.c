@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 12:09:09 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/12 19:59:53 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/15 12:50:02 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ void	validate_map(char **grid, t_map *map)
 
 	row = -1;
 	player_found = false;
-	start_pos = (t_vector){0, 0};
 	while (++row < map->height)
 	{
 		col = -1;

@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 00:19:17 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/14 10:45:15 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/15 12:34:19 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	fill_in_grid(char *line, t_map *map, char **grid, int row)
 	int	col;
 
 	col = 0;
-	grid[row] = (char *)malloc(sizeof(char) * (map->width + 1));
+	grid[row] = (char *)ft_calloc(sizeof(char), (map->width + 1));
 	if (grid[row] == NULL)
 	{
 		ft_putstr_fd("malloc() error\n", 2);
@@ -35,7 +35,6 @@ static int	fill_in_grid(char *line, t_map *map, char **grid, int row)
 		grid[row][col] = ' ';
 		col++;
 	}
-	grid[row][col] = '\0';
 	return (0);
 }
 
@@ -76,7 +75,6 @@ char	**init_char_grid(char *file, t_map *map, int map_start_line)
 	grid = (char **)ft_calloc(sizeof(char *), (map->height + 1));
 	if (grid == NULL)
 		put_error_and_exit("malloc() error\n");
-	grid[map->height] = NULL;
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 	{
