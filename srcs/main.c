@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:54:42 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/13 10:50:43 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/15 09:37:50 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	initialize_game(t_map *map)
 {
 	map->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "cub3D", false);
 	if (map->mlx == 0 || init_visuals(map) == -1
-		|| load_animations(map->mlx, &map->animation) == -1)
+		|| load_animations(map->mlx, map->animations) == -1)
 	{
 		free_grid(map->grid);
 		free_textures(map->textures);
@@ -26,7 +26,7 @@ int	initialize_game(t_map *map)
 	{
 		free_grid(map->grid);
 		free_textures(map->textures);
-		free_animation(&map->animation);
+		free_animations(map->animations);
 		return (-1);
 	}
 	mlx_set_cursor_mode(map->mlx, MLX_MOUSE_HIDDEN);
