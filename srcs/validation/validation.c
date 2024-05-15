@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 12:27:31 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/14 10:52:32 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/15 14:43:40 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@ static void	validate_file_extension(char *file)
 {
 	if (ft_strlen(file) < 5
 		|| ft_strcmp(file + ft_strlen(file) - 4, ".cub") != 0)
+	{
+		ft_putendl_fd("Error\nInvalid filename", 2);
+		ft_putendl_fd("Usage: ./cub3D path_to_file.cub", 1);
+		exit(EXIT_FAILURE);
+	}
+	else if (file[ft_strlen(file) - 5] == '/')
 	{
 		ft_putendl_fd("Error\nInvalid filename", 2);
 		ft_putendl_fd("Usage: ./cub3D path_to_file.cub", 1);
