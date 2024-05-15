@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 13:05:12 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/13 18:44:34 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/15 19:41:19 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,10 @@ static int	get_next_edge(t_hitinfo *hit, t_map *map, t_vector dir, \
 	return (1);
 }
 
-int	grid_raycast(t_hitinfo *hit, t_map *map, t_vector origin, t_vector dir)
+void	grid_raycast(t_hitinfo *hit, t_map *map, t_vector origin, t_vector dir)
 {
 	t_raydata	raydata;
 
-	hit->distance = 0;
-	hit->side = 0;
-	hit->hit_type = EMPTY;
-	hit->hit_open_door = false;
 	init_raydata(&raydata, origin, dir);
 	while (get_next_edge(hit, map, dir, &raydata))
 	{
@@ -88,16 +84,20 @@ int	grid_raycast(t_hitinfo *hit, t_map *map, t_vector origin, t_vector dir)
 			|| map->grid[raydata.grid_y][raydata.grid_x].type == CLOSED_DOOR)
 		{
 			hit->hit_type = map->grid[raydata.grid_y][raydata.grid_x].type;
+			if (!hit->door.hit_open_door && hit->hit_type == CLOSED_DOOR)
+				hit->door.door_tile = map->grid[raydata.grid_y][raydata.grid_x];
 			hit->x = origin.x + hit->distance * dir.x;
 			hit->y = origin.y + hit->distance * dir.y;
 			if (hit->side == NORTH || hit->side == SOUTH)
 				hit->side_ratio = hit->x - floor(hit->x);
 			else
 				hit->side_ratio = hit->y - floor(hit->y);
-			return (1);
+			break ;
 		}
 		else if (map->grid[raydata.grid_y][raydata.grid_x].type == OPEN_DOOR)
-			hit->hit_open_door = true;
+		{
+			hit->door.hit_open_door = true;
+			hit->door.door_tile = map->grid[raydata.grid_y][raydata.grid_x];
+		}
 	}
-	return (0);
 }

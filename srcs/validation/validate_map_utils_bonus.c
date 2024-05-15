@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 12:35:49 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/10 12:51:34 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/15 12:19:42 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ void	check_door_position(int r, int c, t_map *map, char **grid)
 			|| is_wall(r, c - 1, map, grid))
 			map_error("A door is positioned at a wrong tile\n", grid);
 	}
-	else if (is_wall(r, c + 1, map, grid))
+	else
 	{
-		if (!is_wall(r, c - 1, map, grid) || is_wall(r + 1, c, map, grid)
-			|| is_wall(r - 1, c, map, grid))
+		if (is_wall(r - 1, c, map, grid) || !is_wall(r, c + 1, map, grid)
+			|| !is_wall(r, c - 1, map, grid))
 			map_error("A door is positioned at a wrong tile\n", grid);
 	}
 }

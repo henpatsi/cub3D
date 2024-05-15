@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/14 10:46:04 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/15 19:44:14 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,19 @@ typedef struct s_vector
 	double	y;
 }	t_vector;
 
+typedef struct s_gridpos
+{
+	int				x;
+	int				y;
+	t_gridpos_type	type;
+}	t_gridpos;
+
+typedef struct s_door
+{
+	bool		hit_open_door;
+	t_gridpos	door_tile;
+}	t_door;
+
 typedef struct s_ray_data
 {
 	int		grid_x;
@@ -123,7 +136,7 @@ typedef struct s_hitinfo
 	t_wall_side		side;
 	double			side_ratio;
 	t_gridpos_type	hit_type;
-	bool			hit_open_door;
+	t_door			door;
 }	t_hitinfo;
 
 typedef struct s_textures
@@ -135,13 +148,6 @@ typedef struct s_textures
 	mlx_texture_t	*closed_door;
 	mlx_texture_t	*door_sides;
 }	t_textures;
-
-typedef struct s_gridpos
-{
-	int				x;
-	int				y;
-	t_gridpos_type	type;
-}	t_gridpos;
 
 typedef struct s_player
 {
@@ -275,7 +281,7 @@ uint32_t		get_texture_pixel(mlx_texture_t *texture, int x, int y);
 mlx_texture_t	*get_hit_texture(t_map *map, t_hitinfo hit);
 
 // raycast
-int				grid_raycast(t_hitinfo *hit, t_map *map,
+void			grid_raycast(t_hitinfo *hit, t_map *map,
 					t_vector origin, t_vector direction);
 
 // door
