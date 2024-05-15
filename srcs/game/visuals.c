@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 11:10:51 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/13 18:45:45 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/15 19:42:12 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,12 @@ void	update_visuals(t_map *map)
 
 	origin.x = map->player.x;
 	origin.y = map->player.y;
+	ft_bzero(&hit, sizeof(t_hitinfo));
 	x = 0;
 	while (x < map->canvas->width)
 	{
-		if (grid_raycast(&hit, map, origin, calculate_ray_dir(map, x)) == 1)
+		grid_raycast(&hit, map, origin, calculate_ray_dir(map, x));
+		if (hit.hit_type == WALL || hit.hit_type == CLOSED_DOOR)
 			draw_environment_line(map, x, hit);
 		x++;
 	}

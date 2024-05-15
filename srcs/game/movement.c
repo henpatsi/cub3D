@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 09:45:59 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/13 18:42:43 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/15 19:42:18 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,13 @@ static t_vector	limit_target_to_walls(t_map *map, t_vector target_pos)
 	t_vector	origin;
 	t_vector	dir;
 
+	ft_bzero(&hit, sizeof(t_hitinfo));
 	origin.x = map->player.x;
 	origin.y = map->player.y;
 	dir.x = target_pos.x - origin.x;
 	dir.y = target_pos.y - origin.y;
-	if (grid_raycast(&hit, map, origin, dir) == 1)
+	grid_raycast(&hit, map, origin, dir);
+	if (hit.hit_type == WALL || hit.hit_type == CLOSED_DOOR)
 	{
 		if (dir.x > 0 && hit.x < target_pos.x)
 			target_pos.x = hit.x - 0.001;
