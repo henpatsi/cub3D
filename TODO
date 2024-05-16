@@ -41,6 +41,7 @@ Improvements:
 		✔ Make sure all errors follow the subject ""Error\n" followed by an explicit error message" @done(24-05-13 10:31)
 	✔ Slow on big maps (e.g. 10 000 x 10 000 did not load in 10 min) @done(24-05-16 11:04)
 		✔ Limit map size to 1000 x 1000? @done(24-05-16 11:04)
+	☐ Testing if a 10 000 x 10 000 map is too big is slow, could be tested when first getting map width / height?
 
 Bug fixes:
 	✔ make re command does not work if MLX42 does not exist @done(24-05-08 11:04)

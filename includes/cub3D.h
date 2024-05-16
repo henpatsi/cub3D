@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/15 21:09:23 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/16 11:35:52 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,7 +210,8 @@ bool			check_if_config_missing(int flags);
 bool			check_if_line_contains_map_content(char *line);
 bool			check_if_map_started(int flags, char *line,
 					int *last_line_before_map);
-void			get_map_dimensions(char *line, t_map *map);
+void			get_map_dimensions(char *line, t_map *map,
+					bool map_start_end[]);
 
 // validate_config
 void			validate_non_map_elements(char *line, int *flags);

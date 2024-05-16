@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 17:40:14 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/16 10:49:24 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/16 11:33:19 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,25 +72,28 @@ bool	check_if_map_started(int config_flag, char *line, int *conf_last_line)
 	return (false);
 }
 
-void	get_map_dimensions(char *line, t_map *map)
+void	get_map_dimensions(char *line, t_map *map, bool	map_start_end[])
 {
-	int	width;
 	int	i;
 
 	i = 0;
+	if (map_start_end[1] == true
+		&& check_if_line_contains_map_content(line) == true)
+	{
+		ft_putstr_fd("Error\nMap separated by one or more lines\n", 2);
+		free(line);
+		exit(EXIT_FAILURE);
+	}
 	if (line[i] == '\n')
 	{
+		map_start_end[1] = true;
 		free(line);
 		return ;
 	}
 	map->height++;
-	width = 0;
 	while (line[i] != '\n' && line[i] != '\0')
-	{
-		width++;
 		i++;
-	}
-	if (width > map->width)
-		map->width = width;
+	if (i > map->width)
+		map->width = i;
 	free(line);
 }
