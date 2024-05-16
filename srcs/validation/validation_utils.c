@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 17:40:14 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/16 10:30:00 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/16 10:49:24 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,14 @@ void	get_map_dimensions(char *line, t_map *map)
 	int	width;
 	int	i;
 
+	i = 0;
+	if (line[i] == '\n')
+	{
+		free(line);
+		return ;
+	}
 	map->height++;
 	width = 0;
-	i = 0;
 	while (line[i] != '\n' && line[i] != '\0')
 	{
 		width++;
