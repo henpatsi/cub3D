@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 12:27:31 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/16 10:48:43 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/16 10:58:14 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,13 @@ static int	parse_file(int fd, t_map *map, int *flag, bool *map_started)
 	return (conf_last_line + 1);
 }
 
-static void	check_missing_content(int map_start_line, int config_flag, \
-								bool map_started, t_map *map)
+static void	check_map_size_and_missing_content(int map_start_line, \
+				int config_flag, bool map_started, t_map *map)
 {
 	bool	config_missing;
 
+	if (map->height > 1000 || map->width > 1000)
+		put_error_and_exit("Limit height and/or width of the map to 1000\n");
 	if (map_start_line == 1)
 		put_error_and_exit("Empty file\n");
 	config_missing = check_if_config_missing(config_flag);
@@ -109,7 +111,8 @@ static void	validate_file_content(char *file, t_map *map)
 		perror_and_exit("close() error");
 	if (map_start_line == -1)
 		exit (1);
-	check_missing_content(map_start_line, config_flag, map_started, map);
+	check_map_size_and_missing_content(map_start_line, config_flag, \
+		map_started, map);
 	grid = init_char_grid(file, map, map_start_line);
 	if (PRINT_MAP_AND_MINIMAP)
 		print_char_grid(grid, map);
