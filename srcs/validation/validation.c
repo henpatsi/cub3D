@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 12:27:31 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/16 11:51:25 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/16 12:16:44 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ static int	parse_file(int fd, t_map *map, int *flag, bool	start_end[])
 			continue ;
 		}
 		if (!start_end[0])
-			validate_non_map_elements(line, flag);
+			validate_non_map_elements(line, flag, fd);
 		else
-			get_map_dimensions(line, map, start_end);
+			get_map_dimensions(line, map, start_end, fd);
 	}
 	return (conf_last_line + 1);
 }

@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 17:40:14 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/16 11:51:55 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/16 12:36:08 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ bool	check_if_config_missing(int config_flag)
 	return (false);
 }
 
-bool	check_if_line_contains_map_content(char *line)
+bool	check_map_content(char *line)
 {
 	int	i;
 
@@ -66,22 +66,22 @@ bool	check_if_map_started(int config_flag, char *line, int *conf_last_line)
 		*conf_last_line += 1;
 		return (false);
 	}
-	if (check_if_line_contains_map_content(line))
+	if (check_map_content(line))
 		return (true);
 	*conf_last_line += 1;
 	return (false);
 }
 
-void	get_map_dimensions(char *line, t_map *map, bool	map_start_end[])
+void	get_map_dimensions(char *line, t_map *map, bool	map_start_end[], int fd)
 {
 	int	i;
 
 	i = 0;
-	if (map_start_end[1] == true
-		&& check_if_line_contains_map_content(line) == true)
+	if (map_start_end[1] == true && check_map_content(line) == true)
 	{
 		free(line);
-		put_error_and_exit("Map separated by one or more lines\n");
+		ft_putstr_fd("Error\nMap separated by one or more lines\n", 2);
+		close_file_and_exit(fd);
 	}
 	if (line[i] == '\n')
 	{
@@ -95,6 +95,8 @@ void	get_map_dimensions(char *line, t_map *map, bool	map_start_end[])
 	if (i > map->width)
 		map->width = i;
 	free(line);
-	if (map->height > MAX_MAP_HEIGHT || map->width > MAX_MAP_WIDTH)
-		put_error_and_exit("Limit height and/or width of the map to 1000\n");
+	if (map->height <= MAX_MAP_HEIGHT && map->width <= MAX_MAP_WIDTH)
+		return ;
+	ft_putstr_fd("Error\nLimit height and/or width of the map to 1000\n", 2);
+	close_file_and_exit(fd);
 }

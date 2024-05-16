@@ -15,7 +15,7 @@ General:
 	✘ Starting orientation random on linux/windows (fix can also be done after eval) @cancelled(24-05-16 11:52)
 		✔ to be checked on MacOS @done(24-05-16 08:54)
 		Happens because some mouse movement is detected even though the mouse does not move
-	☐ validation.c parse file functions can exit without closing fd
+	✔ validation.c parse file functions can exit without closing fd @done(24-05-16 12:27)
 
 Improvements:
 	✔ Fix stuck on walls when diagonal towards wall @done(24-04-30 09:27)

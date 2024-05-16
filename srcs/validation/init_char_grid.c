@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 00:19:17 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/16 11:01:20 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/16 12:34:51 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	parse_file(int fd, int map_start_line, t_map *map, char **grid)
 		line = get_next_line(fd, &gnl_error);
 		line_nbr++;
 		if (gnl_error != 0)
-			gnl_error_free_and_exit(grid, row, gnl_error);
+			gnl_error_free_and_exit(grid, row, gnl_error, fd);
 		if (line == NULL)
 			break ;
 		if (line_nbr < map_start_line || ft_strcmp(line, "\n") == 0)
@@ -72,12 +72,15 @@ char	**init_char_grid(char *file, t_map *map, int map_start_line)
 	char	**grid;
 	int		fd;
 
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		perror_and_exit("open() error");
 	grid = (char **)ft_calloc(sizeof(char *), (map->height + 1));
 	if (grid == NULL)
 		put_error_and_exit("malloc() error\n");
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
+	{
+		free(grid);
+		perror_and_exit("open() error");
+	}
 	parse_file(fd, map_start_line, map, grid);
 	if (close(fd) == -1)
 	{

@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 10:35:01 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/14 10:44:34 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/16 12:19:22 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,15 @@ void	perror_and_exit(char *message)
 	exit(EXIT_FAILURE);
 }
 
-void	non_map_error(char *message, char *line, char **split_line)
+void	non_map_error(char *message, char *line, char **split_line, int fd)
 {
 	ft_putstr_fd("Error\n", 2);
 	ft_putstr_fd(message, 2);
 	ft_putstr_fd(line, 2);
 	free(line);
 	ft_freestrs(split_line);
+	if (close(fd) == -1)
+		perror("close() error");
 	exit(EXIT_FAILURE);
 }
 
