@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 17:40:14 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/16 11:33:19 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/16 11:51:55 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,8 @@ void	get_map_dimensions(char *line, t_map *map, bool	map_start_end[])
 	if (map_start_end[1] == true
 		&& check_if_line_contains_map_content(line) == true)
 	{
-		ft_putstr_fd("Error\nMap separated by one or more lines\n", 2);
 		free(line);
-		exit(EXIT_FAILURE);
+		put_error_and_exit("Map separated by one or more lines\n");
 	}
 	if (line[i] == '\n')
 	{
@@ -96,4 +95,6 @@ void	get_map_dimensions(char *line, t_map *map, bool	map_start_end[])
 	if (i > map->width)
 		map->width = i;
 	free(line);
+	if (map->height > MAX_MAP_HEIGHT || map->width > MAX_MAP_WIDTH)
+		put_error_and_exit("Limit height and/or width of the map to 1000\n");
 }

@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/16 11:35:52 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/16 11:46:38 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 # include <math.h>
 # include "libft.h"
 # include "MLX42.h"
+
+# define MAX_MAP_WIDTH 1000
+# define MAX_MAP_HEIGHT 1000
 
 # define WIN_WIDTH 1024
 # define WIN_HEIGHT 1024
