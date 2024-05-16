@@ -3,24 +3,32 @@ General:
 	✔ Check that all possible errors handle in load map @done(24-05-10 13:12)
 	✔ Add sprite animation @done(24-05-07 12:10)
 	✔ Add doors @done(24-05-12 17:00)
-	☐ Check if all malloc() calls are protected
+	✔ Check if all malloc() calls are protected @done(24-05-16 08:46)
 		✔ in load_animations.c, ft_calloc() return to be checked @done(24-05-13 12:05)
 		✔ filename is not freed if extension = ft_strdup(".cub") fails (validate.c line 26) @done(24-05-13 12:08)
 	✔ Check the work against norm errors except for MLX42 library @done(24-05-13 13:02)
 		✔ some small fixes to be done with libft @done(24-05-13 09:01)
+	✔ Segfault on big map (e.g. 1000 x 1000) @done(24-05-15 21:39)
+	✔ .cub valid if has path before @done(24-05-16 08:46)
+	✔ -fsanitize=address complains (on Linux) when game starts e.g. running program with maps/map0.cub: @done(24-05-16 11:05)
+		SUMMARY: AddressSanitizer: 84301 byte(s) leaked in 1550 allocation(s).
+	✘ Starting orientation random on linux/windows (fix can also be done after eval) @cancelled(24-05-16 11:52)
+		✔ to be checked on MacOS @done(24-05-16 08:54)
+		Happens because some mouse movement is detected even though the mouse does not move
+	✔ validation.c parse file functions can exit without closing fd @done(24-05-16 12:27)
 
 Improvements:
 	✔ Fix stuck on walls when diagonal towards wall @done(24-04-30 09:27)
 	✔ Set minimum distance from wall (player size), set to that distance if would otherwise go in wall @done(24-04-30 09:59)
 	✔ Make movement calculate final new position then move, not x then y, weird if facing away from wall and moving diagonal towards it @done(24-05-04 17:39)
-	☐ Optimization of drawing
+	✘ Optimization of drawing @cancelled(24-05-16 08:48)
 		✔ Store image in correct form so abgr to rgba does not have to be called @done(24-05-05 08:56)
-		☐ Store height of each hit into buffer, draw in horizontal lines (optional and a lot of work)
+		✘ Store height of each hit into buffer, draw in horizontal lines (optional and a lot of work) @cancelled(24-05-16 08:48)
 		✔ Dont draw every frame, only when someting moved @done(24-05-05 09:24)
 	✔ Movement @done(24-05-10 14:49)
 		✔ Make move input set e.g. xmove and ymove values, then call move player with those values @done(24-05-10 14:49)
 		✔ Prevent diagonal speed up by making simultaneous y and x moves scale to a single move @done(24-05-10 14:49)
-	☐ Free
+	✔ Free @done(24-05-15 12:00)
 		✔ init minimap does not necessarily have to free the minimap grid, as this is also handled in free_all @done(24-05-13 10:22)
 		✔ load animations does not have to free because handled in free_all @done(24-05-13 10:22)
 		✔ if failing on validate.c parse_file at e.g. 11th iteration, invalid free in grid_init.c parse_file @done(24-05-13 14:05)
@@ -32,6 +40,9 @@ Improvements:
 		✔ Map that is missing map prints "Map missing start position", maybe this could be more explicit that map is missing? @done(24-05-12 21:25)
 		✔ Duplicate of a color "Map contains an invalid character" but duplicate of a texture prints "Invalid element: NO ./textures/north_texture.png" @done(24-05-12 21:26)
 		✔ Make sure all errors follow the subject ""Error\n" followed by an explicit error message" @done(24-05-13 10:31)
+	✔ Slow on big maps (e.g. 10 000 x 10 000 did not load in 10 min) @done(24-05-16 11:04)
+		✔ Limit map size to 1000 x 1000? @done(24-05-16 11:04)
+	✔ Testing if a 10 000 x 10 000 map is too big is slow, could be tested when first getting map width / height? @done(24-05-16 11:52)
 
 Bug fixes:
 	✔ make re command does not work if MLX42 does not exist @done(24-05-08 11:04)
@@ -41,3 +52,4 @@ Bug fixes:
 	✔ Minimap has a (single pixel?) line gap when player is touching a west or north facing wall @done(24-05-06 22:00)
 	✔ RGB not checked for errors @done(24-05-08 14:29)
 	✔ RGB still error because of atoi, e.g. 255,30a,0 is valid (fix with stricter atoi?) @done(24-05-10 09:35)
+	✔ Wrong door opens in some cases where many doors are next to each other @done(24-05-15 19:58)

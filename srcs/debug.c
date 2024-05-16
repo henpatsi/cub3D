@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 21:07:22 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/13 21:06:16 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/15 15:38:25 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,12 @@ void	print_char_grid(char **grid, t_map *map)
 		c = -1;
 		while (++c < map->width)
 		{
-			if (grid[r][c] == ' ')
+			if (grid[r][c] == ' ' || grid[r][c] == '0')
 				printf("%c", '.');
+			else if (grid[r][c] == '1')
+				printf("%c", '#');
+			else if (grid[r][c] == '2')
+				printf("%c", 'D');
 			else
 				printf("%c", grid[r][c]);
 		}

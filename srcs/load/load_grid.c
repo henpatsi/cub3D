@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 14:19:17 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/14 10:08:31 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/16 10:55:51 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,31 +73,44 @@ static int	load_grid_row(t_map *map, int y, char *line)
 	return (1);
 }
 
+static int	handle_line(t_map *map, char *line, int gnl_error, int y)
+{
+	if (line == 0 || gnl_error != 0)
+	{
+		free_grid(map->grid);
+		return (gnl_error_return(gnl_error));
+	}
+	if (ft_strcmp(line, "\n") == 0)
+		return (1);
+	if (load_grid_row(map, y, line) == -1)
+	{
+		free_grid(map->grid);
+		return (-1);
+	}
+	return (0);
+}
+
 int	load_grid(t_map *map, int map_fd)
 {
 	int		y;
 	char	*line;
 	int		gnl_error;
+	int		ret;
 
 	map->grid = ft_calloc(map->height + 1, sizeof(t_gridpos *));
 	if (map->grid == 0)
 		return (-1);
-	y = -1;
-	while (++y < map->height)
+	y = 0;
+	while (y < map->height)
 	{
 		line = get_next_line(map_fd, &gnl_error);
-		if (line == 0 || gnl_error != 0)
-		{
-			free_grid(map->grid);
-			return (gnl_error_return(gnl_error));
-		}
-		if (load_grid_row(map, y, line) == -1)
-		{
-			free(line);
-			free_grid(map->grid);
-			return (-1);
-		}
+		ret = handle_line(map, line, gnl_error, y);
 		free(line);
+		if (ret == -1)
+			return (-1);
+		else if (ret == 1)
+			continue ;
+		y++;
 	}
 	return (1);
 }

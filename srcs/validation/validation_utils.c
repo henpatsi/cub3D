@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 17:40:14 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/14 10:49:25 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/16 12:36:08 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,13 @@ bool	check_if_config_missing(int config_flag)
 	return (false);
 }
 
-bool	check_if_line_contains_map_content(char *line)
+bool	check_map_content(char *line)
 {
 	int	i;
 
 	i = 0;
+	if (line[i] == '\n' || line[i] == '\0')
+		return (false);
 	while (line[i] != '\n' && line[i] != '\0')
 	{
 		if (ft_strchr(" 1", line[i]) == NULL)
@@ -64,26 +66,37 @@ bool	check_if_map_started(int config_flag, char *line, int *conf_last_line)
 		*conf_last_line += 1;
 		return (false);
 	}
-	if (check_if_line_contains_map_content(line))
+	if (check_map_content(line))
 		return (true);
 	*conf_last_line += 1;
 	return (false);
 }
 
-void	get_map_dimensions(char *line, t_map *map)
+void	get_map_dimensions(char *line, t_map *map, bool	map_start_end[], int fd)
 {
-	int	width;
 	int	i;
 
-	map->height++;
-	width = 0;
 	i = 0;
-	while (line[i] != '\n' && line[i] != '\0')
+	if (map_start_end[1] == true && check_map_content(line) == true)
 	{
-		width++;
-		i++;
+		free(line);
+		ft_putstr_fd("Error\nMap separated by one or more lines\n", 2);
+		close_file_and_exit(fd);
 	}
-	if (width > map->width)
-		map->width = width;
+	if (line[i] == '\n')
+	{
+		map_start_end[1] = true;
+		free(line);
+		return ;
+	}
+	map->height++;
+	while (line[i] != '\n' && line[i] != '\0')
+		i++;
+	if (i > map->width)
+		map->width = i;
 	free(line);
+	if (map->height <= MAX_MAP_HEIGHT && map->width <= MAX_MAP_WIDTH)
+		return ;
+	ft_putstr_fd("Error\nLimit height and/or width of the map to 1000\n", 2);
+	close_file_and_exit(fd);
 }

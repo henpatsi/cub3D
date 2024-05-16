@@ -6,7 +6,7 @@
 #    By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/22 08:30:50 by hpatsi            #+#    #+#              #
-#    Updated: 2024/05/14 10:44:55 by hpatsi           ###   ########.fr        #
+#    Updated: 2024/05/16 11:36:55 by hpatsi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ VALIDATION_FILES_BONUS = validate_map_bonus validate_map_utils_bonus
 MINIMAP_FILES = init_minimap update_minimap load_minimap \
 				draw_minimap draw_minimap_utils
 
-LOAD_FILES = load_map load_config load_grid load_animations
+LOAD_FILES = load_map load_config load_grid load_animations load_config_helpers
 
 GAME_FILES = hooks hook_helpers movement visuals draw_environment \
 				draw_environment_helpers raycast door

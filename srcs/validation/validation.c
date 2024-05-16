@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 12:27:31 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/14 10:52:32 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/16 12:16:44 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,15 @@ static void	validate_file_extension(char *file)
 		ft_putendl_fd("Usage: ./cub3D path_to_file.cub", 1);
 		exit(EXIT_FAILURE);
 	}
+	else if (file[ft_strlen(file) - 5] == '/')
+	{
+		ft_putendl_fd("Error\nInvalid filename", 2);
+		ft_putendl_fd("Usage: ./cub3D path_to_file.cub", 1);
+		exit(EXIT_FAILURE);
+	}
 }
 
-static int	parse_file(int fd, t_map *map, int *flag, bool *map_started)
+static int	parse_file(int fd, t_map *map, int *flag, bool	start_end[])
 {
 	int		conf_last_line;
 	char	*line;
@@ -37,23 +43,23 @@ static int	parse_file(int fd, t_map *map, int *flag, bool *map_started)
 			return (gnl_error_return(gnl_error));
 		if (line == NULL)
 			break ;
-		if (!*map_started)
-			*map_started = check_if_map_started(*flag, line, &conf_last_line);
-		if (*line == '\n' && !*map_started)
+		if (!start_end[0])
+			start_end[0] = check_if_map_started(*flag, line, &conf_last_line);
+		if (*line == '\n' && !start_end[0])
 		{
 			free(line);
 			continue ;
 		}
-		if (!*map_started)
-			validate_non_map_elements(line, flag);
+		if (!start_end[0])
+			validate_non_map_elements(line, flag, fd);
 		else
-			get_map_dimensions(line, map);
+			get_map_dimensions(line, map, start_end, fd);
 	}
 	return (conf_last_line + 1);
 }
 
-static void	check_missing_content(int map_start_line, int config_flag, \
-								bool map_started, t_map *map)
+static void	check_missing_content(int map_start_line, \
+				int config_flag, bool map_started, t_map *map)
 {
 	bool	config_missing;
 
@@ -87,7 +93,7 @@ static void	validate_file_content(char *file, t_map *map)
 {
 	int		fd;
 	int		config_flag;
-	bool	map_started;
+	bool	map_start_end[2];
 	int		map_start_line;
 	char	**grid;
 
@@ -97,17 +103,17 @@ static void	validate_file_content(char *file, t_map *map)
 	map->width = 0;
 	map->height = 0;
 	config_flag = 0;
-	map_started = false;
-	map_start_line = parse_file(fd, map, &config_flag, &map_started);
+	ft_bzero(map_start_end, sizeof(bool) * 2);
+	map_start_line = parse_file(fd, map, &config_flag, map_start_end);
 	if (close(fd) == -1)
 		perror_and_exit("close() error");
 	if (map_start_line == -1)
 		exit (1);
-	check_missing_content(map_start_line, config_flag, map_started, map);
+	check_missing_content(map_start_line, config_flag, map_start_end[0], map);
 	grid = init_char_grid(file, map, map_start_line);
-	validate_map(grid, map);
 	if (PRINT_MAP_AND_MINIMAP)
 		print_char_grid(grid, map);
+	validate_map(grid, map);
 	free_char_grid(grid);
 }
 
