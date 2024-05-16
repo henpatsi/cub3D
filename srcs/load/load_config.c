@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 11:56:33 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/15 14:58:34 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/16 21:46:00 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ static char	**read_split_line(int map_fd)
 	}
 	split_line = ft_split(line, ' ');
 	free(line);
+	if (split_line == 0)
+		return (0);
 	if (split_line[0] == 0)
 	{
 		ft_freestrs(split_line);
