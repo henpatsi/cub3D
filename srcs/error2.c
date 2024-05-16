@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 10:44:10 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/14 10:46:00 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/16 10:40:25 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	gnl_error_exit(int error)
 		perror("read() error");
 	else if (error == GNL_MALLOC_ERROR)
 		ft_putstr_fd("malloc() error\n", 2);
+	else
+		ft_putstr_fd("unknown error\n", 2);
 	exit (1);
 }
 
@@ -33,6 +35,8 @@ int	gnl_error_return(int error)
 		perror("read() error");
 	else if (error == GNL_MALLOC_ERROR)
 		ft_putstr_fd("malloc() error\n", 2);
+	else
+		ft_putstr_fd("unknown error\n", 2);
 	return (-1);
 }
 
