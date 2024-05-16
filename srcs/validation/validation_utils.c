@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 17:40:14 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/14 10:49:25 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/16 10:30:00 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ bool	check_if_line_contains_map_content(char *line)
 	int	i;
 
 	i = 0;
+	if (line[i] == '\n' || line[i] == '\0')
+		return (false);
 	while (line[i] != '\n' && line[i] != '\0')
 	{
 		if (ft_strchr(" 1", line[i]) == NULL)
