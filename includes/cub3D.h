@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/17 12:26:07 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/17 13:38:40 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,12 +116,6 @@ typedef struct s_gridpos
 	t_gridpos_type	type;
 }	t_gridpos;
 
-typedef struct s_door
-{
-	bool		hit_open_door;
-	t_gridpos	door_tile;
-}	t_door;
-
 typedef struct s_coords
 {
 	int	r;
@@ -145,8 +139,9 @@ typedef struct s_hitinfo
 	double			y;
 	t_wall_side		side;
 	double			side_ratio;
-	t_gridpos_type	hit_type;
-	t_door			door;
+	t_gridpos		tile_info;
+	bool			hit_open_door;
+	t_gridpos		open_door_info;
 }	t_hitinfo;
 
 typedef struct s_textures

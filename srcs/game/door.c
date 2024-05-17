@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:14:34 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/17 12:30:54 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/17 13:35:34 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,13 @@ void	handle_door_actions(t_map *map)
 	origin.x = map->player.x;
 	origin.y = map->player.y;
 	grid_raycast(&hit, map, origin, map->player.dir);
-	if ((hit.hit_type == CLOSED_DOOR && hit.distance < 1)
-		|| hit.door.hit_open_door)
+	if ((hit.tile_info.type == CLOSED_DOOR && hit.distance < 1)
+		|| hit.hit_open_door)
 	{
-		door_gridpos = hit.door.door_tile;
+		if (hit.hit_open_door)
+			door_gridpos = hit.open_door_info;
+		else
+			door_gridpos = hit.tile_info;
 		if (player_next_to_door(map, door_gridpos))
 		{
 			toggle_door_state(map, door_gridpos.y, door_gridpos.x);

@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 13:05:12 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/15 19:41:19 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/17 13:40:33 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,7 @@ void	grid_raycast(t_hitinfo *hit, t_map *map, t_vector origin, t_vector dir)
 		if (map->grid[raydata.grid_y][raydata.grid_x].type == WALL
 			|| map->grid[raydata.grid_y][raydata.grid_x].type == CLOSED_DOOR)
 		{
-			hit->hit_type = map->grid[raydata.grid_y][raydata.grid_x].type;
-			if (!hit->door.hit_open_door && hit->hit_type == CLOSED_DOOR)
-				hit->door.door_tile = map->grid[raydata.grid_y][raydata.grid_x];
+			hit->tile_info = map->grid[raydata.grid_y][raydata.grid_x];
 			hit->x = origin.x + hit->distance * dir.x;
 			hit->y = origin.y + hit->distance * dir.y;
 			if (hit->side == NORTH || hit->side == SOUTH)
@@ -94,10 +92,11 @@ void	grid_raycast(t_hitinfo *hit, t_map *map, t_vector origin, t_vector dir)
 				hit->side_ratio = hit->y - floor(hit->y);
 			break ;
 		}
-		else if (map->grid[raydata.grid_y][raydata.grid_x].type == OPEN_DOOR)
+		else if (map->grid[raydata.grid_y][raydata.grid_x].type == OPEN_DOOR
+				&& !hit->hit_open_door)
 		{
-			hit->door.hit_open_door = true;
-			hit->door.door_tile = map->grid[raydata.grid_y][raydata.grid_x];
+			hit->hit_open_door = true;
+			hit->open_door_info = map->grid[raydata.grid_y][raydata.grid_x];
 		}
 	}
 }
