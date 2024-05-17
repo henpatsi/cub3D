@@ -6,7 +6,7 @@
 /*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:14:34 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/15 19:42:06 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/17 12:30:54 by ixu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ static bool	player_next_to_door(t_map *map, t_gridpos door_gridpos)
 	player_x = map->player.x;
 	player_y = map->player.y;
 	if ((is_player(map, door_gridpos.y + 1, door_gridpos.x)
-			&& player_y - PLAYER_SIZE >= door_gridpos.y + 1)
+			&& player_y - PLAYER_SIZE >= door_gridpos.y + 1 - EPSILON)
 		|| (is_player(map, door_gridpos.y - 1, door_gridpos.x)
-			&& player_y + PLAYER_SIZE <= door_gridpos.y)
+			&& player_y + PLAYER_SIZE <= door_gridpos.y + EPSILON)
 		|| (is_player(map, door_gridpos.y, door_gridpos.x + 1)
-			&& player_x - PLAYER_SIZE >= door_gridpos.x + 1)
+			&& player_x - PLAYER_SIZE >= door_gridpos.x + 1 - EPSILON)
 		|| (is_player(map, door_gridpos.y, door_gridpos.x - 1)
-			&& player_x + PLAYER_SIZE <= door_gridpos.x))
+			&& player_x + PLAYER_SIZE <= door_gridpos.x + EPSILON))
 		return (true);
 	return (false);
 }
