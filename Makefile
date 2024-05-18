@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+         #
+#    By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/22 08:30:50 by hpatsi            #+#    #+#              #
-#    Updated: 2024/05/16 11:36:55 by hpatsi           ###   ########.fr        #
+#    Updated: 2024/05/18 22:06:14 by ixu              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ MINIMAP_DIR = ./srcs/minimap/
 
 # C FILES
 
-SOURCE_FILES = main error error2 free debug
+SOURCE_FILES = main error error2 free print_map
 
 VALIDATION_FILES_COMMON = validation validation_utils validate_config \
 						init_char_grid
@@ -75,7 +75,7 @@ DEPENDENCIES = -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -lm
 
 CFLAGS += -Wall -Wextra -Werror $(HEADERS)
 
-CC = cc $(CFLAGS) -g -O2
+CC = cc $(CFLAGS)
 
 # RULES
 
