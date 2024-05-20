@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 10:35:01 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/16 12:19:22 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/20 10:19:48 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ void	map_error(char *message, char **grid)
 {
 	ft_putstr_fd("Error\n", 2);
 	ft_putstr_fd(message, 2);
-	free_char_grid(grid);
+	ft_freestrs(grid);
 	exit(EXIT_FAILURE);
 }

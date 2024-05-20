@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 10:17:11 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/20 09:55:24 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/20 10:26:14 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,9 @@ int	load_map(t_map *map, char *map_filename)
 	}
 	if (close(map_fd) == -1)
 	{
-		perror("close() error");
 		free_textures(map->textures);
 		free_grid(map->grid);
-		exit(1);
+		perror_and_exit("close() error");
 	}
 	return (1);
 }

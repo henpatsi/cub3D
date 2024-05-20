@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 12:27:31 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/16 12:16:44 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/20 10:19:59 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ static void	validate_file_content(char *file, t_map *map)
 	if (PRINT_MAP_AND_MINIMAP)
 		print_char_grid(grid, map);
 	validate_map(grid, map);
-	free_char_grid(grid);
+	ft_freestrs(grid);
 }
 
 void	validate_input(int argc, char **argv, t_map *map)

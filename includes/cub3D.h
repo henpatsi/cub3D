@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/20 09:55:01 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/20 10:56:28 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@
 # define BLUE 0x6495efff
 
 // animation folders
-# define MAXIMUM_ANIMATIONS 100
+# define ANIMATION_COUNT 1
 # define GUN_ANIM "textures/sprite_animations/gun/"
 
 // door textures
@@ -169,6 +169,7 @@ typedef struct s_minimap
 
 typedef struct s_anim
 {
+	char		name[10];
 	int			active;
 	int			current_frame;
 	double		frame_count;
@@ -197,7 +198,7 @@ typedef struct s_map
 	uint32_t	ceiling_color;
 	t_player	player;
 	t_minimap	minimap;
-	t_anim		animations[MAXIMUM_ANIMATIONS];
+	t_anim		animations[ANIMATION_COUNT + 1];
 	mlx_t		*mlx;
 }	t_map;
 
@@ -234,7 +235,11 @@ int				load_map(t_map *map, char *map_filename);
 int				load_config(t_map *map, int map_fd);
 int				load_grid(t_map *map, int map_fd);
 int				load_animations(mlx_t *mlx, t_anim *animations);
+
+// helpers
 int				check_texture_path(char *path);
+int				get_anim_info(t_anim *animation, char *dir);
+mlx_image_t		*anim_image_from_png(mlx_t *mlx, char *dir, int frame);
 
 /* MINIMAP */
 
@@ -303,13 +308,11 @@ void			map_error(char *message, char **grid);
 // error2
 void			gnl_error_exit(int error);
 int				gnl_error_return(int error);
-void			gnl_error_free_and_exit(char **grid, int row, int gnl_error,
-					int fd);
+void			gnl_error_free_and_exit(char **grid, int gnl_error, int fd);
 void			close_file_and_exit(int fd);
 
 // free
 void			free_grid(t_gridpos **grid);
-void			free_char_grid(char **grid);
 void			free_textures(t_textures textures);
 void			free_animations(t_anim *animations);
 void			free_all(t_map *map);

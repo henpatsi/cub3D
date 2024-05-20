@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:50:28 by ixu               #+#    #+#             */
-/*   Updated: 2024/05/15 21:22:16 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/20 10:20:15 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	flood_fill(char **grid, t_map *map, int row, int col)
 	if (stack == NULL)
 	{
 		ft_putstr_fd("malloc() error\n", 2);
-		free_char_grid(grid);
+		ft_freestrs(grid);
 		exit(EXIT_FAILURE);
 	}
 	top = 0;

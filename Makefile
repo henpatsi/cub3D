@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+         #
+#    By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/22 08:30:50 by hpatsi            #+#    #+#              #
-#    Updated: 2024/05/18 22:06:14 by ixu              ###   ########.fr        #
+#    Updated: 2024/05/20 10:48:58 by hpatsi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,8 @@ VALIDATION_FILES_BONUS = validate_map_bonus validate_map_utils_bonus
 MINIMAP_FILES = init_minimap update_minimap load_minimap \
 				draw_minimap draw_minimap_utils
 
-LOAD_FILES = load_map load_config load_grid load_animations load_config_helpers
+LOAD_FILES = load_map load_config load_grid load_animations \
+				load_config_helpers load_animation_helpers
 
 GAME_FILES = hooks hook_helpers movement visuals draw_environment \
 				draw_environment_helpers raycast door
@@ -75,7 +76,7 @@ DEPENDENCIES = -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -lm
 
 CFLAGS += -Wall -Wextra -Werror $(HEADERS)
 
-CC = cc $(CFLAGS)
+CC = cc $(CFLAGS) -g
 
 # RULES
 

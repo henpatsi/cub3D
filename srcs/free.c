@@ -6,28 +6,13 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 11:54:33 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/15 09:37:59 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/20 10:18:37 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
 void	free_grid(t_gridpos **grid)
-{
-	int	row;
-
-	if (grid == 0)
-		return ;
-	row = 0;
-	while (grid[row] != NULL)
-	{
-		free(grid[row]);
-		row++;
-	}
-	free(grid);
-}
-
-void	free_char_grid(char **grid)
 {
 	int	row;
 
