@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 14:59:30 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/15 09:57:08 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/20 11:51:27 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ void	movement_hook(void *param)
 {
 	t_map		*map;
 	t_vector	movement_input;
-	double		rotate_amount;
+	t_vector	rotate_input;
 
 	map = (t_map *) param;
 	ft_bzero(&movement_input, sizeof(t_vector));
-	rotate_amount = 0.0;
+	ft_bzero(&rotate_input, sizeof(t_vector));
 	if (mlx_is_key_down(map->mlx, MLX_KEY_W))
 		movement_input.y += 1;
 	if (mlx_is_key_down(map->mlx, MLX_KEY_S))
@@ -30,12 +30,17 @@ void	movement_hook(void *param)
 	if (mlx_is_key_down(map->mlx, MLX_KEY_A))
 		movement_input.x -= 1;
 	if (mlx_is_key_down(map->mlx, MLX_KEY_RIGHT))
-		rotate_amount += 1;
+		rotate_input.x += 1;
 	if (mlx_is_key_down(map->mlx, MLX_KEY_LEFT))
-		rotate_amount -= 1;
+		rotate_input.x -= 1;
+	if (mlx_is_key_down(map->mlx, MLX_KEY_UP))
+		rotate_input.y += 1;
+	if (mlx_is_key_down(map->mlx, MLX_KEY_DOWN))
+		rotate_input.y -= 1;
 	normalize_vector(&movement_input);
+	normalize_vector(&rotate_input);
 	move_player(map, movement_input.y, movement_input.x);
-	rotate_player(map, rotate_amount);
+	rotate_player(map, rotate_input.x, rotate_input.y);
 }
 
 void	key_hook(mlx_key_data_t keydata, void *param)
@@ -56,8 +61,8 @@ void	cursor_input_hook(double xpos, double ypos, void *param)
 	t_map	*map;
 
 	map = (t_map *) param;
-	(void) ypos;
-	rotate_player(map, (xpos - map->mlx->width / 2) * MOUSE_SENSITIVITY);
+	rotate_player(map, (xpos - map->mlx->width / 2) * MOUSE_SENSITIVITY,
+			(ypos - map->mlx->height / 2) * MOUSE_SENSITIVITY);
 	mlx_set_mouse_pos(map->mlx, map->mlx->width / 2, map->mlx->height / 2);
 }
 
@@ -65,17 +70,19 @@ void	update_visuals_hook(void *param)
 {
 	t_map			*map;
 	static t_vector	old_pos;
-	static double	old_rot;
+	static t_vector	old_rot;
 
 	map = (t_map *) param;
 	if (map->player.x == old_pos.x && map->player.y == old_pos.y
-		&& map->player.x_rotation == old_rot)
+		&& map->player.x_rotation == old_rot.x
+		&& map->player.y_rotation == old_rot.y)
 		return ;
 	update_visuals(map);
 	update_minimap(map);
 	old_pos.x = map->player.x;
 	old_pos.y = map->player.y;
-	old_rot = map->player.x_rotation;
+	old_rot.x = map->player.x_rotation;
+	old_rot.y = map->player.y_rotation;
 }
 
 void	animation_hook(void *param)

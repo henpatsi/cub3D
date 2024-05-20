@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/20 10:56:28 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/20 11:42:50 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ typedef struct s_player
 	double		x;
 	double		y;
 	double		x_rotation;
+	double		y_rotation;
 	t_vector	dir;
 	t_vector	cam_plane;
 }	t_player;
@@ -274,7 +275,7 @@ void			normalize_vector(t_vector	*vector);
 
 // movement
 void			move_player(t_map *map, double forward, double right);
-void			rotate_player(t_map *map, double amount);
+void			rotate_player(t_map *map, double horizontal, double vertical);
 
 // visuals
 int				init_visuals(t_map *map);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 09:45:59 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/17 13:36:04 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/20 11:44:52 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,23 +92,31 @@ void	move_player(t_map *map, double forward, double right)
 	map->player.y = target_pos.y;
 }
 
-void	rotate_player(t_map *map, double amount)
+void	rotate_player(t_map *map, double horizontal, double vertical)
 {
-	double	rotation;
-	double	rotation_rad;
+	double	rotation_x;
+	double	rotation_y;
+	double	rotation_x_rad;
 
-	if (amount == 0)
+	if (horizontal == 0 && vertical == 0)
 		return ;
-	rotation = map->player.x_rotation
-		+ (amount * map->mlx->delta_time * ROTATE_SPEED);
-	if (rotation > 360)
-		rotation -= 360;
-	if (rotation < 0)
-		rotation += 360;
-	map->player.x_rotation = rotation;
-	rotation_rad = (rotation * PI) / 180;
-	map->player.dir.x = sin(rotation_rad);
-	map->player.dir.y = -cos(rotation_rad);
-	map->player.cam_plane.x = cos(rotation_rad);
-	map->player.cam_plane.y = sin(rotation_rad);
+	rotation_x = map->player.x_rotation
+		+ (horizontal * map->mlx->delta_time * ROTATE_SPEED);
+	rotation_y = map->player.y_rotation
+		+ (vertical * map->mlx->delta_time * ROTATE_SPEED);
+	if (rotation_x > 360)
+		rotation_x -= 360;
+	if (rotation_x < 0)
+		rotation_x += 360;
+	if (rotation_y > 90)
+		rotation_y = 90;
+	if (rotation_y < -90)
+		rotation_y = -90;
+	map->player.x_rotation = rotation_x;
+	map->player.y_rotation = rotation_y;
+	rotation_x_rad = (rotation_x * PI) / 180;
+	map->player.dir.x = sin(rotation_x_rad);
+	map->player.dir.y = -cos(rotation_x_rad);
+	map->player.cam_plane.x = cos(rotation_x_rad);
+	map->player.cam_plane.y = sin(rotation_x_rad);
 }

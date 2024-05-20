@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_environment.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ixu <ixu@student.hive.fi>                  +#+  +:+       +#+        */
+/*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 13:12:51 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/13 18:46:42 by ixu              ###   ########.fr       */
+/*   Updated: 2024/05/20 11:51:52 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static void	draw_vertical_color(t_draw_line_info dli, uint32_t color)
 	int	y;
 
 	y = 0;
-	while (y < dli.height)
+	while (y < dli.height && dli.height
+			&& dli.canvas_start.y + y < dli.canvas->height)
 	{
 		mlx_put_pixel(dli.canvas, dli.canvas_start.x,
 			dli.canvas_start.y + y, color);
@@ -33,7 +34,7 @@ static void	draw_vertical_texture(t_draw_line_info dli, mlx_texture_t *texture,
 	int		texture_y;
 
 	y = 0;
-	while (y < dli.height)
+	while (y < dli.height && dli.canvas_start.y + y < dli.canvas->height)
 	{
 		ratio = (double) y / (double) dli.height;
 		texture_y = ((texture->height - 1 - (2 * image_start.y)) * ratio)
@@ -71,7 +72,9 @@ void	draw_environment_line(t_map *map, int x, t_hitinfo hit)
 		draw_fs_wall_line(dli, wall_height, image_start, wall_texture);
 	else
 	{
-		dli.height = (map->canvas->height / 2) - (wall_height / 2);
+		dli.height = (map->canvas->height / 2) - (wall_height / 2) + map->player.y_rotation;
+		if (dli.height < 0)
+			dli.height = 0;
 		draw_vertical_color(dli, map->ceiling_color);
 		dli.canvas_start.y += dli.height;
 		dli.height = wall_height;
