@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 08:51:25 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/20 09:53:32 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/20 09:55:01 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,7 +234,6 @@ int				load_map(t_map *map, char *map_filename);
 int				load_config(t_map *map, int map_fd);
 int				load_grid(t_map *map, int map_fd);
 int				load_animations(mlx_t *mlx, t_anim *animations);
-
 int				check_texture_path(char *path);
 
 /* MINIMAP */
