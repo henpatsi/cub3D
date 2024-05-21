@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 13:12:51 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/21 19:33:13 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/21 20:20:08 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	draw_vertical_texture(t_draw_line_info dli, mlx_texture_t *texture,
 	while (y < dli.height && dli.canvas_start.y + y < dli.canvas->height)
 	{
 		ratio = (double) y / (double) dli.height;
-		texture_y = ((texture->height - 1 - (2 * image_start.y)) * ratio)
+		texture_y = ((texture->height - 1 - image_start.y) * ratio)
 			+ image_start.y;
 		mlx_put_pixel(dli.canvas, dli.canvas_start.x, dli.canvas_start.y + y,
 			get_texture_pixel(texture, image_start.x, texture_y));
@@ -65,6 +65,8 @@ void	draw_environment_line(t_map *map, int x, t_hitinfo hit)
 	dli.height = ((double)map->canvas->height - (double)wall_height) / 2 + (map->player.y_rotation * 4);
 	if (dli.height < 0)
 	{
+		double ratio = (double)-dli.height / (double) wall_height;
+		image_start.y = floor(ratio * wall_texture->height);
 		wall_height += dli.height;
 		dli.height = 0;
 	}
