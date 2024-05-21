@@ -6,7 +6,7 @@
 /*   By: hpatsi <hpatsi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 13:12:51 by hpatsi            #+#    #+#             */
-/*   Updated: 2024/05/20 11:51:52 by hpatsi           ###   ########.fr       */
+/*   Updated: 2024/05/21 19:33:13 by hpatsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,6 @@ static void	draw_vertical_texture(t_draw_line_info dli, mlx_texture_t *texture,
 	}
 }
 
-static void	draw_fs_wall_line(t_draw_line_info dli,
-		uint32_t wall_height, t_vector image_start,
-		mlx_texture_t *wall_texture)
-{
-	image_start.y = ((double)(wall_height - dli.canvas->height) / 2)
-		/ (double) wall_height * (double) wall_texture->height;
-	dli.height = dli.canvas->height;
-	draw_vertical_texture(dli, wall_texture, image_start);
-}
-
 void	draw_environment_line(t_map *map, int x, t_hitinfo hit)
 {
 	t_draw_line_info	dli;
@@ -65,23 +55,30 @@ void	draw_environment_line(t_map *map, int x, t_hitinfo hit)
 	dli.canvas = map->canvas;
 	dli.canvas_start.x = x;
 	dli.canvas_start.y = 0;
+
 	wall_texture = get_hit_texture(map, hit);
 	wall_height = (uint32_t)(WALL_HEIGHT / hit.distance);
+
 	image_start.x = round(hit.side_ratio * (double) wall_texture->width);
-	if (wall_height >= map->canvas->height)
-		draw_fs_wall_line(dli, wall_height, image_start, wall_texture);
-	else
+	image_start.y = 0;
+
+	dli.height = ((double)map->canvas->height - (double)wall_height) / 2 + (map->player.y_rotation * 4);
+	if (dli.height < 0)
 	{
-		dli.height = (map->canvas->height / 2) - (wall_height / 2) + map->player.y_rotation;
-		if (dli.height < 0)
-			dli.height = 0;
-		draw_vertical_color(dli, map->ceiling_color);
-		dli.canvas_start.y += dli.height;
-		dli.height = wall_height;
-		image_start.y = 0;
-		draw_vertical_texture(dli, wall_texture, image_start);
-		dli.canvas_start.y += dli.height;
-		dli.height = map->canvas->height - dli.canvas_start.y;
-		draw_vertical_color(dli, map->floor_color);
+		wall_height += dli.height;
+		dli.height = 0;
 	}
+	draw_vertical_color(dli, map->ceiling_color);
+	dli.canvas_start.y += dli.height;
+
+	if (dli.canvas_start.y + wall_height > map->canvas->height)
+		dli.height = map->canvas->height - dli.canvas_start.y;
+	else
+		dli.height = wall_height;
+	draw_vertical_texture(dli, wall_texture, image_start);
+
+	dli.canvas_start.y += dli.height;
+	
+	dli.height = map->canvas->height - dli.canvas_start.y;
+	draw_vertical_color(dli, map->floor_color);
 }
